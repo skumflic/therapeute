@@ -6,11 +6,11 @@
 	require("bibli_generale.php");
 	
 	$title = "Inscription";
-	$style = "../style/index.css";
+	$style = "../styles/index.css";
 	
 	gk_cb_html_debut($title, $style);
 	echo '<header>',
-		'<p id="titre">Inscription </p>',
+		'<p id="expli">Pour vous inscrire il suffit de :</p>',
 	'</header>';
 	
 	echo '<aside>',
@@ -82,7 +82,7 @@
 	
 		$S = "SELECT COUNT(*) as count
 			FROM USER
-			WHERE pseudo ='$pseudo'";
+			WHERE login ='$pseudo'";
 	
 		$R = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
 		$D = mysqli_fetch_assoc($R);
@@ -118,6 +118,7 @@
 		
 
 		return $erreur;
+		mysqli_close($bd);
 	}
 	
 	//Si le bouton de validation a été demandé
@@ -155,17 +156,9 @@
 			
 			//Requete d'insertion 
 			$S = "INSERT INTO USER 
-				(nom, prenom, pseudo, mail, password, adresse, telephone, isModerateur)
+				(nom, prenom, login, mail, password, adresse, telephone, isModerateur)
 					VALUES 
 				('$nom', '$prenom','$pseudo','$mail','$pass','$adresse','$telephone','$isModerateur')";
-			
-			$r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
-			$ID = mysqli_insert_id($bd);
-		
-			$S = "INSERT INTO THERAPEUTE
-				(id, isAccepted, cleLogiciel, titre, description, isCertified, couleur, skin, lienPhoto)
-					VALUES
-				('$ID', false, NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
 			
 			$r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
 			$ID = mysqli_insert_id($bd);
@@ -179,7 +172,7 @@
 			
 
 			//Redirection vers compte.php
-			header ('location: cabinet.php');
+			header ('location: compte.php');
 			exit();
 		}
 		
@@ -216,8 +209,8 @@
 				
 	echo '</div>';	
 	
-	gk_cb_aff_footer();
-	mysqli_close($bd);
+
+	
 	gk_cb_html_fin();
 	
 
