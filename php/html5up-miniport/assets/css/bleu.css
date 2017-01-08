@@ -1,0 +1,87 @@
+body, input, select, textarea {
+    color: #6B5AA9; /* PPR */
+}
+
+a:hover {
+    color: #38267D !important; /* PPR */
+}
+
+strong, b {
+    color: #4E3C91; /* PPR */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #4E3C91; /* PPR */
+}
+
+#header {
+    background: #38267D; /* PPR */
+    color: #9688C8; /* PPR */
+}
+
+header.major h2 {
+    color: #38267D; /* PPR */
+}
+
+header.major h2 + p {
+    color: #4E3C91; /* PPR */
+}
+
+label {
+    color: #4E3C91; /* PPR */
+}
+
+textarea:focus {
+    border-color: #38267D; /* PPR */
+}
+
+ul.feature-icons li:before {
+    background: #4E3C91;
+    color: #ffffff;
+}
+
+#one:before {
+    background-image: url("../../../images/bleu/bleu_flowers.png");
+}
+
+#header > nav ul li {
+    border-top: solid 2px #9688C8;
+
+}
+#header > footer .icons li a {
+    color: #9688C8;
+}
+
+#header > nav ul li a.active {
+    background: #fff;
+    color: #241363 !important;
+}
+
+#header > header p {
+    color: #d1f1e9;
+}
+
+input[type="submit"].special,
+input[type="reset"].special,
+input[type="button"].special,
+.button.special {
+    background-color: #4E3C91;
+    color: #ffffff !important;
+}
+
+
+@media screen and (max-width: 1024px) {
+    #titleBar {
+        color: #fff;
+    }
+
+    #titleBar .title {
+        color: #fff;
+
+    }
+
+    #titleBar .toggle:before {
+        background: #38267D;
+        color: #ffffff;
+    }
+}

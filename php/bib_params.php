@@ -23,7 +23,7 @@ define('IS_DEV', TRUE);
 // Paramètres base de données
 define('BD_SERVEUR', 'localhost');
 define('BD_USER', 'root');
-define('BD_PASS', 'c0o-simpson');
+define('BD_PASS', '');
 define('BD_NOM', 'Therapeute');
 ?>
 

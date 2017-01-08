@@ -43,7 +43,25 @@
 			<head>
 				<meta charset="iso-8859-1">
 				<title>', $title, ' </title>
+			
 				<link rel="stylesheet" href="',$style,'" type="text/css">
+				<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+			</head>
+	
+			<body>
+				<div id="bcPage">';
+	}
+	
+	function gk_cb_html_debut_formation($title, $style, $js) {
+			echo '<!DOCTYPE html>
+		<html>
+			<head>
+				<meta charset="iso-8859-1">
+				<title>', $title, ' </title>
+				<link rel="stylesheet" href="',$style,'" type="text/css">
+				<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 				<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
 			</head>
 	
@@ -176,5 +194,64 @@
 		}
 	}
 	
+	
+	/**
+	*	deencrypt les données
+	*	@param $maChaineàcCrypter valeur à decrypter
+	*/
+	
+	function de_encrypt_donnee($maChaineCrypter){
+
+		$maCleDeCryptage='omg dat encrypt rositas';//cle de cryptage
+
+		$maCleDeCryptage = md5($maCleDeCryptage);
+		
+		#echo "Clé de cryptage md5 du PHPSESSID :".$maCleDeCryptage."<br>";
+		$letter = -1;
+		$newstr = '';
+		$maChaineCrypter = base64_decode($maChaineCrypter);
+		$strlen = strlen($maChaineCrypter);
+		for ( $i = 0; $i < $strlen; $i++ ){
+			$letter++;
+			if ( $letter > 31 ){
+				$letter = 0;
+			}
+			$neword = ord($maChaineCrypter{$i}) - ord($maCleDeCryptage{$letter});
+			if ( $neword < 1 ){
+				$neword += 256;
+			}
+		$newstr .= chr($neword);
+		}
+	return $newstr;
+	}
+
+	/**
+	*	encrypt les données
+	*	@param $maChaineàcCrypter valeur à crypter
+	*/
+
+	function  encrypt_donnee($maChaineACrypter){
+
+		$maCleDeCryptage='omg dat encrypt rositas';//cle de cryptage
+
+		$maCleDeCryptage = md5($maCleDeCryptage);
+		
+		#echo "Clé de cryptage md5 du PHPSESSID :".$maCleDeCryptage."<br>";
+		$letter = -1;
+		$newstr = '';
+		$strlen = strlen($maChaineACrypter);
+		for($i = 0; $i < $strlen; $i++ ){
+			$letter++;
+			if ( $letter > 31 ){
+				$letter = 0;
+			}
+			$neword = ord($maChaineACrypter{$i}) + ord($maCleDeCryptage{$letter});
+			if ( $neword > 255 ){
+				$neword -= 256;
+			}
+			$newstr .= chr($neword);
+		}
+		return base64_encode($newstr);
+	}
 	
 ?>

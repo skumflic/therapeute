@@ -8,10 +8,10 @@
 	$title = "Connectez-vous !";
 	$style = "../style/index.css";
 	
+	
 	gk_cb_html_debut($title, $style);
 	echo '<header>',
 		'<p id="titre">Connectez-vous </p>',
-		'<p id="expli" >Pour vous connecter a Cuiteur, il faut vous identifier :</p>',
 	'</header>';
 	
 	echo '<aside>',
@@ -38,7 +38,9 @@
 				
 	}
 	
-
+	
+	
+	
 	
 
 	if(isset($_POST['btnValider'])) {
@@ -48,12 +50,12 @@
 		$pseudo = trim($_POST['txtPseudo']);
 		$pass = trim($_POST['txtPasse']);
 	
-		
+		$pass_encrypt = encrypt_donnee($pass);
 		
 		$S = "SELECT *
 			FROM USER
 			WHERE pseudo = '$pseudo'
-			AND password = '$pass'";
+			AND password = '$pass_encrypt'";
 			
 	
 		$R = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
@@ -81,7 +83,7 @@
 			$_SESSION['pseudo'] = $D['pseudo'];
 		
 
-
+			mysqli_close($bd);
 			header ('location: cabinet.php');
 			exit();
 		}
@@ -99,13 +101,8 @@
 		}
 
 	}	
-	
-	
-	
 
-	gk_cb_aff_footer();
-	mysqli_close($bd);
-	cb_html_fin();
+	gk_cb_html_fin();
 	
 
 ?>

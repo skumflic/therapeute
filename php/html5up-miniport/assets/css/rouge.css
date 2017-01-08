@@ -1,0 +1,87 @@
+body, input, select, textarea {
+    color: #888; /* PPR */
+}
+
+a:hover {
+    color: #B52A26 !important; /* PPR */
+}
+
+strong, b {
+    color: #D34B47; /* PPR */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #D34B47; /* PPR */
+}
+
+#header {
+    background: #B52A26; /* PPR */
+    color: #FFA5A3; /* PPR */
+}
+
+header.major h2 {
+    color: #B52A26; /* PPR */
+}
+
+header.major h2 + p {
+    color: #D34B47; /* PPR */
+}
+
+label {
+    color: #D34B47; /* PPR */
+}
+
+textarea:focus {
+    border-color: #B52A26; /* PPR */
+}
+
+ul.feature-icons li:before {
+    background: #D34B47;
+    color: #ffffff;
+}
+
+#one:before {
+    background-image: url("../../../images/rouge/banner.png");
+}
+
+#header > nav ul li {
+    border-top: solid 2px #FFA5A3;
+
+}
+#header > footer .icons li a {
+    color: #FFA5A3;
+}
+
+#header > nav ul li a.active {
+    background: #fff;
+    color: #8F100D !important;
+}
+
+#header > header p {
+    color: #F57773;
+}
+
+input[type="submit"].special,
+input[type="reset"].special,
+input[type="button"].special,
+.button.special {
+    background-color: #D34B47;
+    color: #ffffff !important;
+}
+
+
+@media screen and (max-width: 1024px) {
+    #titleBar {
+        color: #fff;
+    }
+
+    #titleBar .title {
+        color: #fff;
+
+    }
+
+    #titleBar .toggle:before {
+        background: #B52A26;
+        color: #ffffff;
+    }
+}
