@@ -79,14 +79,14 @@ function html_alpha_section_banner($nom, $prenom) {
 	    </section>';
 }
 
-function html_alpha_main($img, $description) {
+function html_alpha_main($lienPhoto, $description) {
 	echo '   <section id="main" class="container">
 
         <section class="box special">
             <header class="major">
                 <h2>A propos de moi.</h2>
 
-                <p><span class="image left"><img src=../upload/'.$img.' alt=""/></span>'. $description .'</p>
+                <p><span class="image left"><img src=../upload/'.$lienPhoto.' alt=""/></span>'. $description .'</p>
             </header>
             </header>
 <!--            <span class="image featured"><img src="../images/fotolia/fotolia_69319557.jpg" alt=""/></span>-->

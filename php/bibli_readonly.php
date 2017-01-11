@@ -36,17 +36,17 @@ function html_readonly_start($title, $dir_to_css_color) {
 }
 
 
-function html_readonly_header() {
+function html_readonly_header($lienPhoto, $nom, $prenom, $titre, $description) {
 	echo '<!-- Header -->
 	<section id="header" class="top">
 	    <header>
-		<span class="image avatar"><img src="../images/fotolia/fotolia_69319557_c.jpg" alt=""/></span>
+		<span class="image avatar"><img src=../upload/'.$lienPhoto.' alt=""/></span>
 
-		<h1 id="logo">Jane Doe</h1>
+		<h1 id="logo">'. $nom . ' ' . $prenom .'</h1>
 
-		<p class="infoT">Thérapeute en Réharmonisation Energetique</p>
+		<p class="infoT">'. $titre .'</p>
 
-		<p class="infoT">Unde Rufinus ea tempestate praefectus praetorio ad discrimen trusus est ultimum.</p>
+		<p class="infoT">'. $description .'</p>
 	    </header>
 	    <nav id="nav">
 		<ul>
@@ -74,12 +74,12 @@ function html_readonly_header() {
 	    <div id="main">';
 }
 
-function html_readonly_one() {
+function html_readonly_one($nom, $prenom) {
 	echo '<!-- One -->
 		<section id="one">
 		    <div class="container">
 			<header class="major">
-			    <h2>Jane Doe</h2>
+			    <h2>'. $nom . ' ' . $prenom .'</h2>
 
 			    <p>A propos de moi.</p>
 			</header>
