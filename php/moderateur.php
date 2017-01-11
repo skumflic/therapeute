@@ -85,10 +85,12 @@
 	$sql="SELECT USER.id, nom, prenom, pseudo, THERAPEUTE.isBlocked, isModerateur
 			FROM USER, THERAPEUTE
 			WHERE USER.id = THERAPEUTE.id";
+			
 	$r = mysqli_query($bd, $sql) or gk_bd_erreur($bd, $sql);
+	afficherBloquer($r);
 	
-	
-	afficherForm($r);
+	$r = mysqli_query($bd, $sql) or gk_bd_erreur($bd, $sql);
+	afficherModerateur($r);
 	
 	
 	
@@ -97,44 +99,55 @@
 
 	
 	
-	function afficherForm($r) {
-		echo '<table border=1 cellpadding=5>';
-		while($enr = mysqli_fetch_assoc($r)) {
-			$id=htmlentities($enr['id'],ENT_QUOTES,'ISO-8859-1');
-			$nom=htmlentities($enr['nom'],ENT_QUOTES,'ISO-8859-1');
-			$pseudo=htmlentities($enr['pseudo'],ENT_QUOTES,'ISO-8859-1');
-			$prenom=htmlentities($enr['prenom'],ENT_QUOTES,'ISO-8859-1');
-			$bloque=htmlentities($enr['isBlocked'],ENT_QUOTES, 'ISO-8859-1');
-			$moderateur=htmlentities($enr['isModerateur'],ENT_QUOTES, 'ISO-8859-1');
-			
-			echo '<form method="POST" action="moderateur.php">';
+	function afficherBloquer($r) {
+		
+		echo '<h4>Bloquer/Debloquer un therapeute</h4>';
+			echo '<table border=1 cellpadding=5>';
+			while($enr = mysqli_fetch_assoc($r)) {
+				$id=htmlentities($enr['id'],ENT_QUOTES,'ISO-8859-1');
+				$nom=htmlentities($enr['nom'],ENT_QUOTES,'ISO-8859-1');
+				$pseudo=htmlentities($enr['pseudo'],ENT_QUOTES,'ISO-8859-1');
+				$prenom=htmlentities($enr['prenom'],ENT_QUOTES,'ISO-8859-1');
+				$bloque=htmlentities($enr['isBlocked'],ENT_QUOTES, 'ISO-8859-1');
+				$moderateur=htmlentities($enr['isModerateur'],ENT_QUOTES, 'ISO-8859-1');
 				
-				if ($bloque == 0) {
-					if ($moderateur == 0) {
-						echo gk_cb_from_ligne("<label>"	.$nom. " " .$prenom. "</label>", "<input type=hidden name=btnValiderBloquer value='$id'> <input type=submit value='Bloquer'> 	
-														<input type=hidden name=btnValiderAddMod value='$id'> <input type=submit value='Ajouter moderateur'>", "right", "");
-					}
-					else {
-						echo gk_cb_from_ligne("<label>"	.$nom. " " .$prenom. "</label>", "<input type=hidden name=btnValiderBloquer value='$id'> <input type=submit value='Bloquer'>", "right", "");
-					}
-				}
-				else {
-					if ($moderateur == 0) {
-						echo gk_cb_from_ligne("<label>"	.$nom. " " .$prenom. "</label>", "<input type=hidden name=btnValiderBloquer value='$id'> <input type=submit value='D&eacute;bloquer'> 
-														<input type=hidden name=btnValiderAddMod value='$id'> <input type=submit value='Ajouter moderateur'>", "right", "");
-					}
-					else {
-						echo gk_cb_from_ligne("<label>"	.$nom. " " .$prenom. "</label>", "<input type=hidden name=btnValiderBloquer value='$id'> <input type=submit value='D&eacute;bloquer'>", "right", "");
-					}
-				}
-				
-			
+				echo '<form method="POST" action="moderateur.php">';
 					
-			echo '</form>';
-		}
+					if ($bloque == 0) 
+						echo gk_cb_from_ligne("<label>"	.$nom. " " .$prenom. "</label>", "<input type=hidden name=btnValiderBloquer value='$id'> <input type=submit value='Bloquer'>", "right", "");
+					else
+						echo gk_cb_from_ligne("<label>"	.$nom. " " .$prenom. "</label>", "<input type=hidden name=btnValiderBloquer value='$id'> <input type=submit value='D&eacute;bloquer'>", "right", "");
+
+						
+				echo '</form>';
+			}
 		echo '</table>';
+		
+
 	}
 	
+	function afficherModerateur($r) {
+				
+		echo '<h4>Ajouter un moderateur</h4>';
+			echo '<table border=1 cellpadding=5>';
+			while($enr = mysqli_fetch_assoc($r)) {
+				$id=htmlentities($enr['id'],ENT_QUOTES,'ISO-8859-1');
+				$nom=htmlentities($enr['nom'],ENT_QUOTES,'ISO-8859-1');
+				$pseudo=htmlentities($enr['pseudo'],ENT_QUOTES,'ISO-8859-1');
+				$prenom=htmlentities($enr['prenom'],ENT_QUOTES,'ISO-8859-1');
+				$bloque=htmlentities($enr['isBlocked'],ENT_QUOTES, 'ISO-8859-1');
+				$moderateur=htmlentities($enr['isModerateur'],ENT_QUOTES, 'ISO-8859-1');
+				echo '<form method="POST" action="moderateur.php">';
+
+					if ($moderateur == 1) 
+						echo gk_cb_from_ligne("<label>"	.$nom. " " .$prenom. "</label>", "<input type=hidden name=btnValiderAddMod value='$id'> <input type=submit value='Ajouter moderateur'>", "right", "");
+				
+				
+						
+				echo '</form>';
+			}
+		echo '</table>';
+	}
 	
 	if(isset($_POST['btnValiderBloquer'])) {
 		$bd = gk_cb_bd_connection();

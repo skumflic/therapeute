@@ -62,7 +62,7 @@
 	echo '<h3>Informations therapeute</h3>';
 	
 	
-	$sql="SELECT cleLogiciel, titre, description, couleur, skin
+	$sql="SELECT cleLogiciel, titre, description, couleur, skin, remerciements, aboutme
 			FROM THERAPEUTE
 			WHERE id = '$id'";
 		$r = mysqli_query($bd, $sql) or gk_bd_erreur($bd, $sql);
@@ -73,14 +73,16 @@
 		$description=htmlentities($enr['description'],ENT_QUOTES,'ISO-8859-1');
 		$couleur=htmlentities($enr['couleur'],ENT_QUOTES,'ISO-8859-1');
 		$skin=htmlentities($enr['skin'],ENT_QUOTES,'ISO-8859-1');
+		$remerciements=htmlentities($enr['remerciements'],ENT_QUOTES,'ISO-8859-1');
+		$aboutme=htmlentities($enr['aboutme'],ENT_QUOTES,'ISO-8859-1');
 		
 		echo '<form method=POST action="infoperso.php">';
 			echo '<table border=1 cellpadding=5>';
 				echo gk_cb_from_ligne("<label>Votre titre de page</label>", "<input type=text name=txtTitre value='$titre' size=37 />", "right", "");
 				echo gk_cb_from_ligne("<label>Description</label>",  "<textarea id=txtBio class=text name=txtDescription rows=12 cols=53>$description</textarea>", "right", "");
 				echo gk_cb_from_ligne("<label>La cl&eacute; logicielle</label>", "<input type=text name=txtLogiciel value='$cleLogiciel' size=30/>", "right", "");
-				
-				
+				echo gk_cb_from_ligne("<label>Remerciements</label>",  "<textarea id=txtBio class=text name=txtRemerciements rows=12 cols=53>$remerciements</textarea>", "right", "");
+				echo gk_cb_from_ligne("<label>A propos de moi</label>",  "<textarea id=txtBio class=text name=txtAboutme rows=12 cols=53>$aboutme</textarea>", "right", "");
 				
 				echo gk_cb_from_ligne("" , "<input class=lesub type=submit name=btnValiderThera value=Valider />", "", "right");
 			echo '</table>';	
@@ -166,6 +168,7 @@
 		$prenom = trim($_POST['txtPrenom']);
 		$mail = trim($_POST['txtMail']);
 		$telephone = trim($_POST['txtTelephone']);
+
 		
 		
 		
@@ -173,13 +176,16 @@
 		$prenom=mysqli_real_escape_string($bd, $prenom);
 		$mail=mysqli_real_escape_string($bd, $mail);
 		$telephone=mysqli_real_escape_string($bd, $telephone);
+		
 
 
 		$S = "UPDATE USER SET
 					nom = '$nom',
 					prenom = '$prenom',
 					mail = '$mail',
-					telephone = '$telephone'
+					telephone = '$telephone',
+					remerciements = '$remerciements',
+					aboutme = '$aboutme'
 				WHERE id = '$id'";
 				
 				
@@ -201,6 +207,8 @@
 		$titre = trim($_POST['txtTitre']);
 		$couleur = trim($_POST['txtCouleur']);
 		$skin = trim($_POST['txtSkin']);
+		$remerciements = trim($_POST['txtRemerciements']);
+		$aboutme = trim($_POST['txtAboutme']);
 		
 		
 		
@@ -209,12 +217,15 @@
 		$description=mysqli_real_escape_string($bd, $description);
 		$couleur=mysqli_real_escape_string($bd, $couleur);
 		$skin=mysqli_real_escape_string($bd, $skin);
-
+		$remerciements=mysqli_real_escape_string($bd, $remerciements);
+		$aboutme=mysqli_real_escape_string($bd, $aboutme);
 
 		$S = "UPDATE THERAPEUTE SET
 					cleLogiciel = '$cleLogiciel',
 					description = '$description',
-					titre = '$titre'
+					titre = '$titre',
+					remerciements = '$remerciements',
+					aboutme = '$aboutme'
 				WHERE id = '$id'";
 				
 				

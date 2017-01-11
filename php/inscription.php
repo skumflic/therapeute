@@ -18,108 +18,12 @@
 	echo '<div id="connection">';
 	
 	if(!isset($_POST['btnValider'])) {
-		cbl_aff_form();
+		aff_form();
 		$_POST['txtPseudo'] = $_POST['txtPasse'] = $_POST['txtVerif'] = '';
 		$_POST['txtNom'] = $_POST['txtMail'] = '';
 		$_POST['txtPrenom'] = $_POST['txtTelephone'] = '';
 	}	
 	
-	
-	
-	
-	/**
-	* Fonction qui va afficher le formulaire de 
-	* la page inscription avec un tableau.
-	*
-	*/
-		
-	
-	function cbl_aff_form() {
-		
-			echo '<form method=POST action="inscription.php">',
-				'<table border=1 cellpadding=5>';
-					echo gk_cb_from_ligne("<label>Renseigner votre nom</label>", "<input type=text name=txtNom size=20 />", "right", "");
-					echo gk_cb_from_ligne("<label>Renseigner votre prenom</label>", "<input type=text name=txtPrenom size=20 />", "right", "");
-					echo gk_cb_from_ligne("<label>Renseigner votre pseudo</label>", "<input type=text name=txtPseudo size=20 />", "right", "");
-					echo gk_cb_from_ligne("<label>Renseigner le mot de passe</label>", "<input type=password name=txtPasse size=20 />", "right", "");
-					echo gk_cb_from_ligne("<label>Repeter le mot de passe</label>", "<input type=password name=txtVerif size=20 />", "right", "");
-					echo gk_cb_from_ligne("<label>Donner une adresse email</label>", "<input type=text name=txtMail size=30/>", "right", "");
-					echo gk_cb_from_ligne("<label>Renseigner votre numero de telephone</label>", "<input type=text name=txtTelephone size=20/>", "right", "");
-					
-					
-					
-					echo gk_cb_from_ligne("" , "<input class=lesub type=submit name=btnValider value=Je&nbsp;m'inscris />", "", "right");
-
-				echo '</table>',
-			'</form>';
-
-	}
-
-	
-
-	
-	/**
-	* Fonction qui va faire les diverses 
-	* vérifications pour savoir si un utilisateur 
-	* s'est correctement enregistré.
-	*
-	*
-	* @return 	array()		$erreur		Retour des erreurs.
-	*/
-		
-	function cbl_new_user() {
-		
-		$bd = gk_cb_bd_connection();
-
-		$nom = trim($_POST['txtNom']);
-		$prenom = trim($_POST['txtPrenom']);
-		$pass = trim($_POST['txtPasse']);
-		$passVerif = trim($_POST['txtVerif']);
-		$pseudo = trim($_POST['txtPseudo']);
-		$mail = trim($_POST['txtMail']);
-		$telephone = trim($_POST['txtTelephone']);
-
-
-	
-		$S = "SELECT COUNT(*) as count
-			FROM USER
-			WHERE pseudo ='$pseudo'";
-	
-		$R = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
-		$D = mysqli_fetch_assoc($R);
-	
-		$count = htmlentities($D['count'], ENT_QUOTES, 'ISO-8859-1');
-	
-		$erreur = array();
-	
-		if ($count != 0) 
-			$erreur[] = "Le pseudo doit etre change";
-		
-		else if (strlen($pseudo) < 4 || strlen($pseudo) > 30) {
-			$erreur[] = "Le pseudo " . $pseudo . " doit avoir de 4 à 30 caractères";
-		}
-		
-		if ($pass == '') 
-			$erreur[] = "Le mot de passe est obligatoire";
-			
-		if (strlen($telephone) != 10)
-			$erreur[] = "Le numero de telephone est incorrecte";
-	
-		if ($pass != $passVerif)
-			$erreur[] = "Le mot de passe est different dans les 2 zones";
-	
-		if ($nom == '')
-			$erreur[] = "Le nom est obligatoire";
-			
-		if ($prenom == '') 
-			$erreur[] = "Le prenom est obligatoire";
-		
-		if ((strpos($mail, "@") === false && strpos($mail, ".") === false) || ($mail == ''))
-			$erreur[] = "L'adresse mail est obligatoire / L'adresse mail n'est pas valide";
-		
-
-		return $erreur;
-	}
 	
 	//Si le bouton de validation a été demandé
 	if(isset($_POST['btnValider'])) {
@@ -137,7 +41,7 @@
 		
 		
 
-		$erreur = cbl_new_user($_POST);
+		$erreur = new_user($_POST);
 		
 		
 		
@@ -188,7 +92,7 @@
 		//Sinon il faudra afficher les erreurs
 		else {
 				$erreur = array();
-				$erreur = cbl_new_user($_POST);	
+				$erreur = new_user($_POST);	
 				$taille = count($erreur);
 
 				echo '<h3>Les erreurs suivantes ont ete detectees :</h3>';
@@ -210,7 +114,7 @@
 
 				
 				echo '</br>';
-				echo cbl_aff_form();
+				echo aff_form();
 
 		}
 
