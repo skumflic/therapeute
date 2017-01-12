@@ -36,7 +36,7 @@ function html_readonly_start($title, $dir_to_css_color) {
 }
 
 
-function html_readonly_header($lienPhoto, $nom, $prenom, $titre, $description) {
+function html_readonly_header($lienPhoto, $nom, $prenom, $titre, $description, $r_reseau, $mail) {
 	echo '<!-- Header -->
 	<section id="header" class="top">
 	    <header>
@@ -57,12 +57,20 @@ function html_readonly_header($lienPhoto, $nom, $prenom, $titre, $description) {
 		</ul>
 	    </nav>
 	    <footer>
-		<ul class="icons">
-		    <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-		    <li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
-		    <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-		    <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
-		</ul>
+		<ul class="icons">';
+			while($enr = mysqli_fetch_assoc($r_reseau)) {
+					$URL=htmlentities($enr['URL'],ENT_QUOTES,'ISO-8859-1');
+					$idReseau=htmlentities($enr['idReseau'],ENT_QUOTES,'ISO-8859-1');
+					
+					if($idReseau == 1) 	echo '<li><a href='. $URL. ' class="icon fa-facebook"><span class="label">Facebook</span></a></li>';
+					if($idReseau == 2)	echo '<li><a href='. $URL. ' class="icon fa-twitter"><span class="label">Twitter</span></a></li>';
+					if($idReseau == 2)	echo '<li><a href='. $URL. ' class="icon fa-google-plus"><span class="label">Google+</span></a></li>';
+					
+					echo '<li><a href=mailto:'. $mail .' class="icon fa-envelope"><span class="label">Email</span></a></li>';
+
+			}
+			    	    
+		echo '</ul>
 	    </footer>
 	</section>
 	

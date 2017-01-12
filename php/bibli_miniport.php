@@ -368,7 +368,7 @@ function html_miniport_tarif($r_tarif) {
 		</div>';
 }
 
-function html_miniport_contact() {
+function html_miniport_contact($r_reseau, $mail) {
 	echo '<!-- Contact-->
 		<div class="wrapper style2">
 			<article id="contact" class="container 75%">
@@ -417,28 +417,24 @@ function html_miniport_contact() {
 						<div class="12u">
 							<hr />
 							<h3>Find me on ...</h3>
-							<ul class="social">
-								<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
-								<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
-								<!--
-					<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-					<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-					<li><a href="#" class="icon fa-tumblr"><span class="label">Tumblr</span></a></li>
-					<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+							<ul class="social">';
+							
+								while($enr = mysqli_fetch_assoc($r_reseau)) {
+									$URL=htmlentities($enr['URL'],ENT_QUOTES,'ISO-8859-1');
+									$idReseau=htmlentities($enr['idReseau'],ENT_QUOTES,'ISO-8859-1');
+									
+									if($idReseau == 1) 	echo '<li><a href='. $URL. ' class="icon fa-facebook"><span class="label">Facebook</span></a></li>';
+									if($idReseau == 2)	echo '<li><a href='. $URL. ' class="icon fa-twitter"><span class="label">Twitter</span></a></li>';
+									if($idReseau == 2)	echo '<li><a href='. $URL. ' class="icon fa-google-plus"><span class="label">Google+</span></a></li>';
+									
+									echo '<li><a href=mailto:'. $mail .' class="icon fa-envelope"><span class="label">Email</span></a></li>';
 
-					<li><a href="#" class="icon fa-rss"><span>RSS</span></a></li>
-					<li><a href="#" class="icon fa-instagram"><span>Instagram</span></a></li>
-					<li><a href="#" class="icon fa-foursquare"><span>Foursquare</span></a></li>
-					<li><a href="#" class="icon fa-skype"><span>Skype</span></a></li>
-					<li><a href="#" class="icon fa-soundcloud"><span>Soundcloud</span></a></li>
-					<li><a href="#" class="icon fa-youtube"><span>YouTube</span></a></li>
-					<li><a href="#" class="icon fa-blogger"><span>Blogger</span></a></li>
-					<li><a href="#" class="icon fa-flickr"><span>Flickr</span></a></li>
-					<li><a href="#" class="icon fa-vimeo"><span>Vimeo</span></a></li>
-					-->
-							</ul>
+								}
+							
+							
+								
+					
+							echo '</ul>
 							<hr />
 						</div>
 					</div>

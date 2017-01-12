@@ -360,15 +360,22 @@ function html_alpha_cta() {
 	     </section>';
 }
 
-function html_alpha_footer() {
+function html_alpha_footer($r_reseau, $mail) {
 	echo '	<!-- Footer -->
 		<footer id="footer">
-			<ul class="icons">
-				<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-				<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-				<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
-				<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
-			    </ul>
+			<ul class="icons">';
+				while($enr = mysqli_fetch_assoc($r_reseau)) {
+					$URL=htmlentities($enr['URL'],ENT_QUOTES,'ISO-8859-1');
+					$idReseau=htmlentities($enr['idReseau'],ENT_QUOTES,'ISO-8859-1');
+					
+					if($idReseau == 1) 	echo '<li><a href='. $URL. ' class="icon fa-facebook"><span class="label">Facebook</span></a></li>';
+					if($idReseau == 2)	echo '<li><a href='. $URL. ' class="icon fa-twitter"><span class="label">Twitter</span></a></li>';
+					if($idReseau == 2)	echo '<li><a href='. $URL. ' class="icon fa-google-plus"><span class="label">Google+</span></a></li>';
+					
+					echo '<li><a href=mailto:'. $mail .' class="icon fa-envelope"><span class="label">Email</span></a></li>';
+
+				}
+			    echo '</ul>
 			<ul class="copyright">
 				<li>&copy; Harmonie. All rights reserved.</li>
 				<li>Design: <a href="http://html5up.net">HTML5 UP</a>, <a href="mailto:pprevitali.ke@gmail.com">Pascal

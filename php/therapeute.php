@@ -24,6 +24,7 @@
 	$description = htmlentities($enr['description'],ENT_QUOTES, 'ISO-8859-1');
 	$nom = htmlentities($enr['nom'],ENT_QUOTES, 'ISO-8859-1');
 	$prenom = htmlentities($enr['prenom'],ENT_QUOTES, 'ISO-8859-1');
+	$mail = htmlentities($enr['mail'],ENT_QUOTES, 'ISO-8859-1');
 	$lienPhoto = htmlentities($enr['lienPhoto'],ENT_QUOTES, 'ISO-8859-1');
 	$remerciements = htmlentities($enr['remerciements'],ENT_QUOTES, 'ISO-8859-1');
 	$aboutme = htmlentities($enr['aboutme'],ENT_QUOTES, 'ISO-8859-1');
@@ -60,6 +61,14 @@
 	
 	
 	
+	//RESEAU
+	$sql_reseau="SELECT * 
+			FROM THERA_RESEAU
+			WHERE idTherapeute = '$profil_id'";
+	$r_reseau = mysqli_query($bd, $sql_reseau) or gk_bd_erreur($bd, $sql_tarif);
+	
+	
+	
 	
 	
 	
@@ -81,7 +90,7 @@
 	if ($skin == 1) 
 		afficher_alpha($color_to_string);
 	if ($skin == 2) 
-		afficher_readonly($color_to_string);
+		afficher_alpha($color_to_string);
 		//~ afficher_miniport($color_to_string);
 	if ($skin == 3) 
 		afficher_prologue($color_to_string);
@@ -92,7 +101,7 @@
 	
 	
 	function afficher_alpha($color) {
-		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif;
+		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail;
 		
 		$dir_to_css_color = "../style/color/$color.css";
 		
@@ -106,13 +115,13 @@
 		html_alpha_three($r_tarif);
 		html_alpha_cta();	
 		
-		html_alpha_footer();
+		html_alpha_footer($r_reseau, $mail);
 		html_alpha_end();
 		
 	}
 	
 	function afficher_miniport($color) {
-		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif;
+		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail;
 	
 		$dir_to_css_color = "$color.css";
 		html_miniport_start($title, $dir_to_css_color);
@@ -124,19 +133,19 @@
 		if (mysqli_num_rows($r_formation) > 0) 
 			html_miniport_formation($r_formation);
 		html_miniport_tarif($r_tarif);
-		html_miniport_contact();
+		html_miniport_contact($r_reseau, $mail);
 		
 		
 		html_miniport_end();
 	}
 	
 	function afficher_prologue($color) {
-		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif;
+		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail;
 	
 		$dir_to_css_color = "../style/color/$color.css";	
 		html_prologue_start($title, $dir_to_css_color);
 		
-		html_prologue_header($lienPhoto, $nom, $prenom, $titre);
+		html_prologue_header($lienPhoto, $nom, $prenom, $titre, $r_reseau, $mail);
 		
 		html_prologue_intro($nom, $prenom, $titre, $description);
 		html_prologue_about($remerciements, $aboutme, $r_formation);
@@ -151,12 +160,12 @@
 	}
 	
 	function afficher_readonly($color) {
-		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif;
+		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail;
 	
 		$dir_to_css_color = "../style/color/$color.css";	
 		html_readonly_start($title, $dir_to_css_color);
 		
-		html_readonly_header($lienPhoto, $nom, $prenom, $titre, $description);
+		html_readonly_header($lienPhoto, $nom, $prenom, $titre, $description, $r_reseau, $mail);
 		
 		html_readonly_one($nom, $prenom, $aboutme, $remerciements, $r_formation);
 		html_readonly_two();
