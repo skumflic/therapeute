@@ -66,97 +66,68 @@ function html_alpha_header_menu() {
 	</header>';
 }
 
-function html_alpha_section_banner($nom, $prenom) {
+function html_alpha_section_banner($nom, $prenom, $titre, $description) {
     echo ' <section id="banner">
 		<h2>' . $nom . ' ' . $prenom . '</h2>
 
-		<p>Thérapeute en Réharmonisation Energ&eacute;tique</p>
+		<p>'. $titre. '</p>
 
-		<p>Je vous propose de soulager vos douleurs physiques ou vos chocs &eacute;motionnels importants.</p>
+		<p>'. $description .'</p>
 		<ul class="actions">
 		    <li><a href="#" class="button">En savoir +</a></li>
 		</ul>
 	    </section>';
 }
 
-function html_alpha_main($lienPhoto, $description) {
-	echo '   <section id="main" class="container">
+function html_alpha_main($lienPhoto, $aboutme, $remerciements, $r_formation) {
+	echo '<section id="main" class="container">
 
-        <section class="box special">
-            <header class="major">
-                <h2>A propos de moi.</h2>
+			<section class="box special">
+				<header class="major">
+					<h2>A propos de moi.</h2>
 
-                <p><span class="image left"><img src=../upload/'.$lienPhoto.' alt=""/></span>'. $description .'</p>
-            </header>
-            </header>
-<!--            <span class="image featured"><img src="../images/fotolia/fotolia_69319557.jpg" alt=""/></span>-->
-        </section>
-        <section class="box special features">
-            <h3>Remerciements</h3>
+					<p><span class="image left"><img src=../upload/'.$lienPhoto.' alt=""/></span>'. $aboutme .'</p>
+				</header>    
+			</section>
+		       
+		       $
+			<section class="box special features">
+				<h3>Remerciements</h3>
 
-            <p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non.
-                Adipiscing cubilia elementum integer lorem ipsum dolor sit amet.</p>
-        </section>
+				<p>'. $remerciements .'</p>
+			</section>';
+			
+			if (mysqli_num_rows($r_formation) > 0) 
+				html_alpha_main_formation($r_formation);
+			
+	 echo '</section>';
+}
 
-        <section class="box special features">
-            <h3>Mes formations</h3>
+function html_alpha_main_formation($r_formation) {
+	echo '		<section class="box special features">
+			
+				<h3>Mes formations</h3>
 
-            <div class="features-row">
-                <section>
-                    <span class="icon major fa-stethoscope accent"></span>
+				<div class="features-row">';
+				
+					while($enr = mysqli_fetch_assoc($r_formation)) {
+						$nom=htmlentities($enr['nom'],ENT_QUOTES,'ISO-8859-1');
+						$annee=htmlentities($enr['annee'],ENT_QUOTES,'ISO-8859-1');
+						$descriptif=htmlentities($enr['descriptif'],ENT_QUOTES,'ISO-8859-1');
+						
+						echo '<section>
+								<span class="icon major fa-stethoscope accent"></span>
 
-                    <h4><strong>orci</strong></h4>
+								<h4><strong>'. $nom. ' '. $annee. '</strong></h4>
 
-                    <p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum
-                        phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-                </section>
-                <section>
-                    <span class="icon major fa-cubes accent"></span>
+								<p>'. $descriptif. '</p>
+							</section>';	
 
-                    <h4><strong>porttitor</strong></h4>
-
-                    <p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum
-                        phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-                </section>
-            </div>
-            <div class="features-row">
-                <section>
-                    <span class="icon major fa-book accent"></span>
-
-                    <h4><strong>lacinia</strong></h4>
-
-                    <p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non.
-                        Adipiscing cubilia elementum integer lorem ipsum dolor sit amet.</p>
-                </section>
-                <section>
-                    <span class="icon major fa-medkit accent"></span>
-
-                    <h4><strong>ultricies</strong></h4>
-
-                    <p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum
-                        phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-                </section>
-            </div>
-            <div class="features-row">
-                <section>
-                    <span class="icon major fa-ambulance accent"></span>
-
-                    <h4><strong>nec</strong></h4>
-
-                    <p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non.
-                        Adipiscing cubilia elementum integer lorem ipsum dolor sit amet.</p>
-                </section>
-                <section>
-                    <span class="icon major fa-users accent"></span>
-
-                    <h4><strong>interdum</strong></h4>
-
-                    <p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum
-                        phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-                </section>
-            </div>
-        </section>
-    </section>';
+					}
+					
+					
+				echo '</div>
+			</section>';
 }
 
 function html_alpha_two() {
@@ -362,30 +333,55 @@ function html_alpha_three() {
 		</section>';
 }
 
-function html_copyright() {
-    echo '<ul class="copyright">
-                <li>&copy; Harmonie. All rights reserved.</li>
-                <li>Design: <a href="http://html5up.net">HTML5 UP</a>, <a href="mailto:pprevitali.ke@gmail.com">Pascal
-                    PREVITALI</a></li>
-            </ul>';
+function html_alpha_cta() {
+	echo '<!-- CTA -->
+		<section id="cta">
+
+			<h2>Contactez Moi</h2>
+
+			<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non.
+			Adipiscing cubilia elementum integer. Integer eu ante ornare amet commetus.</p>
+
+			<form method="post" action="#">
+				<div class="row uniform">
+					<div class="6u 12u(xsmall)"><input type="text" name="name" id="name" placeholder="Name"/></div>
+					<div class="6u 12u(xsmall)"><input type="email" name="email" id="email" placeholder="Email"/></div>
+				</div>
+				<div class="row uniform">
+					<div class="12u"><input type="text" name="subject" id="subject" placeholder="Subject"/></div>
+				</div>
+				<div class="row uniform">
+				<div class="12u"><textarea name="message" id="message" placeholder="Message"
+						       rows="6"></textarea></div>
+				</div>
+				<div class="row uniform">
+					<div class="12u">
+						<ul class="actions">
+							<li><input type="submit" class="special" value="Send Message"/></li>
+							<li><input type="reset" value="Reset Form"/></li>
+						</ul>
+					</div>
+				</div>
+			</form>
+
+	     </section>';
 }
 
-function html_social_network_get_icon_class($name) {
-    switch ($name) {
-        case "Twitter":
-            return '"icon fa-twitter"';
-        case "Facebook":
-            return '"icon fa-facebook"';
-        case "Google+":
-            return '"icon fa-google-plus"';
-        case "Email":
-            return '"icon fa-envelope"';
-    }
-}
-
-function html_social_network($href, $name) {
-    $icon=html_social_network_get_icon_class($name);
-    echo ' <li><a href='.$href.' class='.$icon.'><span class="label">'.$name.'</span></a></li>';
+function html_alpha_footer() {
+	echo '	<!-- Footer -->
+		<footer id="footer">
+			<ul class="icons">
+				<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+				<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+				<li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
+			    </ul>
+			<ul class="copyright">
+				<li>&copy; Harmonie. All rights reserved.</li>
+				<li>Design: <a href="http://html5up.net">HTML5 UP</a>, <a href="mailto:pprevitali.ke@gmail.com">Pascal
+			    PREVITALI</a></li>
+			</ul>
+		</footer>';
 }
 
 function htlm_end() {

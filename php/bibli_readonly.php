@@ -74,7 +74,7 @@ function html_readonly_header($lienPhoto, $nom, $prenom, $titre, $description) {
 	    <div id="main">';
 }
 
-function html_readonly_one($nom, $prenom) {
+function html_readonly_one($nom, $prenom, $aboutme, $remerciements, $r_formation) {
 	echo '<!-- One -->
 		<section id="one">
 		    <div class="container">
@@ -83,35 +83,39 @@ function html_readonly_one($nom, $prenom) {
 
 			    <p>A propos de moi.</p>
 			</header>
-			<p>Mauris accumsan metus velit, quis molestie ligula pellentesque ac. Suspendisse feugiat lectus ex, nec
-			    finibus ligula ornare quis. Praesent in facilisis orci, eu fermentum ex. Praesent maximus libero nec
-			    felis aliquam feugiat. Proin tempor lobortis blandit. Duis ut tortor commodo, egestas massa at,
-			    dictum felis. Phasellus blandit condimentum dolor, a ornare leo varius eget. Suspendisse quis
-			    posuere ligula, id tristique orci. Proin porttitor lacus ante, vitae lacinia metus sagittis at.
-			    Mauris bibendum non turpis eu semper. Quisque pharetra est at felis consectetur, ac varius purus
-			    tristique. Donec dapibus dictum ultricies.</p>
+			<p>'. $aboutme .'</p>
 		    </div>
 		    <div class="container">
 			<h3>Remerciements</h3>
 
-			<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non.
-			    Adipiscing cubilia elementum integer lorem ipsum dolor sit amet.</p>
-		    </div>
-		    <div class="container">
+			<p>'. $remerciements .'</p>
+		    </div>';
+		    
+		    if (mysqli_num_rows($r_formation) > 0) 
+				html_readonly_one_formation($r_formation);
+		    
+		    
+		echo '</section>';
+}
+
+function html_readonly_one_formation($r_formation) {
+	echo '<div class="container">
 			<h3>Mes formations</h3>
 
 			<p>Nulla nec augue posuere, ornare elit a, condimentum sapien. Nullam rutrum dui at elit dapibus, quis
 			    lobortis ex aliquet. Maecenas sed purus nec nulla mattis interdum.</p>
-			<ul class="feature-icons">
-			    <li class="fa-stethoscope">orci</li>
-			    <li class="fa-cubes">porttitor</li>
-			    <li class="fa-book">lacinia</li>
-			    <li class="fa-medkit">ultricies</li>
-			    <li class="fa-ambulance">nec</li>
-			    <li class="fa-users">interdum</li>
-			</ul>
-		    </div>
-		</section>';
+			<ul class="feature-icons">';
+			
+				while($enr = mysqli_fetch_assoc($r_formation)) {
+					$nom=htmlentities($enr['nom'],ENT_QUOTES,'ISO-8859-1');
+					$annee=htmlentities($enr['annee'],ENT_QUOTES,'ISO-8859-1');
+						
+					echo '<li class="fa-book">'. $nom. ' ' . $annee .'</li>';	
+
+				}
+			    
+			echo '</ul>
+		    </div>';
 }
 
 function html_readonly_two() {

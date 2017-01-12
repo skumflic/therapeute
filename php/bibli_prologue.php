@@ -106,7 +106,7 @@ function html_prologue_intro($nom, $prenom, $titre, $description) {
 				</section>';
 }
 
-function html_prologue_about($aboutme, $remerciements) {
+function html_prologue_about($aboutme, $remerciements, $r_formation) {
 	echo '<!-- about -->
 			<section id="about" class="two">
 				<div class="container">
@@ -124,26 +124,38 @@ function html_prologue_about($aboutme, $remerciements) {
 
 								<p>'. $remerciements .'</p>
 							</article>
-						</div>
-						<div id="formation" class="12u 12u$(mobile)">
+						</div>';
+						
+						if (mysqli_num_rows($r_formation) > 0) 
+							html_prologue_about_formation($r_formation);
+							
+					echo'</div>
+				</div>
+			</section>';
+}
+
+function html_prologue_about_formation($r_formation) {
+	echo '<div id="formation" class="12u 12u$(mobile)">
 							<article class="item ssPara">
 								<h3>Mes formations</h3>
 
 								<p>Nulla nec augue posuere, ornare elit a, condimentum sapien. Nullam rutrum dui at elit dapibus, quis
 									lobortis ex aliquet. Maecenas sed purus nec nulla mattis interdum.</p>
-								<ul class="feature-icons">
-									<li class="fa-stethoscope">orci</li>
-									<li class="fa-cubes">porttitor</li>
-									<li class="fa-book">lacinia</li>
-									<li class="fa-medkit">ultricies</li>
-									<li class="fa-ambulance">nec</li>
-									<li class="fa-users">interdum</li>
-								</ul>
+								<ul class="feature-icons">';
+								
+									while($enr = mysqli_fetch_assoc($r_formation)) {
+										$nom=htmlentities($enr['nom'],ENT_QUOTES,'ISO-8859-1');
+										$annee=htmlentities($enr['annee'],ENT_QUOTES,'ISO-8859-1');
+										$descriptif=htmlentities($enr['descriptif'],ENT_QUOTES,'ISO-8859-1');
+										
+										echo '<li class="fa-stethoscope">'.$nom . ' '. $annee.' </li>';	
+
+									}
+									
+									
+								echo '</ul>
 							</article>
-						</div>
-					</div>
-				</div>
-			</section>';
+						</div>';
 }
 
 function html_prologue_methode() {

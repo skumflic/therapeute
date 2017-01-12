@@ -49,7 +49,7 @@ function html_miniport_nav() {
 		</nav>';
 }
 
-function html_miniport_home($img, $nom, $prenom, $titre) {
+function html_miniport_home($img, $nom, $prenom, $titre, $description) {
 	echo '<!-- Home -->
 		<div class="wrapper style1 first">
 			<article class="container" id="accueil">
@@ -62,7 +62,7 @@ function html_miniport_home($img, $nom, $prenom, $titre) {
 							<h1><strong>'. $nom . ' ' . $prenom . '</strong></h1>
 						</header>
 						<p>'. $titre .'</p>
-						<p>Unde Rufinus ea tempestate praefectus praetorio ad discrimen trusus est ultimum.</p>
+						<p>'. $description .'</p>
 						<a href="#methode" class="button big scrolly">En savoir +</a>
 					</div>
 				</div>
@@ -70,7 +70,7 @@ function html_miniport_home($img, $nom, $prenom, $titre) {
 		</div>';
 }
 
-function html_miniport_presentation($description) {
+function html_miniport_presentation($aboutme) {
 	echo '<!-- presentation -->
 		<div class="wrapper style2">
 			<article id="presentation">
@@ -79,14 +79,14 @@ function html_miniport_presentation($description) {
 				</header>
 				<div class="container">
 					<div class="row">
-						<p>'. $description .'</p>
+						<p>'. $aboutme .'</p>
 					</div>
 				</div>
 			</article>
 		</div>';
 }
 		
-function html_miniport_remerciements() {
+function html_miniport_remerciements($remerciements) {
 	echo '<!-- Remerciements -->
 		<div class="wrapper style3">
 			<article id="Remerciements">
@@ -95,15 +95,14 @@ function html_miniport_remerciements() {
 				</header>
 				<div class="container">
 					<div class="row">
-						<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non.
-							Adipiscing cubilia elementum integer lorem ipsum dolor sit amet.</p>
+						<p>'. $remerciements .'</p>
 					</div>
 				</div>
 			</article>
 		</div>';
 }	
 
-function html_miniport_formation() {
+function html_miniport_formation($r_formation) {
 		echo '<!-- formations -->
 		<div class="wrapper style3">
 			<article id="formations">
@@ -114,72 +113,34 @@ function html_miniport_formation() {
 					<div class="row">
 						<p>Nulla nec augue posuere, ornare elit a, condimentum sapien. Nullam rutrum dui at elit dapibus, quis
 							lobortis ex aliquet. Maecenas sed purus nec nulla mattis interdum.</p>
-					</div>
-					<div class="row">
-						<div class="4u 4u(tablet) 12u(mobile)">
-							<section class="box style1">
-								<span class="icon featured fa-stethoscope accent"></span>
+					</div>';
+					$i=0;
+					while($enr = mysqli_fetch_assoc($r_formation)) {
+						$nom=htmlentities($enr['nom'],ENT_QUOTES,'ISO-8859-1');
+						$annee=htmlentities($enr['annee'],ENT_QUOTES,'ISO-8859-1');
+						$descriptif=htmlentities($enr['descriptif'],ENT_QUOTES,'ISO-8859-1');
+						
+						//le i % 3 est pour que tout s'affiche bien
+						if($i % 3 == 0) echo '<div class="row">';
+						
+							echo '<div class="4u 4u(tablet) 12u(mobile)">
+								<section class="box style1">
+									<span class="icon featured fa-book accent"></span>
 
-								<h4>orci</h4>
+									<h4>'. $nom. ' '. $annee. '</h4>
 
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum
-									phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-						</div>
-						<div class="4u 4u(tablet) 12u(mobile)">
-							<section class="box style1">
-								<span class="icon featured fa-cubes accent"></span>
-
-								<h4>porttitor</h4>
-
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum
-									phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-						</div>
-						<div class="4u 4u(tablet) 12u(mobile)">
-							<section class="box style1">
-								<span class="icon featured fa-book accent"></span>
-
-								<h4>lacinia</h4>
-
-								<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non.
-									Adipiscing cubilia elementum integer lorem ipsum dolor sit amet.</p>
-							</section>
-						</div>
-					</div>
-					<div class="row">
-						<div class="4u 4u(tablet) 12u(mobile)">
-							<section class="box style1">
-								<span class="icon featured fa-medkit accent"></span>
-
-								<h4>ultricies</h4>
-
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum
-									phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-						</div>
-						<div class="4u 4u(tablet) 12u(mobile)">
-							<section class="box style1">
-								<span class="icon featured fa-ambulance accent"></span>
-
-								<h4>nec</h4>
-
-								<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non.
-									Adipiscing cubilia elementum integer lorem ipsum dolor sit amet.</p>
-							</section>
-						</div>
-						<div class="4u 4u(tablet) 12u(mobile)">
-							<section class="box style1">
-								<span class="icon featured fa-users accent"></span>
-
-								<h4>interdum</h4>
-
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum
-									phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
-							</section>
-						</div>
-					</div>
-				</div>
+									<p>'. $descriptif. '</p>
+								</section>
+							</div>';
+							
+							$i++;
+						if($i % 3 == 0) echo '</div>';	
+						
+						
+					}
+					
+					
+				echo '</div>
 			</article>
 		</div>';
 }
