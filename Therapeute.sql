@@ -67,16 +67,25 @@ CREATE TABLE IF NOT EXISTS `COULEUR` (
 -- Table structure for table `EXPERIENCE`
 --
 
-CREATE TABLE IF NOT EXISTS `EXPERIENCE` (
-  `idExperience` int(10) NOT NULL,
+DROP TABLE IF EXISTS `experience`;
+CREATE TABLE IF NOT EXISTS `experience` (
+  `idExperience` int(10) NOT NULL AUTO_INCREMENT,
   `idTherapeute` int(10) NOT NULL,
   `poste` varchar(50) NOT NULL,
-  `dateDebut` int(10) NOT NULL,
-  `dateFin` int(10) NOT NULL,
+  `dateDebut` date NOT NULL,
+  `dateFin` date NOT NULL,
   `nomEntreprise` varchar(60) NOT NULL,
   `afficher` tinyint(1) NOT NULL,
   PRIMARY KEY (`idExperience`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Дамп данных таблицы `experience`
+--
+
+INSERT INTO `experience` (`idExperience`, `idTherapeute`, `poste`, `dateDebut`, `dateFin`, `nomEntreprise`, `afficher`) VALUES
+(5, 9, 'gjkjfbvdrnf', '2016-12-22', '2016-12-11', 'hrtyu,hg', 0),
+(7, 10, 'qdbnhbdsqcv', '2017-01-18', '2017-01-01', 'sggdhbgd', 1);
 
 -- --------------------------------------------------------
 
