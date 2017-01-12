@@ -324,9 +324,9 @@
 	*/
 		
 	
-	function aff_form() {
+	function aff_form($page) {
 		
-			echo '<form method=POST action="inscription.php">',
+			echo '<form method=POST action="'.$page.'.php">',
 				'<table border=1 cellpadding=5>';
 					echo gk_cb_from_ligne("<label>Renseigner votre nom</label>", "<input type=text name=txtNom size=20 />", "right", "");
 					echo gk_cb_from_ligne("<label>Renseigner votre prenom</label>", "<input type=text name=txtPrenom size=20 />", "right", "");
@@ -338,7 +338,7 @@
 					
 					
 					
-					echo gk_cb_from_ligne("" , "<input class=lesub type=submit name=btnValider value=Je&nbsp;m'inscris />", "", "right");
+					echo gk_cb_from_ligne("" , "<input class=lesub type=submit name=btnValiderInscription value=Je&nbsp;m'inscris />", "", "right");
 
 				echo '</table>',
 			'</form>';

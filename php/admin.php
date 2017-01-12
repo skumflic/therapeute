@@ -66,8 +66,8 @@
 	echo '<h3>Ajouter moderateur  </h3>';
 	
 	
-	if(!isset($_POST['btnValiderAjout'])) {
-		aff_form();
+	if(!isset($_POST['btnValiderInscription'])) {
+		aff_form("admin");
 		$_POST['txtPseudo'] = $_POST['txtPasse'] = $_POST['txtVerif'] = '';
 		$_POST['txtNom'] = $_POST['txtMail'] = '';
 		$_POST['txtPrenom'] = $_POST['txtTelephone'] = '';
@@ -77,7 +77,7 @@
 	
 	
 	
-	if(isset($_POST['btnValiderAjout'])) {
+	if(isset($_POST['btnValiderInscription'])) {
 		
 		
 		$bd = gk_cb_bd_connection();
@@ -107,29 +107,18 @@
 			$mail=mysqli_real_escape_string($bd, $mail);
 			$isModerateur = 2;
 			
+			
+			$pass_encrypt = encrypt_donnee($pass);
+			
 			//Requete d'insertion 
 			$S = "INSERT INTO USER 
 				(nom, prenom, pseudo, mail, password, telephone, isModerateur)
 					VALUES 
-				('$nom', '$prenom','$pseudo','$mail','$pass','$telephone','$isModerateur')";
+				('$nom', '$prenom','$pseudo','$mail','$pass_encrypt','$telephone','$isModerateur')";
 			
 			$r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
 			$ID = mysqli_insert_id($bd);
 		
-			$S = "INSERT INTO THERAPEUTE
-				(id, isAccepted, cleLogiciel, titre, description, isCertified, couleur, skin, lienPhoto)
-					VALUES
-				('$ID', true, NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
-			
-			$r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
-			$ID = mysqli_insert_id($bd);
-		
-			//On peut démarrer la session 
-			session_start();
-			
-			$_SESSION['id'] = $D['id'];
-			$_SESSION['nom'] = $D['nom'];
-			$_SESSION['prenom'] = $D['prenom'];
 			
 
 			//Redirection vers compte.php
@@ -162,7 +151,7 @@
 
 				
 				echo '</br>';
-				echo aff_form();
+				echo aff_form("admin");
 
 		}
 
@@ -175,10 +164,9 @@
 	echo '<h3>Supprimer un moderateur non therapeute  </h3>';
 	
 
-	$sql="SELECT USER.id, nom, prenom, pseudo, THERAPEUTE.isBlocked, isModerateur, mail
-			FROM USER, THERAPEUTE
-			WHERE USER.id = THERAPEUTE.id
-			ORDER BY isModerateur";
+	$sql="SELECT USER.id, nom, prenom, pseudo, isModerateur, mail
+			FROM USER
+			WHERE isModerateur = 2";
 	$r = mysqli_query($bd, $sql) or gk_bd_erreur($bd, $sql);
 	
 	
@@ -190,12 +178,11 @@
 			$nom=htmlentities($enr['nom'],ENT_QUOTES,'ISO-8859-1');
 			$pseudo=htmlentities($enr['pseudo'],ENT_QUOTES,'ISO-8859-1');
 			$prenom=htmlentities($enr['prenom'],ENT_QUOTES,'ISO-8859-1');
-			$bloque=htmlentities($enr['isBlocked'],ENT_QUOTES, 'ISO-8859-1');
 			$moderateur=htmlentities($enr['isModerateur'],ENT_QUOTES, 'ISO-8859-1');
+			
 			echo '<form method="POST" action="admin.php">';
 
-				if ($moderateur == 2)
-					echo gk_cb_from_ligne("<label>"	.$nom. " " .$prenom. "</label>", "<input type=hidden name=btnValiderRemoveModNotTherapeute value='$id'> <input type=submit value='Supprimer moderateur'>", "right", "");
+				echo gk_cb_from_ligne("<label>"	.$nom. " " .$prenom. "</label>", "<input type=hidden name=btnValiderRemoveModNotTherapeute value='$id'> <input type=submit value='Supprimer moderateur'>", "right", "");
 			
 			
 					

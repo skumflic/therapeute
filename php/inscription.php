@@ -17,8 +17,8 @@
 	
 	echo '<div id="connection">';
 	
-	if(!isset($_POST['btnValider'])) {
-		aff_form();
+	if(!isset($_POST['btnValiderInscription'])) {
+		aff_form("inscription");
 		$_POST['txtPseudo'] = $_POST['txtPasse'] = $_POST['txtVerif'] = '';
 		$_POST['txtNom'] = $_POST['txtMail'] = '';
 		$_POST['txtPrenom'] = $_POST['txtTelephone'] = '';
@@ -26,7 +26,7 @@
 	
 	
 	//Si le bouton de validation a été demandé
-	if(isset($_POST['btnValider'])) {
+	if(isset($_POST['btnValiderInscription'])) {
 		
 		
 		$bd = gk_cb_bd_connection();
@@ -47,7 +47,6 @@
 		
 		//Si le nombre d'erreur est 0, on va pouvoir insérer dans la base de donnée
 		if (count($erreur) == 0) {
-
 			$prenom=mysqli_real_escape_string($bd, $prenom);
 			$telephone=mysqli_real_escape_string($bd, $telephone);
 			$nom=mysqli_real_escape_string($bd, $nom);
@@ -114,7 +113,7 @@
 
 				
 				echo '</br>';
-				echo aff_form();
+				echo aff_form("inscription");
 
 		}
 
