@@ -84,17 +84,34 @@ CREATE TABLE IF NOT EXISTS `EXPERIENCE` (
 -- Table structure for table `FORMATION`
 --
 
+DROP TABLE IF EXISTS `FORMATION`;
 CREATE TABLE IF NOT EXISTS `FORMATION` (
   `idFormation` int(10) NOT NULL AUTO_INCREMENT,
   `idTherapeute` int(10) NOT NULL,
   `nom` varchar(60) NOT NULL,
   `annee` int(10) NOT NULL,
   `etablissement` varchar(50) NOT NULL,
-  `descriptif` varchar(250) NOT NULL,
+  `descriptif` varchar(250) DEFAULT NULL,
   `afficher` tinyint(1) NOT NULL,
-  PRIMARY KEY (`idFormation`),
-  UNIQUE KEY `idTherapeute` (`idTherapeute`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  PRIMARY KEY (`idFormation`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+
+--
+-- Дамп данных таблицы `formation`
+--
+
+INSERT INTO `FORMATION` (`idFormation`, `idTherapeute`, `nom`, `annee`, `etablissement`, `descriptif`, `afficher`) VALUES
+(13, 9, 'Formation therapeutique', 2016, 'UniversitÃƒï¿½Ã‚Â©', 'Blablas Blablas Blablas Blablas Blablas Blablas Blablas Blablas Blablas Blablas Blablas Blablas', 1),
+(14, 9, 'Relaxation via massage', 2014, 'UniversitÃƒï¿½Ã‚Â©', 'TTuydtfislg,nvblxwnfljkhlmbkv; lbfgkjshd:b ,;b,sdkfjsdfmlb, ;bwdflrfjb!:xcn,bi hjdgbsdvbgdsh', 1),
+(15, 9, 'Relaxation', 2014, 'UniversitÃƒÂ©', 'TTuydtfislg,nvblxwnfljkhlmbkv; lbfgkjshd:b ,;b,sdkfjsdfmlb, ;bwdflrfjb!:xcn,bi hjdgbsdvbgdsh', 0),
+(16, 9, 'Relaxation', 2014, 'UniversitÃƒÂ©', 'TTuydtfislg,nvblxwnfljkhlmbkv; lbfgkjshd:b ,;b,sdkfjsdfmlb, ;bwdflrfjb!:xcn,bi hjdgbsdvbgdsh', 0),
+(18, 9, 'dferhggjfgh', 2016, 'qsfgsfdgsfdhds', 'dsfhgdsjrhjikgujytr', 1),
+(19, 9, 'dferhggjfgh', 2016, 'qsfgsfdgsfdhds', 'dsfhgdsjrhjikgujytr', 1),
+(20, 9, 'dferhggjfgh', 2016, 'qsfgsfdgsfdhds', 'dsfhgdsjrhjikgujytrfdbgn hdpobslkjtblkdsj mlcjlkdjlkjmlkgog lsklfgogiblskdmfjgsudpodovl slkfhgjh jhodfgds ojpsdoufgifp^bvksdpfug ioÃ´iÃ´dgisdbilm fhth', 1),
+(21, 9, 'dferhggjfgh', 2016, 'qsfgsfdgsfdhds', 'dsfhgdsjrhjikgujytr', 1),
+(22, 10, 'fhghg', 2015, 'dfhhfdh', 'lkrqhtkgjhfdk lgfdfoiuisdgpl lhshdghd iufogidshb l,', 0),
+(23, 10, 'fhdghdf', 2015, 'dfhhgdf', 'qsdgfdshbsfdqgfs<q', 1),
+(24, 14, 'qsdfqsdf', 2015, 'sqfsdqfqs', 'sqdfdsqfqsdfsdf', 1);
 
 -- --------------------------------------------------------
 
@@ -277,11 +294,6 @@ INSERT INTO `USER` (`id`, `nom`, `prenom`, `pseudo`, `password`, `mail`, `teleph
 -- Constraints for dumped tables
 --
 
---
--- Constraints for table `FORMATION`
---
-ALTER TABLE `FORMATION`
-  ADD CONSTRAINT `FORMATION_ibfk_1` FOREIGN KEY (`idTherapeute`) REFERENCES `THERAPEUTE` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `THERAPEUTE`
