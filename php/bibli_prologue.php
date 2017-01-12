@@ -274,7 +274,7 @@ function html_prologue_methode() {
 		</section>';
 }
 
-function html_prologue_cabinet() {
+function html_prologue_cabinet($r_tarif) {
 	echo '<!-- cabinet -->
 		<section id="cabinet" class="two">
 			<div class="container">
@@ -317,8 +317,15 @@ function html_prologue_cabinet() {
 						</article>
 					</div>
 				</div>
-			</div>
-			<div class="container ssPara">
+			</div>';
+			html_prologue_cabinet_tarif($r_tarif);
+			
+			echo '</div>
+		</section>';
+}
+
+function html_prologue_cabinet_tarif($r_tarif) {
+	echo '<div class="container ssPara">
 				<h3>Tarifs</h3>
 				<div class="row">
 					<div class="12u">
@@ -332,40 +339,26 @@ function html_prologue_cabinet() {
 										<th>Price</th>
 									</tr>
 									</thead>
-									<tbody>
-									<tr>
-										<td>Item One</td>
-										<td>Ante turpis integer aliquet porttitor.</td>
-										<td>29.99</td>
-									</tr>
-									<tr>
-										<td>Item Two</td>
-										<td>Vis ac commodo adipiscing arcu aliquet.</td>
-										<td>19.99</td>
-									</tr>
-									<tr>
-										<td>Item Three</td>
-										<td> Morbi faucibus arcu accumsan lorem.</td>
-										<td>29.99</td>
-									</tr>
-									<tr>
-										<td>Item Four</td>
-										<td>Vitae integer tempus condimentum.</td>
-										<td>19.99</td>
-									</tr>
-									<tr>
-										<td>Item Five</td>
-										<td>Ante turpis integer aliquet porttitor.</td>
-										<td>29.99</td>
-									</tr>
-									</tbody>
+									<tbody>';
+										while($enr = mysqli_fetch_assoc($r_tarif)) {
+											$libelle=htmlentities($enr['libelle'],ENT_QUOTES,'ISO-8859-1');
+											$description=htmlentities($enr['description'],ENT_QUOTES,'ISO-8859-1');
+											$prix=htmlentities($enr['prix'],ENT_QUOTES,'ISO-8859-1');
+
+												echo '<tr>
+														<td>'. $libelle .'</td>
+														<td>'. $description .'</td>
+														<td>'. $prix .'</td>
+													</tr>';
+
+										}
+									
+									echo '</tbody>
 								</table>
 							</div>
 						</article>
 					</div>
-				</div>
-			</div>
-		</section>';
+				</div>';
 }
 
 function html_prologue_contact() {

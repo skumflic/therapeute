@@ -240,7 +240,7 @@ function html_alpha_two() {
 	</section>';
 }
 
-function html_alpha_three() {
+function html_alpha_three($r_tarif) {
 	echo '<section id="cabinet" class="container">
 			<section class="box special">
 				<header class="major">
@@ -282,8 +282,16 @@ function html_alpha_three() {
 							integer adipiscing ornare amet.</p>
 						</div>	
 					</article>
-				</div>
-				<section id="tarifs" class="box special features">
+				</div>';
+				
+				html_alpha_three_tarif($r_tarif);
+			echo '</section>
+			
+		</section>';
+}
+
+function html_alpha_three_tarif($r_tarif) {
+	echo '<section id="tarifs" class="box special features">
 					<h3>Tarifs</h3>
 
 					<div class="table-wrapper">
@@ -295,43 +303,28 @@ function html_alpha_three() {
 								    <th>Price</th>
 								</tr>
 							</thead>
-							<tbody>
-								<tr>
-									<td>Something</td>
-									<td>Ante turpis integer aliquet porttitor.</td>
-									<td>29.99</td>
-								</tr>
-								<tr>
-									<td>Nothing</td>
-									<td>Vis ac commodo adipiscing arcu aliquet.</td>
-									<td>19.99</td>
-								</tr>
-								<tr>
-									<td>Something</td>
-									<td> Morbi faucibus arcu accumsan lorem.</td>
-									<td>29.99</td>
-								</tr>
-								<tr>
-									<td>Nothing</td>
-									<td>Vitae integer tempus condimentum.</td>
-									<td>19.99</td>
-								</tr>
-								<tr>
-									<td>Something</td>
-									<td>Ante turpis integer aliquet porttitor.</td>
-									<td>29.99</td>
-								</tr>
-							</tbody>
+							<tbody>';
+									while($enr = mysqli_fetch_assoc($r_tarif)) {
+										$libelle=htmlentities($enr['libelle'],ENT_QUOTES,'ISO-8859-1');
+										$description=htmlentities($enr['description'],ENT_QUOTES,'ISO-8859-1');
+										$prix=htmlentities($enr['prix'],ENT_QUOTES,'ISO-8859-1');
+
+											echo '<tr>
+													<td>'. $libelle .'</td>
+													<td>'. $description .'</td>
+													<td>'. $prix .'</td>
+												</tr>';
+
+									}
+								
+							echo '</tbody>
 
 						</table>
 					</div>
 
-				</section>
-
-			</section>
-			
-		</section>';
+				</section>';
 }
+
 
 function html_alpha_cta() {
 	echo '<!-- CTA -->

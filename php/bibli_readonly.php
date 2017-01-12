@@ -235,92 +235,86 @@ function html_readonly_two() {
 		</section>';
 }
 
-function html_readonly_three() {
+function html_readonly_three($r_tarif) {
 	echo '<!-- Three -->
 		<section id="three">
-		    <div class="container">
-			<h2>Le cabinet</h2>
+			<div class="container">
+				<h2>Le cabinet</h2>
 
-			<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non.
-			    Adipiscing cubilia elementum integer. Integer eu ante ornare amet commetus.</p>
+				<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non.
+				Adipiscing cubilia elementum integer. Integer eu ante ornare amet commetus.</p>
 
-			<div class="features">
-			    <article>
-				<a href="#" class="image"><img src="../images/fotolia/fotolia_88327670.jpg" alt=""/></a>
+				<div class="features">
+					<article>
+						<a href="#" class="image"><img src="../images/fotolia/fotolia_88327670.jpg" alt=""/></a>
 
-				<div class="inner">
-				    <h4>Possibly broke spacetime</h4>
+						<div class="inner">
+							<h4>Possibly broke spacetime</h4>
 
-				    <p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus
-					integer adipiscing ornare amet.</p>
+							<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus
+							integer adipiscing ornare amet.</p>
+						</div>
+					</article>
+					<article>
+						<a href="#" class="image"><img src="../images/fotolia/fotolia_84543149.jpg" alt=""/></a>
+
+						<div class="inner">
+							<h4>Terraformed a small moon</h4>
+
+							<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus
+							integer adipiscing ornare amet.</p>
+						</div>
+					</article>
+					<article>
+						<a href="#" class="image"><img src="../images/fotolia/fotolia_79923444.jpg" alt=""/></a>
+
+						<div class="inner">
+							<h4>Snapped dark matter in the wild</h4>
+		
+							<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus
+							integer adipiscing ornare amet.</p>
+						</div>
+					</article>
 				</div>
-			    </article>
-			    <article>
-				<a href="#" class="image"><img src="../images/fotolia/fotolia_84543149.jpg" alt=""/></a>
+			</div>';
+			
+			html_readonly_three_tarif($r_tarif);
+			
 
-				<div class="inner">
-				    <h4>Terraformed a small moon</h4>
+		echo '</section>';
+}
 
-				    <p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus
-					integer adipiscing ornare amet.</p>
+function html_readonly_three_tarif($r_tarif) {
+	echo '<div class="container">
+				<h3>Tarifs</h3>
+
+				<div class="table-wrapper">
+					<table class="alt">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Description</th>
+								<th>Price</th>
+							</tr>
+						</thead>
+						<tbody>';
+							while($enr = mysqli_fetch_assoc($r_tarif)) {
+								$libelle=htmlentities($enr['libelle'],ENT_QUOTES,'ISO-8859-1');
+								$description=htmlentities($enr['description'],ENT_QUOTES,'ISO-8859-1');
+								$prix=htmlentities($enr['prix'],ENT_QUOTES,'ISO-8859-1');
+
+									echo '<tr>
+											<td>'. $libelle .'</td>
+											<td>'. $description .'</td>
+											<td>'. $prix .'</td>
+										</tr>';
+
+							}
+						
+						echo '</tbody>
+					</table>
 				</div>
-			    </article>
-			    <article>
-				<a href="#" class="image"><img src="../images/fotolia/fotolia_79923444.jpg" alt=""/></a>
-
-				<div class="inner">
-				    <h4>Snapped dark matter in the wild</h4>
-
-				    <p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus
-					integer adipiscing ornare amet.</p>
-				</div>
-			    </article>
-			</div>
-		    </div>
-		    <div class="container">
-			<h3>Tarifs</h3>
-
-			<div class="table-wrapper">
-			    <table class="alt">
-				<thead>
-				<tr>
-				    <th>Name</th>
-				    <th>Description</th>
-				    <th>Price</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr>
-				    <td>Item One</td>
-				    <td>Ante turpis integer aliquet porttitor.</td>
-				    <td>29.99</td>
-				</tr>
-				<tr>
-				    <td>Item Two</td>
-				    <td>Vis ac commodo adipiscing arcu aliquet.</td>
-				    <td>19.99</td>
-				</tr>
-				<tr>
-				    <td>Item Three</td>
-				    <td> Morbi faucibus arcu accumsan lorem.</td>
-				    <td>29.99</td>
-				</tr>
-				<tr>
-				    <td>Item Four</td>
-				    <td>Vitae integer tempus condimentum.</td>
-				    <td>19.99</td>
-				</tr>
-				<tr>
-				    <td>Item Five</td>
-				    <td>Ante turpis integer aliquet porttitor.</td>
-				    <td>29.99</td>
-				</tr>
-				</tbody>
-			    </table>
-			</div>
-		    </div>
-
-		</section>';
+			</div>';
 }
 
 function html_readonly_four() {

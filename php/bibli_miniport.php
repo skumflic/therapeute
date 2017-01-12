@@ -323,7 +323,7 @@ function html_miniport_cabinet() {
 		</div>';
 }
 
-function html_miniport_tarif() {
+function html_miniport_tarif($r_tarif) {
 	echo '<!-- Tarifs -->
 		<div class="wrapper style3">
 			<article id="Tarifs">
@@ -343,33 +343,21 @@ function html_miniport_tarif() {
 											<th>Price</th>
 										</tr>
 										</thead>
-										<tbody>
-										<tr>
-											<td>Item One</td>
-											<td>Ante turpis integer aliquet porttitor.</td>
-											<td>29.99</td>
-										</tr>
-										<tr>
-											<td>Item Two</td>
-											<td>Vis ac commodo adipiscing arcu aliquet.</td>
-											<td>19.99</td>
-										</tr>
-										<tr>
-											<td>Item Three</td>
-											<td> Morbi faucibus arcu accumsan lorem.</td>
-											<td>29.99</td>
-										</tr>
-										<tr>
-											<td>Item Four</td>
-											<td>Vitae integer tempus condimentum.</td>
-											<td>19.99</td>
-										</tr>
-										<tr>
-											<td>Item Five</td>
-											<td>Ante turpis integer aliquet porttitor.</td>
-											<td>29.99</td>
-										</tr>
-										</tbody>
+											<tbody>';
+												while($enr = mysqli_fetch_assoc($r_tarif)) {
+													$libelle=htmlentities($enr['libelle'],ENT_QUOTES,'ISO-8859-1');
+													$description=htmlentities($enr['description'],ENT_QUOTES,'ISO-8859-1');
+													$prix=htmlentities($enr['prix'],ENT_QUOTES,'ISO-8859-1');
+
+														echo '<tr>
+																<td>'. $libelle .'</td>
+																<td>'. $description .'</td>
+																<td>'. $prix .'</td>
+															</tr>';
+		
+												}
+											
+										echo '</tbody>
 									</table>
 								</div>
 							</article>
