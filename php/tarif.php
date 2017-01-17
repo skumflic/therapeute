@@ -43,7 +43,7 @@ echo '<div class="content">
 	*																												*
 	****************************************************************************************************************/
 	
-			$sql="SELECT idTarif, libelle, description
+			$sql="SELECT idTarif, libelle, description, prix
 					FROM TARIF
 					WHERE idTherapeute = '$id_user'";
 				
@@ -62,7 +62,7 @@ echo '<div class="content">
 			if(isset($_POST['btn_sauvegarder_tarif'])){
 				$idTarif=trim($_POST['txtTarif']);
 				$libelle=trim($_POST['txtLibelle']);
-				$description=trim($_POST['txtDescription']);
+				$description=trim($_POST['txtDesc']);
 				$prix=trim($_POST['txtPrix']);
 				
 				if(isset($_POST['chbxAff'])){
@@ -115,7 +115,7 @@ function ajouter_tarif($bd, $id_user, $libelle, $description, $prix) {
 			
 			//Requete d'insertion 
 			$sql = "INSERT INTO TARIF 
-				(idTherapeute, libelle, description, prix, descriptif)
+				(idTherapeute, libelle, description, prix)
 					VALUES 
 				('$id_user', '$libelle', '$description', '$prix')";
 			
@@ -178,6 +178,7 @@ function aff_form_tarif_existant($idTarif, $libelle, $description, $prix) {
 				<tr>
 					<input type="text" name="txtTarif" style="display:none;" value='. $idTarif .' >
 					<td><input type="text" name="txtLibelle" value='.$libelle.'></td>
+					<td><input type="text" name="txtPrix" value='.$prix.'></td>
 				</tr>
 				
 				<tr>
@@ -206,7 +207,7 @@ function aff_form_tarif_ajout() {
 				</td></tr>
 				
 				<tr><td colspan=2>
-					<input type=text name=txtPrix size=70 placeholder="Entrez une description "/>	
+					<input type=text name=txtPrix size=70 placeholder="Entrez prix "/>	
 				</td></tr>
 				<tr>
 					<td><input type=submit name="bnt_ajouter_tarif" value="ajouter"/></td>
