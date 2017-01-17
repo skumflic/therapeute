@@ -138,7 +138,7 @@ function html_miniport_formation($r_formation) {
 						
 						
 					}
-					
+					if($i % 3 != 0) echo '</div>';	
 					
 				echo '</div>
 			</article>
@@ -290,34 +290,35 @@ function html_miniport_cabinet($r_cabinet) {
 						Adipiscing cubilia elementum integer. Integer eu ante ornare amet commetus.</p>
 				</header>
 				<div class="container">';
-				$i=0;
-				while($enr = mysqli_fetch_assoc($r_formation)) {
-					$idPhoto=htmlentities($enr['idPhoto'],ENT_QUOTES,'ISO-8859-1');
-					$titre=htmlentities($enr['titre'],ENT_QUOTES,'ISO-8859-1');
-					$description=htmlentities($enr['description'],ENT_QUOTES,'ISO-8859-1');
-					
-					//le i % 2 est pour que tout s'affiche bien
-					if($i % 2 == 0) 
-						echo '<div class="row">';
-							echo '<div class="6u 12u(mobile)">
-									<article class="box style2">
-										<a href="#" class="image featured"><img src=../upload/cabinet/'.$idPhoto.'.png alt=""/></a>
-
-										<div class="inner">
-											<h4><a href="#">'.$titre.'</a></h4>
-
-											<p>'.$description.'</p>
-										</div>
-									</article>
-							</div>';
+					$i=0;
+					while($enr = mysqli_fetch_assoc($r_cabinet)) {
+						$idPhoto=htmlentities($enr['idPhoto'],ENT_QUOTES,'ISO-8859-1');
+						$titre=htmlentities($enr['titre'],ENT_QUOTES,'ISO-8859-1');
+						$description=htmlentities($enr['description'],ENT_QUOTES,'ISO-8859-1');
 						
-						$i++;
-					if($i % 2 == 0) 
-						echo '</div>';	
-					
-					
-				}				
+						//le i % 2 est pour que tout s'affiche bien
+						if($i % 2 == 0) 
+							echo '<div class="row">';
+								echo '<div class="6u 12u(mobile)">
+										<article class="box style2">
+											<a href="#" class="image featured"><img src=../upload/cabinet/'.$idPhoto.'.png alt=""/></a>
+
+											<div class="inner">
+												<h4><a href="#">'.$titre.'</a></h4>
+
+												<p>'.$description.'</p>
+											</div>
+										</article>
+								</div>';
 							
+							$i++;
+						if($i % 2 == 0) 
+							echo '</div>';	
+						
+						
+					}				
+					if ($i % 2 != 0) 
+							echo '</div>';		
 				echo '</div>
 			</article>
 		</div>';

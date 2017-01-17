@@ -4,11 +4,16 @@
 
 	require("bibli_cuiteur.php");
 	require("bibli_generale.php");
+
 	require("bibli_alpha.php");
+
 	require("bibli_miniport.php");
+
 	require("bibli_readonly.php");
+
 	require("bibli_prologue.php");
-	
+
+
 	$bd = gk_cb_bd_connection();
 	$profil_id = 14;
 	
@@ -70,14 +75,11 @@
 	
 	
 	//CABINET
-	$sql_cabinet="SELECT *
+	$sql_cabinet="SELECT * 
 			FROM PHOTO
 			WHERE idTherapeute = '$profil_id'
-			AND afficher = true";
-	$r_cabinet = mysqli_query($bd, $sql_cabinet) or gk_bd_erreur($bd, $sql_cabinet);
-
-	
-	
+			AND afficher = 1";
+	$r_cabinet = mysqli_query($bd, $sql_cabinet) or gk_bd_erreur($bd, $sql_cabinet);	
 	
 	
 	if ($color == 1) 
@@ -97,13 +99,12 @@
 	if ($skin == 1) 
 		afficher_alpha($color_to_string);
 	if ($skin == 2) 
-		afficher_miniport($color_to_string);
+		afficher_prologue($color_to_string);
 		//~ afficher_miniport($color_to_string);
 	if ($skin == 3) 
 		afficher_prologue($color_to_string);
 	if ($skin == 4)
 		afficher_readonly($color_to_string);	
-	
 	
 	
 	
@@ -139,12 +140,6 @@
 		html_miniport_remerciements($remerciements); 
 		if (mysqli_num_rows($r_formation) > 0) 
 			html_miniport_formation($r_formation);
-		html_miniport_methode();
-		html_miniport_delmet();
-		html_miniport_deontologie();
-		html_miniport_certification();
-		if (mysqli_num_rows($r_cabinet) > 0) 
-			html_miniport_cabinet($r_cabinet);	
 		html_miniport_tarif($r_tarif);
 		html_miniport_contact($r_reseau, $mail);
 		
@@ -163,7 +158,7 @@
 		html_prologue_intro($nom, $prenom, $titre, $description);
 		html_prologue_about($remerciements, $aboutme, $r_formation);
 		html_prologue_methode();
-		html_prologue_cabinet($r_tarif, $r_cabinet);
+		html_prologue_cabinet($r_tarif, $_cabinet);
 		html_prologue_contact();
 		
 		html_prologue_end_main();

@@ -283,7 +283,7 @@ function html_prologue_methode() {
 function html_prologue_cabinet($r_tarif, $r_cabinet) {
 	echo '<!-- cabinet -->
 		<section id="cabinet" class="two">';
-			if (mysqli_num_rows($r_cabinet) {
+			if (mysqli_num_rows($r_cabinet) > 0) {
 				echo '<div class="container">
 						<header>
 							<h2>Le cabinet</h2>
@@ -292,7 +292,7 @@ function html_prologue_cabinet($r_tarif, $r_cabinet) {
 						</header>';
 						
 						$i=0;
-						while($enr = mysqli_fetch_assoc($r_formation)) {
+						while($enr = mysqli_fetch_assoc($r_cabinet)) {
 							$idPhoto=htmlentities($enr['idPhoto'],ENT_QUOTES,'ISO-8859-1');
 							$titre=htmlentities($enr['titre'],ENT_QUOTES,'ISO-8859-1');
 							$description=htmlentities($enr['description'],ENT_QUOTES,'ISO-8859-1');
@@ -300,32 +300,35 @@ function html_prologue_cabinet($r_tarif, $r_cabinet) {
 							//le i % 2 est pour que tout s'affiche bien
 							if($i % 2 == 0) 
 								echo '<div class="row">';
-									echo '<div class="6u 12u$(mobile)">
+									echo ' <div class="6u 12u$(mobile)">
 											<article class="item">
-												<a href="#" class="image fit"><img src=../upload/cabinet/'.$idPhoto.'.png alt=""/></a>
-
+												<a href="#" class="image fit"><img src="../images/fotolia/fotolia_88327670.jpg" alt="" /></a>
 												<header>
-													<h4>'.$titre.'</h4>
-
-													<p>'.$description.'</p>
+													<h4>Possibly broke spacetime</h4>
+													<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus
+													integer adipiscing ornare amet.</p>
 												</header>
 											</article>
-									</div>';
-								
+										</div>';
 								$i++;
 							if($i % 2 == 0) 
 								echo '</div>';	
 							
 							
 						}				
+							if ($i % 2 != 0) 
+								echo '</div>';
+							
+							
+						
+							
 				
 						
-					echo '</div>';
+				echo '</div>';
 			}
 			html_prologue_cabinet_tarif($r_tarif);
 			
-			echo '</div>
-		</section>';
+		echo '</section>';
 }
 
 function html_prologue_cabinet_tarif($r_tarif) {

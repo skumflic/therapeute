@@ -247,7 +247,7 @@ function html_readonly_two() {
 function html_readonly_three($r_tarif, $r_cabinet) {
 	echo '<!-- Three -->
 		<section id="three">';
-			if (mysqli_num_rows($r_formation) > 0) {
+			if (mysqli_num_rows($r_cabinet) > 0) {
 				echo '<div class="container">
 					<h2>Le cabinet</h2>
 
@@ -255,7 +255,7 @@ function html_readonly_three($r_tarif, $r_cabinet) {
 					Adipiscing cubilia elementum integer. Integer eu ante ornare amet commetus.</p>
 
 					<div class="features">';
-						while($enr = mysqli_fetch_assoc($r_tarif)) {
+						while($enr = mysqli_fetch_assoc($r_cabinet)) {
 									$idPhoto=htmlentities($enr['idPhoto'],ENT_QUOTES,'ISO-8859-1');
 									$titre=htmlentities($enr['titre'],ENT_QUOTES,'ISO-8859-1');
 									$description=htmlentities($enr['description'],ENT_QUOTES,'ISO-8859-1');

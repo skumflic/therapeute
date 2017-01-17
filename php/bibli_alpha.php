@@ -244,7 +244,7 @@ function html_alpha_three($r_tarif, $r_cabinet) {
 	echo '<section id="cabinet" class="container">
 			<section class="box special">';
 			
-				if (mysqli_num_rows($r_formation) > 0) {
+				if (mysqli_num_rows($r_cabinet) > 0) {
 
 					echo '<header class="major">
 						<h2>Le cabinet</h2>
@@ -255,24 +255,25 @@ function html_alpha_three($r_tarif, $r_cabinet) {
 
 
 					<div class="features">';
-						while($enr = mysqli_fetch_assoc($r_tarif)) {
-								$idPhoto=htmlentities($enr['idPhoto'],ENT_QUOTES,'ISO-8859-1');
-								$titre=htmlentities($enr['titre'],ENT_QUOTES,'ISO-8859-1');
-								$description=htmlentities($enr['description'],ENT_QUOTES,'ISO-8859-1');
-								
-								
-							echo '<article>
-								<a href="#" class="image"><img src=../upload/cabinet/'.$idPhoto.'.png alt=""/></a>
+						while($enr = mysqli_fetch_assoc($r_cabinet)) {
+									$idPhoto=htmlentities($enr['idPhoto'],ENT_QUOTES,'ISO-8859-1');
+									$titre=htmlentities($enr['titre'],ENT_QUOTES,'ISO-8859-1');
+									$description=htmlentities($enr['description'],ENT_QUOTES,'ISO-8859-1');
+									
+									
+								echo '<article>
+									<a href="#" class="image"><img src=../upload/cabinet/'.$idPhoto.'.png alt=""/></a>
 
-								<div class="inner">
-									<h4>'.$titre.'</h4>
+									<div class="inner">
+										<h4>'.$titre.'</h4>
 
-									<p>'.$description.'</p>
-								</div>
-							</article>';
-												
+										<p>'.$description.'</p>
+									</div>
+								</article>';
+													
 
-						}
+							}
+						
 						
 						
 						
