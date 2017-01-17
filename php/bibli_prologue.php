@@ -74,11 +74,10 @@ function html_prologue_header($lienPhoto, $nom, $prenom, $titre, $r_reseau, $mai
 						
 						if($idReseau == 1) 	echo '<li><a href='. $URL. ' class="icon fa-facebook"><span class="label">Facebook</span></a></li>';
 						if($idReseau == 2)	echo '<li><a href='. $URL. ' class="icon fa-twitter"><span class="label">Twitter</span></a></li>';
-						if($idReseau == 2)	echo '<li><a href='. $URL. ' class="icon fa-google-plus"><span class="label">Google+</span></a></li>';
-						
-						echo '<li><a href=mailto:'. $mail .' class="icon fa-envelope"><span class="label">Email</span></a></li>';
-
+						if($idReseau == 3)	echo '<li><a href='. $URL. ' class="icon fa-google-plus"><span class="label">Google+</span></a></li>';
+					
 					}
+					echo '<li><a href=mailto:'. $mail .' class="icon fa-envelope"><span class="label">Email</span></a></li>';
 				echo '</ul>
 
 			</div>
@@ -281,50 +280,48 @@ function html_prologue_methode() {
 		</section>';
 }
 
-function html_prologue_cabinet($r_tarif) {
+function html_prologue_cabinet($r_tarif, $r_cabinet) {
 	echo '<!-- cabinet -->
-		<section id="cabinet" class="two">
-			<div class="container">
-				<header>
-					<h2>Le cabinet</h2>
-					<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non.
-						Adipiscing cubilia elementum integer. Integer eu ante ornare amet commetus.</p>
-				</header>
-				<div class="row">
-					<div class="6u 12u$(mobile)">
-						<article class="item">
-							<a href="#" class="image fit"><img src="../images/fotolia/fotolia_88327670.jpg" alt="" /></a>
-							<header>
-								<h4>Possibly broke spacetime</h4>
-								<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus
-									integer adipiscing ornare amet.</p>
-							</header>
-						</article>
-					</div>
-					<div class="6u 12u$(mobile)">
-						<article class="item">
-							<a href="#" class="image fit"><img src="../images/fotolia/fotolia_84543149.jpg" alt="" /></a>
-							<header>
-								<h4>Terraformed a small moon</h4>
-								<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus
-									integer adipiscing ornare amet.</p>
-							</header>
-						</article>
-					</div>
-				</div>
-				<div class="row">
-					<div class="6u 12u$(mobile)">
-						<article class="item">
-							<a href="#" class="image fit"><img src="../images/fotolia/fotolia_79923444.jpg" alt="" /></a>
-							<header>
-								<h4>Snapped dark matter in the wild</h4>
-								<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus
-									integer adipiscing ornare amet.</p>
-							</header>
-						</article>
-					</div>
-				</div>
-			</div>';
+		<section id="cabinet" class="two">';
+			if (mysqli_num_rows($r_cabinet) {
+				echo '<div class="container">
+						<header>
+							<h2>Le cabinet</h2>
+							<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non.
+							Adipiscing cubilia elementum integer. Integer eu ante ornare amet commetus.</p>
+						</header>';
+						
+						$i=0;
+						while($enr = mysqli_fetch_assoc($r_formation)) {
+							$idPhoto=htmlentities($enr['idPhoto'],ENT_QUOTES,'ISO-8859-1');
+							$titre=htmlentities($enr['titre'],ENT_QUOTES,'ISO-8859-1');
+							$description=htmlentities($enr['description'],ENT_QUOTES,'ISO-8859-1');
+							
+							//le i % 2 est pour que tout s'affiche bien
+							if($i % 2 == 0) 
+								echo '<div class="row">';
+									echo '<div class="6u 12u$(mobile)">
+											<article class="item">
+												<a href="#" class="image fit"><img src=../upload/cabinet/'.$idPhoto.'.png alt=""/></a>
+
+												<header>
+													<h4>'.$titre.'</h4>
+
+													<p>'.$description.'</p>
+												</header>
+											</article>
+									</div>';
+								
+								$i++;
+							if($i % 2 == 0) 
+								echo '</div>';	
+							
+							
+						}				
+				
+						
+					echo '</div>';
+			}
 			html_prologue_cabinet_tarif($r_tarif);
 			
 			echo '</div>

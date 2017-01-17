@@ -280,47 +280,53 @@ function html_miniport_certification() {
 		</div>';
 }
 
-function html_miniport_cabinet() {
-	echo '<!-- cabinet -->
-		<div class="wrapper style2">
+function html_miniport_cabinet($r_cabinet) {
+	
+	echo '<div class="wrapper style2">
 			<article id="cabinet">
 				<header>
 					<h2>Le cabinet</h2>
 					<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non.
 						Adipiscing cubilia elementum integer. Integer eu ante ornare amet commetus.</p>
 				</header>
-				<div class="container">
-					<div class="row">
-						<div class="6u 12u(mobile)">
-							<article class="box style2">
-								<a href="#" class="image featured"><img src="../images/fotolia/fotolia_88327670.jpg" alt="" /></a>
-								<h4><a href="#">Possibly broke spacetime</a></h4>
-								<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus
-									integer adipiscing ornare amet.</p>
-							</article>
-						</div>
-						<div class="6u 12u(mobile)">
-							<article class="box style2">
-								<a href="#" class="image featured"><img src="../images/fotolia/fotolia_84543149.jpg" alt="" /></a>
-								<h4><a href="#">Terraformed a small moon</a></h4>
-								<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus
-									integer adipiscing ornare amet.</p>
-							</article>
-						</div>
-					</div>
-					<div class="row">
-						<div class="6u 12u(mobile)">
-							<article class="box style2">
-								<a href="#" class="image featured"><img src="../images/fotolia/fotolia_79923444.jpg" alt="" /></a>
-								<h4><a href="#">Snapped dark matter in the wild</a></h4>
-								<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus
-									integer adipiscing ornare amet.</p>
-							</article>
-						</div>
-					</div>
-				</div>
+				<div class="container">';
+				$i=0;
+				while($enr = mysqli_fetch_assoc($r_formation)) {
+					$idPhoto=htmlentities($enr['idPhoto'],ENT_QUOTES,'ISO-8859-1');
+					$titre=htmlentities($enr['titre'],ENT_QUOTES,'ISO-8859-1');
+					$description=htmlentities($enr['description'],ENT_QUOTES,'ISO-8859-1');
+					
+					//le i % 2 est pour que tout s'affiche bien
+					if($i % 2 == 0) 
+						echo '<div class="row">';
+							echo '<div class="6u 12u(mobile)">
+									<article class="box style2">
+										<a href="#" class="image featured"><img src=../upload/cabinet/'.$idPhoto.'.png alt=""/></a>
+
+										<div class="inner">
+											<h4><a href="#">'.$titre.'</a></h4>
+
+											<p>'.$description.'</p>
+										</div>
+									</article>
+							</div>';
+						
+						$i++;
+					if($i % 2 == 0) 
+						echo '</div>';	
+					
+					
+				}				
+							
+				echo '</div>
 			</article>
 		</div>';
+	
+	
+	
+	
+	
+	
 }
 
 function html_miniport_tarif($r_tarif) {
@@ -425,14 +431,14 @@ function html_miniport_contact($r_reseau, $mail) {
 									
 									if($idReseau == 1) 	echo '<li><a href='. $URL. ' class="icon fa-facebook"><span class="label">Facebook</span></a></li>';
 									if($idReseau == 2)	echo '<li><a href='. $URL. ' class="icon fa-twitter"><span class="label">Twitter</span></a></li>';
-									if($idReseau == 2)	echo '<li><a href='. $URL. ' class="icon fa-google-plus"><span class="label">Google+</span></a></li>';
+									if($idReseau == 3)	echo '<li><a href='. $URL. ' class="icon fa-google-plus"><span class="label">Google+</span></a></li>';
 									
-									echo '<li><a href=mailto:'. $mail .' class="icon fa-envelope"><span class="label">Email</span></a></li>';
-
+									
 								}
 							
 							
-								
+								echo '<li><a href=mailto:'. $mail .' class="icon fa-envelope"><span class="label">Email</span></a></li>';
+
 					
 							echo '</ul>
 							<hr />

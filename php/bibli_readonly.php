@@ -64,11 +64,12 @@ function html_readonly_header($lienPhoto, $nom, $prenom, $titre, $description, $
 					
 					if($idReseau == 1) 	echo '<li><a href='. $URL. ' class="icon fa-facebook"><span class="label">Facebook</span></a></li>';
 					if($idReseau == 2)	echo '<li><a href='. $URL. ' class="icon fa-twitter"><span class="label">Twitter</span></a></li>';
-					if($idReseau == 2)	echo '<li><a href='. $URL. ' class="icon fa-google-plus"><span class="label">Google+</span></a></li>';
+					if($idReseau == 3)	echo '<li><a href='. $URL. ' class="icon fa-google-plus"><span class="label">Google+</span></a></li>';
 					
-					echo '<li><a href=mailto:'. $mail .' class="icon fa-envelope"><span class="label">Email</span></a></li>';
 
 			}
+			echo '<li><a href=mailto:'. $mail .' class="icon fa-envelope"><span class="label">Email</span></a></li>';
+
 			    	    
 		echo '</ul>
 	    </footer>
@@ -243,49 +244,39 @@ function html_readonly_two() {
 		</section>';
 }
 
-function html_readonly_three($r_tarif) {
+function html_readonly_three($r_tarif, $r_cabinet) {
 	echo '<!-- Three -->
-		<section id="three">
-			<div class="container">
-				<h2>Le cabinet</h2>
+		<section id="three">';
+			if (mysqli_num_rows($r_formation) > 0) {
+				echo '<div class="container">
+					<h2>Le cabinet</h2>
 
-				<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non.
-				Adipiscing cubilia elementum integer. Integer eu ante ornare amet commetus.</p>
+					<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non.
+					Adipiscing cubilia elementum integer. Integer eu ante ornare amet commetus.</p>
 
-				<div class="features">
-					<article>
-						<a href="#" class="image"><img src="../images/fotolia/fotolia_88327670.jpg" alt=""/></a>
+					<div class="features">';
+						while($enr = mysqli_fetch_assoc($r_tarif)) {
+									$idPhoto=htmlentities($enr['idPhoto'],ENT_QUOTES,'ISO-8859-1');
+									$titre=htmlentities($enr['titre'],ENT_QUOTES,'ISO-8859-1');
+									$description=htmlentities($enr['description'],ENT_QUOTES,'ISO-8859-1');
+									
+									
+								echo '<article>
+									<a href="#" class="image"><img src=../upload/cabinet/'.$idPhoto.'.png alt=""/></a>
 
-						<div class="inner">
-							<h4>Possibly broke spacetime</h4>
+									<div class="inner">
+										<h4>'.$titre.'</h4>
 
-							<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus
-							integer adipiscing ornare amet.</p>
-						</div>
-					</article>
-					<article>
-						<a href="#" class="image"><img src="../images/fotolia/fotolia_84543149.jpg" alt=""/></a>
+										<p>'.$description.'</p>
+									</div>
+								</article>';
+													
 
-						<div class="inner">
-							<h4>Terraformed a small moon</h4>
-
-							<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus
-							integer adipiscing ornare amet.</p>
-						</div>
-					</article>
-					<article>
-						<a href="#" class="image"><img src="../images/fotolia/fotolia_79923444.jpg" alt=""/></a>
-
-						<div class="inner">
-							<h4>Snapped dark matter in the wild</h4>
-		
-							<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus
-							integer adipiscing ornare amet.</p>
-						</div>
-					</article>
-				</div>
-			</div>';
-			
+							}
+						
+					echo'</div>
+				</div>';
+			}
 			html_readonly_three_tarif($r_tarif);
 			
 
