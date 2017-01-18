@@ -70,7 +70,7 @@
 			$S = "INSERT INTO THERAPEUTE
 				(id, isAccepted, cleLogiciel, titre, description, isCertified, couleur, skin, lienPhoto)
 					VALUES
-				('$ID', false, NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
+				('$ID', false, NULL, NULL, NULL, 0, NULL, NULL, NULL)";
 			
 			$r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
 			$ID = mysqli_insert_id($bd);

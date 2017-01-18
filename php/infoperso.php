@@ -158,6 +158,49 @@
 	
 	
 	
+	echo '<h3>Reseaux sociaux</h3>';
+	
+	$sql="SELECT *
+			FROM RESEAU";
+		$r = mysqli_query($bd, $sql) or gk_bd_erreur($bd, $sql);
+		
+		
+	while($enr = mysqli_fetch_assoc($r)) {
+		$libelle=htmlentities($enr['libelle'],ENT_QUOTES,'ISO-8859-1');
+		$idReseau=htmlentities($enr['idReseau'],ENT_QUOTES,'ISO-8859-1');
+		
+		$sql_url="SELECT THERA_RESEAU.URL
+			FROM THERA_RESEAU
+			WHERE THERA_RESEAU.idReseau = '$idReseau'
+			AND THERA_RESEAU.idTherapeute = '$id'";
+		$r_url = mysqli_query($bd, $sql_url) or gk_bd_erreur($bd, $sql_url);
+		
+		
+		if (mysqli_num_rows($r_url) > 0) {
+			$enr_url = mysqli_fetch_assoc($r_url);
+			$URL=htmlentities($enr_url['URL'],ENT_QUOTES,'ISO-8859-1');
+			echo '<form method=POST action="infoperso.php">';
+				echo '<table border=1 cellpadding=5>';
+					echo gk_cb_from_ligne("<label>$libelle</label>",  "<input type=text name=txtURL value='$URL' size=30/>", "right", "");
+					
+					echo gk_cb_from_ligne("" , "<input type=hidden name=btnValiderUpdate value='$idReseau'> <input type=submit value='Go'>", "", "right");
+				echo '</table>';	
+			echo '</form>';
+		}
+		else {
+			echo '<form method=POST action="infoperso.php">';
+				echo '<table border=1 cellpadding=5>';
+					echo gk_cb_from_ligne("<label>$libelle</label>",  "<input type=text name=txtURL size=30/>", "right", "");
+					
+					echo gk_cb_from_ligne("" , "<input type=hidden name=btnValiderInsert value='$idReseau'> <input type=submit value=Go />", "", "right");
+				echo '</table>';	
+			echo '</form>';
+		}
+	}
+	
+	
+	
+	
 	
 	//Si des modifications sont apportés aux informations personnelles
 	if(isset($_POST['btnValiderPerso'])) {
@@ -236,8 +279,7 @@
 		header ('location: infoperso.php');
 	
 	}
-	
-	
+		
 	
 	if(isset($_POST['btnValiderPhoto'])) {
 		$target_dir = "../upload/";
@@ -286,6 +328,48 @@
 		header('location: infoperso.php');
 		
 	}
+	
+	
+	if(isset($_POST['btnValiderUpdate'])) {
+		
+		$URL = trim($_POST['txtURL']);
+
+		$URL=mysqli_real_escape_string($bd, $URL);
+		
+		$idReseau = $_POST['btnValiderUpdate'];
+		
+		$S = "UPDATE THERA_RESEAU SET
+				URL = '$URL'
+				WHERE THERA_RESEAU.idTherapeute = '$id'
+				AND THERA_RESEAU.idReseau = '$idReseau'";	
+		$r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
+		
+		header('location: infoperso.php');
+		
+	
+	}
+	
+	if(isset($_POST['btnValiderInsert'])) {
+		
+		$URL = trim($_POST['txtURL']);
+
+		$URL=mysqli_real_escape_string($bd, $URL);
+		
+		$id = $_POST['btnValiderInsert'];
+		
+		$S = "INSERT INTO THERA_RESEAU
+				(idTherapeute, idReseau, URL)
+					VALUES 
+				('$id', '$idReseau', '$URL')";	
+		$r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
+		
+		header('location: infoperso.php');
+		
+	
+	}
+	
+	
+	
 	
 			
 	function changePass ($ancienPass) {
