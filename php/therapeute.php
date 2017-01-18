@@ -35,6 +35,7 @@
 	$aboutme = htmlentities($enr['aboutme'],ENT_QUOTES, 'ISO-8859-1');
 	$couleur = htmlentities($enr['couleur'],ENT_QUOTES, 'ISO-8859-1');
 	$skin = htmlentities($enr['skin'],ENT_QUOTES, 'ISO-8859-1');
+	$isCertified = htmlentities($enr['isCertified'],ENT_QUOTES, 'ISO-8859-1');
 	
 	
 	$title = "$nom $prenom";
@@ -99,7 +100,7 @@
 	if ($skin == 1) 
 		afficher_alpha($color_to_string);
 	if ($skin == 2) 
-		afficher_prologue($color_to_string);
+		afficher_readonly($color_to_string);
 		//~ afficher_miniport($color_to_string);
 	if ($skin == 3) 
 		afficher_prologue($color_to_string);
@@ -109,7 +110,7 @@
 	
 	
 	function afficher_alpha($color) {
-		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail, $r_cabinet;
+		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail, $r_cabinet, $isCertified;
 		
 		$dir_to_css_color = "../style/color/$color.css";
 		
@@ -119,7 +120,7 @@
 		html_alpha_header_menu();
 		html_alpha_section_banner($nom, $prenom, $titre, $description);
 		html_alpha_main($lienPhoto, $aboutme, $remerciements, $r_formation);
-		html_alpha_two();
+		html_alpha_two($isCertified);
 		html_alpha_three($r_tarif, $r_cabinet);
 		html_alpha_cta();	
 		
@@ -129,7 +130,7 @@
 	}
 	
 	function afficher_miniport($color) {
-		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail, $r_cabinet;
+		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail, $r_cabinet, $isCertified;
 	
 		$dir_to_css_color = "$color.css";
 		html_miniport_start($title, $dir_to_css_color);
@@ -140,6 +141,13 @@
 		html_miniport_remerciements($remerciements); 
 		if (mysqli_num_rows($r_formation) > 0) 
 			html_miniport_formation($r_formation);
+		html_miniport_methode();
+		html_miniport_delmet();
+		html_miniport_deontologie();	
+		if ($isCertified == 1) 
+			html_miniport_certification();
+		if (mysqli_num_rows($r_cabinet) > 0) 
+			html_miniport_cabinet($r_cabinet);
 		html_miniport_tarif($r_tarif);
 		html_miniport_contact($r_reseau, $mail);
 		
@@ -148,7 +156,7 @@
 	}
 	
 	function afficher_prologue($color) {
-		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail, $r_cabinet;
+		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail, $r_cabinet, $isCertified;
 	
 		$dir_to_css_color = "../style/color/$color.css";	
 		html_prologue_start($title, $dir_to_css_color);
@@ -157,7 +165,7 @@
 		
 		html_prologue_intro($nom, $prenom, $titre, $description);
 		html_prologue_about($remerciements, $aboutme, $r_formation);
-		html_prologue_methode();
+		html_prologue_methode($isCertified);
 		html_prologue_cabinet($r_tarif, $_cabinet);
 		html_prologue_contact();
 		
@@ -168,7 +176,7 @@
 	}
 	
 	function afficher_readonly($color) {
-		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail, $r_cabinet;
+		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail, $r_cabinet, $isCertified;
 	
 		$dir_to_css_color = "../style/color/$color.css";	
 		html_readonly_start($title, $dir_to_css_color);
@@ -176,7 +184,7 @@
 		html_readonly_header($lienPhoto, $nom, $prenom, $titre, $description, $r_reseau, $mail);
 		
 		html_readonly_one($nom, $prenom, $aboutme, $remerciements, $r_formation);
-		html_readonly_two();
+		html_readonly_two($isCertified);
 		html_readonly_three($r_tarif, $r_cabinet);
 		
 		

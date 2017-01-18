@@ -127,7 +127,7 @@ function html_readonly_one_formation($r_formation) {
 		    </div>';
 }
 
-function html_readonly_two() {
+function html_readonly_two($isCertified) {
 	echo '<!-- Two -->
 		<section id="two">
 		    <div class="container">
@@ -221,25 +221,27 @@ function html_readonly_two() {
 					hendrerit elit ac lectus placerat, eget semper nulla rutrum.
 				    </li>
 				</ul>
-			    </article>
-			    <article>
+			    </article>';
+			    if ($isCertified == 1) {
+				  echo ' <article>
 
-				<h3>Certification</h3>
+					<h3>Certification</h3>
 
-				<p><span class="image left"><img src="../images/fotolia/fotolia_76292836.jpg" alt=""/></span>Fringilla
-				    nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod.
-				    Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis
-				    volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis
-				    sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit
-				    adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque
-				    praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod.
-				    Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis
-				    volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis
-				    sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit
-				    adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque
-				    praesent.</p>
-			    </article>
-			</div>
+					<p><span class="image left"><img src="../images/fotolia/fotolia_76292836.jpg" alt=""/></span>Fringilla
+					    nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod.
+					    Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis
+					    volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis
+					    sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit
+					    adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque
+					    praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod.
+					    Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis
+					    volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis
+					    sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit
+					    adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque
+					    praesent.</p>
+				    </article>';
+			}	    
+			echo '</div>
 		    </div>
 		</section>';
 }

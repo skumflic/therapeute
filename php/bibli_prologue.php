@@ -164,7 +164,7 @@ function html_prologue_about_formation($r_formation) {
 						</div>';
 }
 
-function html_prologue_methode() {
+function html_prologue_methode($isCertified) {
 	echo '	<!-- methode -->
 		<section id="methode" class="three">
 			<div class="container">
@@ -259,25 +259,26 @@ function html_prologue_methode() {
 						hendrerit elit ac lectus placerat, eget semper nulla rutrum.
 					</li>
 				</ul>
-			</div>
-			<div class="container ssPara">
-				<header><h3>Certification</h3></header>
+			</div>';
+			if ($isCertified == 1) {
+				echo '<div class="container ssPara">
+					<header><h3>Certification</h3></header>
 
-				<p><span class="image left"><img src="../images/fotolia/fotolia_76292836.jpg" alt=""/></span>Fringilla
-					nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod.
-					Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis
-					volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis
-					sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit
-					adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque
-					praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod.
-					Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis
-					volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis
-					sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit
-					adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque
-					praesent.</p>
-			</div>
-
-		</section>';
+					<p><span class="image left"><img src="../images/fotolia/fotolia_76292836.jpg" alt=""/></span>Fringilla
+						nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod.
+						Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis
+						volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis
+						sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit
+						adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque
+						praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod.
+						Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis
+						volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis
+						sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit
+						adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque
+						praesent.</p>
+				</div>';
+			}
+		echo '</section>';
 }
 
 function html_prologue_cabinet($r_tarif, $r_cabinet) {

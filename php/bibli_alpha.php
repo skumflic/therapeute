@@ -130,7 +130,7 @@ function html_alpha_main_formation($r_formation) {
 			</section>';
 }
 
-function html_alpha_two() {
+function html_alpha_two($isCertified) {
 	echo '<section id="methode" class="container">
 		<section class="box special">
 		    <header class="major">
@@ -219,25 +219,28 @@ function html_alpha_two() {
 				<li class="fa-gavel">Nulla nisi nisl, convallis quis pretium vel, consequat non ante. Phasellus
 				    hendrerit elit ac lectus placerat, eget semper nulla rutrum.</li>
 			</ul>
-		</section>
-		<section class="box special features">
-			<h3>Certification</h3>
+		</section>';
+		if ($isCertified == 1) {
+			echo '
+				<section class="box special features">
+					<h3>Certification</h3>
 
-			<p><span class="image left"><img src="../images/fotolia/fotolia_76292836.jpg" alt=""/></span>Fringilla
-			nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod.
-			Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis
-			volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis
-			sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit
-			adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque
-			praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod.
-			Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis
-			volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis
-			sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit
-			adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque
-			praesent.</p>
-		</section>
+					<p><span class="image left"><img src="../images/fotolia/fotolia_76292836.jpg" alt=""/></span>Fringilla
+					nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod.
+					Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis
+					volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis
+					sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit
+					adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque
+					praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod.
+					Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis
+					volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis
+					sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit
+					adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque
+					praesent.</p>
+				</section>';
+		}
 
-	</section>';
+	echo '</section>';
 }
 
 function html_alpha_three($r_tarif, $r_cabinet) {
