@@ -18,7 +18,7 @@
 <?php
 				if(isset($_SESSION['pseudo']))
 				{
-					$nb_new_pm = mysql_fetch_array(mysql_query('select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
+					$nb_new_pm = mysqli_fetch_array(mysqli_query($mydb, 'select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
 					$nb_new_pm = $nb_new_pm['nb_new_pm'];
 ?>
 				<div class="box">
@@ -69,16 +69,16 @@
 ?>
 					</tr>
 <?php
-					$dn1 = mysql_query('select c.id, c.name, c.description, c.position, 
+					$dn1 = mysqli_query($mydb, 'select c.id, c.name, c.description, c.position, 
 						(select count(t.id) 
 							from topics as t 
 							where t.parent=c.id and t.id2=1) as topics, 
 								(select count(t2.id) 
 								from topics as t2 
 								where t2.parent=c.id and t2.id2!=1) as replies from categories as c group by c.id order by c.position asc');
-					$nb_cats = mysql_num_rows($dn1);
+					$nb_cats = mysqli_num_rows($dn1);
 					
-					while($dnn1 = mysql_fetch_array($dn1))
+					while($dnn1 = mysqli_fetch_array($dn1))
 					{
 ?>
 						<tr>
