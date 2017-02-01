@@ -55,6 +55,7 @@
 			$mail=mysqli_real_escape_string($bd, $mail);
 			$isModerateur = 0;
 			
+			$rand=rand(100000,100000000);
 			
 			$pass_encrypt = encrypt_donnee($pass);
 			
@@ -68,24 +69,52 @@
 			$ID = mysqli_insert_id($bd);
 		
 			$S = "INSERT INTO THERAPEUTE
-				(id, isAccepted, cleLogiciel, titre, description, isCertified, couleur, skin, lienPhoto)
+				(id, isAccepted, cleLogiciel, titre, description, isCertified, couleur, skin, lienPhoto, isVerified, random)
 					VALUES
-				('$ID', false, NULL, NULL, NULL, 0, NULL, NULL, NULL)";
+				('$ID', false, NULL, NULL, NULL, 0, NULL, NULL, NULL, 0, '$rand')";
 			
 			$r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
-			$ID = mysqli_insert_id($bd);
+	
 		
-			//On peut démarrer la session 
-			session_start();
 			
-			$_SESSION['id'] = $D['id'];
-			$_SESSION['nom'] = $D['nom'];
-			$_SESSION['prenom'] = $D['prenom'];
+				
+				
+			$subject = "Email Verification mail";
+			$headers = "From: corentin_25@hotmail.fr \r\n";
+			$headers .= "Reply-To: corentin_25@hotmail.fr \r\n";
+			$headers .= "MIME-Version: 1.0\r\n";
+			$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+			$message = '<html><body>';
+			$message.='<div style="width:550px; background-color:#CC6600; padding:15px; font-weight:bold;">';
+			$message.='Email Verification mail';
+			$message.='</div>';
+			$message.='<div style="font-family: Arial;">Confiramtion mail have been sent to your email id<br/>';
+			$message.='click on the below link in your verification mail id to verify your account ';
+			$message.="<a href='localhost/therapeute/php/confirmation.php?id=$ID&email=$mail&confirmation_code=$rand'>click</a>";		
+			$message.='</div>';
+			$message.='</body></html>';
+
+			mail($mail,$subject,$message,$headers);
 			
-			mysqli_close($bd);
-			//Redirection vers compte.php
-			header ('location: cabinet.php');
-			exit();
+			$sql="SELECT mail
+				FROM USER
+				WHERE isModerateur = 4";
+			$r = mysqli_query($bd, $sql) or gk_bd_erreur($bd, $sql);
+			
+			
+			$headers = "From: no-reply@re-energetique \r\n";
+			$headers .= "Reply-To: no-reply@re-energetique \r\n";
+			$headers .= "MIME-Version: 1.0\r\n";
+			$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+			
+			while($enr = mysqli_fetch_assoc($r)) {
+				$mail_admin=htmlentities($enr['mail'],ENT_QUOTES,'ISO-8859-1');
+				mail($mail_admin,"Nouveau therapeute sur re-energetique !", "Un nouveau therapeute est arrivé sur le site, allez dans la partie administration pour l'accepter",$headers);
+			}
+			
+			echo '<p>un mail de confirmation vous a &eacute;t&eacute; envoy&eacute;</p>';
+			
 		}
 		
 		//Sinon il faudra afficher les erreurs
