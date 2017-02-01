@@ -6,7 +6,7 @@
 		$id = intval($_GET['parent']);
 		if(isset($_SESSION['pseudo']))
 		{
-			$dn1 = mysql_fetch_array(mysql_query('select count(c.id) as nb1, c.name from categories as c where c.id="'.$id.'"'));
+			$dn1 = mysqli_fetch_array(mysqli_query($mydb, 'select count(c.id) as nb1, c.name from categories as c where c.id="'.$id.'"'));
 			if($dn1['nb1']>0)
 			{
 ?>
@@ -25,7 +25,7 @@
 					</div>
 					<div class="content">
 <?php
-						$nb_new_pm = mysql_fetch_array(mysql_query('select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
+						$nb_new_pm = mysqli_fetch_array(mysqli_query($mydb, 'select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
 						$nb_new_pm = $nb_new_pm['nb_new_pm'];
 ?>
 						<div class="box">
@@ -48,9 +48,9 @@
 								$title = stripslashes($title);
 								$message = stripslashes($message);
 							}
-							$title = mysql_real_escape_string($title);
-							$message = mysql_real_escape_string(bbcode_to_html($message));
-							if(mysql_query('insert into topics (parent, id, id2, title, message, authorid, timestamp, timestamp2) select "'.$id.'", ifnull(max(id), 0)+1, "1", "'.$title.'", "'.$message.'", "'.$_SESSION['id'].'", "'.time().'", "'.time().'" from topics'))
+							$title = mysqli_real_escape_string($mydb, $title);
+							$message = mysqli_real_escape_string($mydb, bbcode_to_html($message));
+							if(mysqli_query($mydb, 'insert into topics (parent, id, id2, title, message, authorid, timestamp, timestamp2) select "'.$id.'", ifnull(max(id), 0)+1, "1", "'.$title.'", "'.$message.'", "'.$_SESSION['id'].'", "'.time().'", "'.time().'" from topics'))
 							{
 ?>
 								<div class="message">The topic have successfully been created.<br />

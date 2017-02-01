@@ -6,7 +6,7 @@
 		$id = intval($_GET['id']);
 	if(isset($_SESSION['pseudo']))
 	{
-		$dn1 = mysql_fetch_array(mysql_query('select count(t.id) as nb1, t.title, t.parent, c.name from topics as t, categories as c where t.id="'.$id.'" and t.id2=1 and c.id=t.parent group by t.id'));
+		$dn1 = mysqli_fetch_array(mysqli_query($mydb, 'select count(t.id) as nb1, t.title, t.parent, c.name from topics as t, categories as c where t.id="'.$id.'" and t.id2=1 and c.id=t.parent group by t.id'));
 		if($dn1['nb1']>0)
 		{
 ?>
@@ -24,7 +24,7 @@
 					</div>
 					<div class="content">
 <?php
-						$nb_new_pm = mysql_fetch_array(mysql_query('select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
+						$nb_new_pm = mysqli_fetch_array(mysqli_query($mydb, 'select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
 						$nb_new_pm = $nb_new_pm['nb_new_pm'];
 ?>
 						<div class="box">
@@ -45,8 +45,8 @@
 							{
 								$message = stripslashes($message);
 							}
-							$message = mysql_real_escape_string(bbcode_to_html($message));
-							if(mysql_query('insert into topics (parent, id, id2, title, message, authorid, timestamp, timestamp2) select "'.$dn1['parent'].'", "'.$id.'", max(id2)+1, "", "'.$message.'", "'.$_SESSION['id'].'", "'.time().'", "'.time().'" from topics where id="'.$id.'"') and mysql_query('update topics set timestamp2="'.time().'" where id="'.$id.'" and id2=1'))
+							$message = mysqli_real_escape_string($mydb, bbcode_to_html($message));
+							if(mysqli_query($mydb, 'insert into topics (parent, id, id2, title, message, authorid, timestamp, timestamp2) select "'.$dn1['parent'].'", "'.$id.'", max(id2)+1, "", "'.$message.'", "'.$_SESSION['id'].'", "'.time().'", "'.time().'" from topics where id="'.$id.'"') and mysqli_query($mydb, 'update topics set timestamp2="'.time().'" where id="'.$id.'" and id2=1'))
 							{
 ?>
 								<div class="message">The message have successfully been sent.<br />

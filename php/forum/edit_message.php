@@ -7,7 +7,7 @@
 		$id2 = intval($_GET['id2']);
 		if(isset($_SESSION['pseudo']))
 		{
-			$dn1 = mysql_fetch_array(mysql_query('select count(t.id) as nb1, t.authorid, t2.title, t.message, t.parent, c.name from topics as t, topics as t2, categories as c where t.id="'.$id.'" and t.id2="'.$id2.'" and t2.id="'.$id.'" and t2.id2=1 and c.id=t.parent group by t.id'));
+			$dn1 = mysqli_fetch_array(mysqli_query($mydb, 'select count(t.id) as nb1, t.authorid, t2.title, t.message, t.parent, c.name from topics as t, topics as t2, categories as c where t.id="'.$id.'" and t.id2="'.$id2.'" and t2.id="'.$id.'" and t2.id2=1 and c.id=t.parent group by t.id'));
 			if($dn1['nb1']>0)
 			{
 				if($_SESSION['id']==$dn1['authorid'] or $_SESSION['isModerateur']==4)
@@ -28,7 +28,7 @@
 							</div>
 							<div class="content">
 <?php
-								$nb_new_pm = mysql_fetch_array(mysql_query('select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
+								$nb_new_pm = mysqli_fetch_array(mysqli_query('select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
 								$nb_new_pm = $nb_new_pm['nb_new_pm'];
 ?>
 								<div class="box">
@@ -52,11 +52,11 @@
 											{
 												$title = stripslashes($title);
 											}
-											$title = mysql_real_escape_string($dn1['title']);
+											$title = mysqli_real_escape_string($mydb, $dn1['title']);
 										}
 										else
 										{
-											$title = mysql_real_escape_string($dn1['title']);
+											$title = mysqli_real_escape_string($mydb, $dn1['title']);
 										}
 									}
 									else
@@ -68,8 +68,8 @@
 									{
 										$message = stripslashes($message);
 									}
-									$message = mysql_real_escape_string(bbcode_to_html($message));
-									if(mysql_query('update topics set title="'.$title.'", message="'.$message.'" where id="'.$id.'" and id2="'.$id2.'"'))
+									$message = mysqli_real_escape_string($mydb, bbcode_to_html($message));
+									if(mysqli_query($mydb, 'update topics set title="'.$title.'", message="'.$message.'" where id="'.$id.'" and id2="'.$id2.'"'))
 									{
 ?>
 										<div class="message">The message have successfully been edited.<br />

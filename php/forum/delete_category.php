@@ -4,7 +4,7 @@ include('config.php');
 	if(isset($_GET['id']))
 	{
 		$id = intval($_GET['id']);
-		$dn1 = mysql_fetch_array(mysql_query('select count(id) as nb1, name, position from categories where id="'.$id.'" group by id'));
+		$dn1 = mysqli_fetch_array(mysqli_query($mydb, 'select count(id) as nb1, name, position from categories where id="'.$id.'" group by id'));
 		if($dn1['nb1']>0)
 		{
 			if(isset($_SESSION['pseudo']) and $_SESSION['isModerateur']==4)
@@ -23,7 +23,7 @@ include('config.php');
 					</div>
 					<div class="content">
 <?php
-						$nb_new_pm = mysql_fetch_array(mysql_query('select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
+						$nb_new_pm = mysqli_fetch_array(mysqli_query($mydb, 'select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
 						$nb_new_pm = $nb_new_pm['nb_new_pm'];
 ?>
 						<div class="box">
@@ -38,7 +38,7 @@ include('config.php');
 <?php
 						if(isset($_POST['confirm']))
 						{
-							if(mysql_query('delete from categories where id="'.$id.'"') and mysql_query('delete from topics where parent="'.$id.'"') and mysql_query('update categories set position=position-1 where position>"'.$dn1['position'].'"'))
+							if(mysqli_query($mydb, 'delete from categories where id="'.$id.'"') and mysqli_query($mydb, 'delete from topics where parent="'.$id.'"') and mysqli_query($mydb, 'update categories set position=position-1 where position>"'.$dn1['position'].'"'))
 							{
 							?>
 							<div class="message">The category and it topics have successfully been deleted.<br />
@@ -62,8 +62,7 @@ include('config.php');
 						}
 ?>
 					</div>
-					<div class="foot"><a href="http://www.webestools.com/scripts_tutorials-code-source-26-simple-php-forum-script-php-forum-easy-simple-script-code-download-free-php-forum-mysql.html">Simple PHP Forum Script</a> - <a href="http://www.webestools.com/">Webestools</a></div>
-				</body>
+					<div class="foot"><p>Bourvon Corentin - Khusanova Guzal  - <a href="http://sciences.univ-fcomte.fr/">UFR ST</a></p></div>				</body>
 			</html>
 <?php
 			}

@@ -6,7 +6,7 @@
 		$id = intval($_GET['id']);
 		if(isset($_SESSION['pseudo']))
 		{
-			$dn1 = mysql_fetch_array(mysql_query('select count(t.id) as nb1, t.title, t.parent, c.name from topics as t, categories as c where t.id="'.$id.'" and t.id2=1 and c.id=t.parent group by t.id'));
+			$dn1 = mysqli_fetch_array(mysqli_query($mydb, 'select count(t.id) as nb1, t.title, t.parent, c.name from topics as t, categories as c where t.id="'.$id.'" and t.id2=1 and c.id=t.parent group by t.id'));
 			if($dn1['nb1']>0)
 			{
 				if($_SESSION['isModerateur']==4)
@@ -25,7 +25,7 @@
 							</div>
 							<div class="content">
 <?php
-								$nb_new_pm = mysql_fetch_array(mysql_query('select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
+								$nb_new_pm = mysqli_fetch_array(mysqli_query($mydb, 'select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
 								$nb_new_pm = $nb_new_pm['nb_new_pm'];
 ?>
 								<div class="box">
@@ -40,7 +40,7 @@
 <?php
 								if(isset($_POST['confirm']))
 								{
-									if(mysql_query('delete from topics where id="'.$id.'"'))
+									if(mysqli_query($mydb, 'delete from topics where id="'.$id.'"'))
 									{
 ?>
 										<div class="message">The topic have successfully been deleted.<br />

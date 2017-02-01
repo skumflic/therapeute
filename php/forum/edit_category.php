@@ -4,7 +4,7 @@
 	if(isset($_GET['id']))
 	{
 		$id = intval($_GET['id']);
-		$dn1 = mysql_fetch_array(mysql_query('select count(id) as nb1, name, description from categories where id="'.$id.'" group by id'));
+		$dn1 = mysqli_fetch_array(mysqli_query($mydb, 'select count(id) as nb1, name, description from categories where id="'.$id.'" group by id'));
 		if($dn1['nb1']>0)
 		{
 			if(isset($_SESSION['pseudo']) and $_SESSION['isModerateur']==4)
@@ -23,7 +23,7 @@
 						</div>
 						<div class="content">
 <?php
-							$nb_new_pm = mysql_fetch_array(mysql_query('select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
+							$nb_new_pm = mysqli_fetch_array(mysqli_query($mydb, 'select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
 							$nb_new_pm = $nb_new_pm['nb_new_pm'];
 ?>
 							<div class="box">
@@ -45,9 +45,9 @@
 									$name = stripslashes($name);
 									$description = stripslashes($description);
 								}
-								$name = mysql_real_escape_string($name);
-								$description = mysql_real_escape_string($description);
-								if(mysql_query('update categories set name="'.$name.'", description="'.$description.'" where id="'.$id.'"'))
+								$name = mysqli_real_escape_string($mydb, $name);
+								$description = mysqli_real_escape_string($mydb, $description);
+								if(mysqli_query($mydb, 'update categories set name="'.$name.'", description="'.$description.'" where id="'.$id.'"'))
 								{
 ?>
 									<div class="message">The category have successfully been edited..<br />

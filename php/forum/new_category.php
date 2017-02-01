@@ -17,7 +17,7 @@
 			</div>
 			<div class="content">
 <?php
-				$nb_new_pm = mysql_fetch_array(mysql_query('select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
+				$nb_new_pm = mysqli_fetch_array(mysqli_query($mydb, 'select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
 				$nb_new_pm = $nb_new_pm['nb_new_pm'];
 ?>
 				<div class="box">
@@ -39,9 +39,9 @@
 						$name = stripslashes($name);
 						$description = stripslashes($description);
 					}
-					$name = mysql_real_escape_string($name);
-					$description = mysql_real_escape_string($description);
-					if(mysql_query('insert into categories (id, name, description, position) select ifnull(max(id), 0)+1, "'.$name.'", "'.$description.'", count(id)+1 from categories'))
+					$name = mysqli_real_escape_string($mydb, $name);
+					$description = mysqli_real_escape_string($mydb, $description);
+					if(mysqli_query($mydb, 'insert into categories (id, name, description, position) select ifnull(max(id), 0)+1, "'.$name.'", "'.$description.'", count(id)+1 from categories'))
 					{
 ?>
 						<div class="message">The category have successfully been created.<br />
@@ -66,7 +66,7 @@
 				}
 ?>
 			</div>
-			<div class="foot"><a href="http://www.webestools.com/scripts_tutorials-code-source-26-simple-php-forum-script-php-forum-easy-simple-script-code-download-free-php-forum-mysql.html">Simple PHP Forum Script</a> - <a href="http://www.webestools.com/">Webestools</a></div>
+			<div class="foot"><p>Bourvon Corentin - Khusanova Guzal  - <a href="http://sciences.univ-fcomte.fr/">UFR ST</a></p></div>
 		</body>
 	</html>
 <?php

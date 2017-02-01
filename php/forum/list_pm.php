@@ -17,13 +17,13 @@
 <?php
 			if(isset($_SESSION['pseudo']))
 			{
-				$req1 = mysql_query('select m1.id, m1.title, m1.timestamp, count(m2.id) as reps, users.id as userid, users.username from pm as m1, pm as m2,users 
+				$req1 = mysqli_query($mydb, 'select m1.id, m1.title, m1.timestamp, count(m2.id) as reps, users.id as userid, users.username from pm as m1, pm as m2,users 
 				where ((m1.user1="'.$_SESSION['id'].'" and m1.user1read="no" and users.id=m1.user2) or (m1.user2="'.$_SESSION['id'].'" and m1.user2read="no" and users.id=m1.user1)) and m1.id2="1" and m2.id=m1.id group by m1.id order by m1.id desc');
 				
-				$req2 = mysql_query('select m1.id, m1.title, m1.timestamp, count(m2.id) as reps, users.id as userid, users.username from pm as m1, pm as m2,users 
+				$req2 = mysqli_query($mydb, 'select m1.id, m1.title, m1.timestamp, count(m2.id) as reps, users.id as userid, users.username from pm as m1, pm as m2,users 
 				where ((m1.user1="'.$_SESSION['id'].'" and m1.user1read="yes" and users.id=m1.user2) or (m1.user2="'.$_SESSION['id'].'" and m1.user2read="yes" and users.id=m1.user1)) and m1.id2="1" and m2.id=m1.id group by m1.id order by m1.id desc');
 				
-				$nb_new_pm = mysql_fetch_array(mysql_query('select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
+				$nb_new_pm = mysqli_fetch_array(mysqli_query($mydb, 'select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
 				$nb_new_pm = $nb_new_pm['nb_new_pm'];
 ?>
 				<div class="box">
@@ -37,7 +37,7 @@
 				</div>
 				This is the list of your personal messages:<br />
 				<a href="new_pm.php" class="button">New Personal Message</a><br />
-				<h3>Unread messages(<?php echo intval(mysql_num_rows($req1)); ?>):</h3>
+				<h3>Unread messages(<?php echo intval(mysqli_num_rows($req1)); ?>):</h3>
 				<table class="list_pm">
 					<tr>
 						<th class="title_cell">Title</th>
@@ -46,7 +46,7 @@
 						<th>Date Sent</th>
 					</tr>
 <?php
-					while($dn1 = mysql_fetch_array($req1))
+					while($dn1 = mysqli_fetch_array($req1))
 					{
 ?>
 					<tr>
@@ -57,7 +57,7 @@
 					</tr>
 <?php
 				}
-				if(intval(mysql_num_rows($req1))==0)
+				if(intval(mysqli_num_rows($req1))==0)
 				{
 ?>
 					<tr>
@@ -68,7 +68,7 @@
 ?>
 			</table>
 			<br />
-			<h3>Read messages(<?php echo intval(mysql_num_rows($req2)); ?>):</h3>
+			<h3>Read messages(<?php echo intval(mysqli_num_rows($req2)); ?>):</h3>
 			<table class="list_pm">
 				<tr>
 					<th class="title_cell">Title</th>
@@ -77,7 +77,7 @@
 					<th>Date Sent</th>
 				</tr>
 <?php
-				while($dn2 = mysql_fetch_array($req2))
+				while($dn2 = mysqli_fetch_array($req2))
 				{
 ?>
 					<tr>
@@ -88,7 +88,7 @@
 					</tr>
 <?php
 				}
-				if(intval(mysql_num_rows($req2))==0)
+				if(intval(mysqli_num_rows($req2))==0)
 				{
 ?>
 					<tr>

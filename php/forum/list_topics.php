@@ -4,7 +4,7 @@
 	if(isset($_GET['parent']))
 	{
 		$id = intval($_GET['parent']);
-		$dn1 = mysql_fetch_array(mysql_query('select count(c.id) as nb1, c.name,count(t.id) as topics from categories as c left join topics as t on t.parent="'.$id.'" where c.id="'.$id.'" group by c.id'));
+		$dn1 = mysqli_fetch_array(mysqli_query($mydb, 'select count(c.id) as nb1, c.name,count(t.id) as topics from categories as c left join topics as t on t.parent="'.$id.'" where c.id="'.$id.'" group by c.id'));
 		if($dn1['nb1']>0)
 		{
 ?>
@@ -23,7 +23,7 @@
 <?php
 					if(isset($_SESSION['pseudo']))
 					{
-						$nb_new_pm = mysql_fetch_array(mysql_query('select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
+						$nb_new_pm = mysqli_fetch_array(mysqli_query($mydb, 'select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
 						$nb_new_pm = $nb_new_pm['nb_new_pm'];
 ?>
 						<div class="box">
@@ -57,11 +57,11 @@
 						<a href="new_topic.php?parent=<?php echo $id; ?>" class="button">New Topic</a>
 <?php
 					}
-					$dn2 = mysql_query('select t.id, t.title, t.authorid, u.pseudo as author, count(r.id) as replies from topics as t 
+					$dn2 = mysqli_query($mydb, 'select t.id, t.title, t.authorid, u.pseudo as author, count(r.id) as replies from topics as t 
 					left join topics as r on r.parent="'.$id.'" and r.id=t.id and r.id2!=1  
 					left join USER as u on u.id=t.authorid 
 					where t.parent="'.$id.'" and t.id2=1 group by t.id order by t.timestamp2 desc');
-					if(mysql_num_rows($dn2)>0)
+					if(mysqli_num_rows($dn2)>0)
 					{
 ?>
 						<table class="topics_table">
@@ -79,7 +79,7 @@
 ?>
 							</tr>
 <?php
-							while($dnn2 = mysql_fetch_array($dn2))
+							while($dnn2 = mysqli_fetch_array($dn2))
 							{
 ?>
 								<tr>

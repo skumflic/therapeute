@@ -17,7 +17,7 @@
 <?php
 				if(isset($_SESSION['pseudo']))
 				{
-					$nb_new_pm = mysql_fetch_array(mysql_query('select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
+					$nb_new_pm = mysqli_fetch_array(mysqli_query($mydb, 'select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
 					$nb_new_pm = $nb_new_pm['nb_new_pm'];
 ?>
 					<div class="box">
@@ -54,8 +54,8 @@
 						<th>Email</th>
 					</tr>
 <?php
-					$req = mysql_query('select id, pseudo, mail from USER WHERE isModerateur != 2');
-					while($dnn = mysql_fetch_array($req))
+					$req = mysqli_query($mydb, 'select id, pseudo, mail from USER WHERE isModerateur != 2');
+					while($dnn = mysqli_fetch_array($req))
 					{
 ?>
 						<tr>

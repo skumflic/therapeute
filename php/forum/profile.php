@@ -17,7 +17,7 @@
 <?php
 				if(isset($_SESSION['pseudo']))
 				{
-					$nb_new_pm = mysql_fetch_array(mysql_query('select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
+					$nb_new_pm = mysqli_fetch_array(mysqli_query($mydb, 'select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
 					$nb_new_pm = $nb_new_pm['nb_new_pm'];
 ?>
 					<div class="box">
@@ -48,10 +48,10 @@
 				if(isset($_GET['id']))
 				{
 					$id = intval($_GET['id']);
-					$dn = mysql_query('select pseudo, mail, lienPhoto from USER, THERAPEUTE where THERAPEUTE.id = USER.id AND THERAPEUTE.id = "'.$id.'" AND USER.id="'.$id.'"');
-					if(mysql_num_rows($dn)>0)
+					$dn = mysqli_query($mydb, 'select pseudo, mail, lienPhoto from USER, THERAPEUTE where THERAPEUTE.id = USER.id AND THERAPEUTE.id = "'.$id.'" AND USER.id="'.$id.'"');
+					if(mysqli_num_rows($dn)>0)
 					{
-						$dnn = mysql_fetch_array($dn);
+						$dnn = mysqli_fetch_array($dn);
 ?>
 						This is the profile of "<?php echo htmlentities($dnn['pseudo']); ?>" :
 <?php

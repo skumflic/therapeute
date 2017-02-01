@@ -4,7 +4,7 @@
 	if(isset($_GET['id']))
 	{
 		$id = intval($_GET['id']);
-		$dn1 = mysql_fetch_array(mysql_query('select count(t.id) as nb1, t.title, t.parent, count(t2.id) as nb2, c.name from topics as t, topics as t2, categories as c where t.id="'.$id.'" and t.id2=1 and t2.id="'.$id.'" and c.id=t.parent group by t.id'));
+		$dn1 = mysqli_fetch_array(mysqli_query($mydb, 'select count(t.id) as nb1, t.title, t.parent, count(t2.id) as nb2, c.name from topics as t, topics as t2, categories as c where t.id="'.$id.'" and t.id2=1 and t2.id="'.$id.'" and c.id=t.parent group by t.id'));
 		
 		if($dn1['nb1']>0)
 		{
@@ -24,7 +24,7 @@
 <?php
 						if(isset($_SESSION['pseudo']))
 						{
-							$nb_new_pm = mysql_fetch_array(mysql_query('select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
+							$nb_new_pm = mysqli_fetch_array(mysqli_query($mydb, 'select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
 							$nb_new_pm = $nb_new_pm['nb_new_pm'];
 ?>
 							<div class="box">
@@ -61,7 +61,7 @@
 							<a href="new_reply.php?id=<?php echo $id; ?>" class="button">Reply</a>
 <?php
 						}
-						$dn2 = mysql_query('select t.id2, t.authorid, t.message, t.timestamp, u.pseudo as author, THERAPEUTE.lienPhoto 
+						$dn2 = mysqli_query($mydb, 'select t.id2, t.authorid, t.message, t.timestamp, u.pseudo as author, THERAPEUTE.lienPhoto 
 						from topics as t, THERAPEUTE, USER as u 
 						where THERAPEUTE.id = u.id AND t.id="'.$id.'" and u.id=t.authorid order by t.timestamp asc');
 ?>
@@ -71,7 +71,7 @@
 								<th>Message</th>
 							</tr>
 <?php
-							while($dnn2 = mysql_fetch_array($dn2))
+							while($dnn2 = mysqli_fetch_array($dn2))
 							{
 ?>
 								<tr>
