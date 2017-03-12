@@ -25,5 +25,7 @@ define('BD_SERVEUR', 'localhost');
 define('BD_USER', 'root');
 define('BD_PASS', '');
 define('BD_NOM', 'Therapeute');
+
+
 ?>
 

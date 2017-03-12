@@ -2,21 +2,21 @@
 	
 	ob_start();
 
-	require("bibli_cuiteur.php");
-	require("bibli_generale.php");
+	require("../../php/bibli_cuiteur.php");
+	require("../../php/bibli_generale.php");
 
-	require("bibli_alpha.php");
+	require("../../php/bibli_alpha.php");
 
-	require("bibli_miniport.php");
+	require("../../php/bibli_miniport.php");
 
-	require("bibli_readonly.php");
+	require("../../php/bibli_readonly.php");
 
-	require("bibli_prologue.php");
+	require("../../php/bibli_prologue.php");
 
 
 	$bd = gk_cb_bd_connection();
-	$profil_id = 14;
-	
+	//$profil_id = $_GET['id'];
+     //   $profil_id=21;
 	
 	$sql="SELECT *
 		FROM USER, THERAPEUTE
@@ -27,20 +27,21 @@
 	
 	$titre = htmlentities($enr['titre'],ENT_QUOTES, 'ISO-8859-1');
 	$description = htmlentities($enr['description'],ENT_QUOTES, 'ISO-8859-1');
+	$telephone = htmlentities($enr['telephone'],ENT_QUOTES, 'ISO-8859-1');
 	$nom = htmlentities($enr['nom'],ENT_QUOTES, 'ISO-8859-1');
 	$prenom = htmlentities($enr['prenom'],ENT_QUOTES, 'ISO-8859-1');
 	$mail = htmlentities($enr['mail'],ENT_QUOTES, 'ISO-8859-1');
 	$lienPhoto = htmlentities($enr['lienPhoto'],ENT_QUOTES, 'ISO-8859-1');
 	$remerciements = htmlentities($enr['remerciements'],ENT_QUOTES, 'ISO-8859-1');
 	$aboutme = htmlentities($enr['aboutme'],ENT_QUOTES, 'ISO-8859-1');
-	$couleur = htmlentities($enr['couleur'],ENT_QUOTES, 'ISO-8859-1');
+	$color = htmlentities($enr['couleur'],ENT_QUOTES, 'ISO-8859-1');
 	$skin = htmlentities($enr['skin'],ENT_QUOTES, 'ISO-8859-1');
 	$isCertified = htmlentities($enr['isCertified'],ENT_QUOTES, 'ISO-8859-1');
 	
-	
+
 	$title = "$nom $prenom";
 	
-	
+	$path="../../php/";
 	//FORMATION
 	$sql_formation="SELECT *
 			FROM FORMATION
@@ -100,8 +101,7 @@
 	if ($skin == 1) 
 		afficher_alpha($color_to_string);
 	if ($skin == 2) 
-		afficher_readonly($color_to_string);
-		//~ afficher_miniport($color_to_string);
+		afficher_miniport($color_to_string);
 	if ($skin == 3) 
 		afficher_prologue($color_to_string);
 	if ($skin == 4)
@@ -110,19 +110,19 @@
 	
 	
 	function afficher_alpha($color) {
-		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail, $r_cabinet, $isCertified;
+		global $title, $path,  $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail, $r_cabinet, $isCertified, $telephone;
 		
-		$dir_to_css_color = "../style/color/$color.css";
+		$dir_to_css_color = "$path../style/color/$color.css";
 		
 		
-		html_alpha_start($title, $dir_to_css_color, "landing");
+		html_alpha_start($title, $dir_to_css_color, "landing", $path);
 		
 		html_alpha_header_menu();
 		html_alpha_section_banner($nom, $prenom, $titre, $description);
-		html_alpha_main($lienPhoto, $aboutme, $remerciements, $r_formation);
+		html_alpha_main($lienPhoto, $aboutme, $remerciements, $r_formation, $path);
 		html_alpha_two($isCertified);
 		html_alpha_three($r_tarif, $r_cabinet);
-		html_alpha_cta();	
+		html_alpha_cta($telephone, $mail);	
 		
 		html_alpha_footer($r_reseau, $mail);
 		html_alpha_end();
@@ -130,15 +130,16 @@
 	}
 	
 	function afficher_miniport($color) {
-		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail, $r_cabinet, $isCertified;
-	
-		$dir_to_css_color = "$color.css";
-		html_miniport_start($title, $dir_to_css_color);
+		global $title, $titre, $path,  $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail, $r_cabinet, $isCertified, $telephone;
+		$path="../../php/";
+        $dir_to_css_color = "$path../$color.css";
+		html_miniport_start($title, $dir_to_css_color, $path);
 		
 		html_miniport_nav();
-		html_miniport_home($lienPhoto, $nom, $prenom, $titre, $description);
+		html_miniport_home($lienPhoto, $nom, $prenom, $titre, $description, $path);
 		html_miniport_presentation($aboutme);
-		html_miniport_remerciements($remerciements); 
+        if ($remerciements != "")
+            html_miniport_remerciements($remerciements);
 		if (mysqli_num_rows($r_formation) > 0) 
 			html_miniport_formation($r_formation);
 		html_miniport_methode();
@@ -149,25 +150,25 @@
 		if (mysqli_num_rows($r_cabinet) > 0) 
 			html_miniport_cabinet($r_cabinet);
 		html_miniport_tarif($r_tarif);
-		html_miniport_contact($r_reseau, $mail);
+		html_miniport_contact($r_reseau, $mail,$telephone);
 		
 		
 		html_miniport_end();
 	}
 	
 	function afficher_prologue($color) {
-		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail, $r_cabinet, $isCertified;
+		global $title, $titre, $path, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail, $r_cabinet, $isCertified, $telephone;
 	
 		$dir_to_css_color = "../style/color/$color.css";	
-		html_prologue_start($title, $dir_to_css_color);
+		html_prologue_start($title, $dir_to_css_color, $path);
 		
-		html_prologue_header($lienPhoto, $nom, $prenom, $titre, $r_reseau, $mail);
+		html_prologue_header($lienPhoto, $nom, $prenom, $titre, $r_reseau, $mail, $path);
 		
 		html_prologue_intro($nom, $prenom, $titre, $description);
 		html_prologue_about($remerciements, $aboutme, $r_formation);
 		html_prologue_methode($isCertified);
-		html_prologue_cabinet($r_tarif, $_cabinet);
-		html_prologue_contact();
+		html_prologue_cabinet($r_tarif, $r_cabinet);
+		html_prologue_contact($telephone, $mail);
 		
 		html_prologue_end_main();
 		html_prologue_footer();
@@ -176,16 +177,17 @@
 	}
 	
 	function afficher_readonly($color) {
-		global $title, $titre, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail, $r_cabinet, $isCertified;
+		global $title, $titre, $path, $description, $nom, $prenom, $lienPhoto, $remerciements, $aboutme, $r_formation, $r_experience, $r_tarif, $r_reseau, $mail, $r_cabinet, $isCertified, $telephone;
 	
 		$dir_to_css_color = "../style/color/$color.css";	
-		html_readonly_start($title, $dir_to_css_color);
-		
-		html_readonly_header($lienPhoto, $nom, $prenom, $titre, $description, $r_reseau, $mail);
+		html_readonly_start($title, $dir_to_css_color, $path);
+
+		html_readonly_header($lienPhoto, $nom, $prenom, $titre, $description, $r_reseau, $mail, $path);
 		
 		html_readonly_one($nom, $prenom, $aboutme, $remerciements, $r_formation);
 		html_readonly_two($isCertified);
 		html_readonly_three($r_tarif, $r_cabinet);
+		html_readonly_four($telephone, $mail);
 		
 		
 		html_readonly_end_main();

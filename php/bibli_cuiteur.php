@@ -60,7 +60,7 @@
 				<title>', $title, ' </title>
 				<link rel="stylesheet" href="',$style,'" type="text/css">
 				<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  				<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 				<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
 			</head>
@@ -189,7 +189,7 @@
 
 	function gk_cb_verifie_session(){ 
 		if($_SESSION['id']==0 || $_SESSION['pseudo']==NULL){
-			header ('location: inscription.php');
+			header ('location: connection.php');
 			exit();
 		}
 	}
@@ -269,9 +269,9 @@
 
 		$nom = trim($_POST['txtNom']);
 		$prenom = trim($_POST['txtPrenom']);
-		$pass = trim($_POST['txtPasse']);
+		$pass = trim($_POST['txtPasseI']);
 		$passVerif = trim($_POST['txtVerif']);
-		$pseudo = trim($_POST['txtPseudo']);
+		$pseudo = trim($_POST['txtPseudoI']);
 		$mail = trim($_POST['txtMail']);
 		$telephone = trim($_POST['txtTelephone']);
 
@@ -298,7 +298,7 @@
 		if ($pass == '') 
 			$erreur[] = "Le mot de passe est obligatoire";
 			
-		if (strlen($telephone) != 10)
+		if (strlen($telephone) != 10 )
 			$erreur[] = "Le numero de telephone est incorrecte";
 	
 		if ($pass != $passVerif)

@@ -1,356 +1,375 @@
 <?php
 
-	ob_start();
-	
-	require("bibli_cuiteur.php");
-	require("bibli_generale.php");
-	
-	$bd = gk_cb_bd_connection();
+ob_start();
 
-	$title = "Espaces Admin";
-	$style = "../style/index.css";
-	
-	gk_cb_html_debut($title, $style);
+require("bibli_cuiteur.php");
+require("bibli_generale.php");
+require("bibli_html.php");
+require ("bibli_for_connection.php");
 
-	
-	session_start();
-	
-	if(!isset($_SESSION['id'])) {
-		header('location: connection.php');
-		exit();
-	}
-	
-	$id_user = $_SESSION['id'];
-	$pseudo = $_SESSION['pseudo'];
-	
-	$sql="SELECT isModerateur
-		FROM USER
-		WHERE USER.id = '$id_user'";
-	$r = mysqli_query($bd, $sql) or gk_bd_erreur($bd, $sql);
-	$enr = mysqli_fetch_assoc($r);
-	$moderateur_user=htmlentities($enr['isModerateur'],ENT_QUOTES, 'ISO-8859-1');
-	
-	if ($moderateur_user < 4) {
-		header('location: accueil.php');
-		exit();
-	}
-	
-	
-	echo '<header>',
-		'<p id="titre">Espace administration </p>',
-	'</header>';	
-	
-	
-		
-	
-	
-	echo '<h3>G&eacute;rer les utilisateurs  </h3>';
-	
-	
-	
+$bd = gk_cb_bd_connection();
 
-	$sql="SELECT USER.id, nom, prenom, pseudo, THERAPEUTE.isBlocked, isModerateur, mail
-			FROM USER, THERAPEUTE
-			WHERE USER.id = THERAPEUTE.id
-			ORDER BY isModerateur";
-			
-	cbl_utilisateur_en_demande($sql);
-	
-	cbl_ajouter_moderateur($sql);
-	
-	cbl_supprimer_moderateur($sql);
-	
-	
-	
-	
-	echo '<h3>Ajouter moderateur  </h3>';
-	
-	
-	if(!isset($_POST['btnValiderInscription'])) {
-		aff_form("admin");
-		$_POST['txtPseudo'] = $_POST['txtPasse'] = $_POST['txtVerif'] = '';
-		$_POST['txtNom'] = $_POST['txtMail'] = '';
-		$_POST['txtPrenom'] = $_POST['txtTelephone'] = '';
-	}	
-	
+$title = "Espace Mod&eacute;ration";
 
-	
-	
-	
-	if(isset($_POST['btnValiderInscription'])) {
-		
-		
-		$bd = gk_cb_bd_connection();
-	
-		$pseudo = trim($_POST['txtPseudo']);
-		$prenom = trim($_POST['txtPrenom']);
-		$pass = trim($_POST['txtPasse']);
-		$passVerif = trim($_POST['txtVerif']);
-		$nom = trim($_POST['txtNom']);
-		$mail = trim($_POST['txtMail']);
-		$telephone = trim($_POST['txtTelephone']);
-		
-		
+session_start();
+if(!isset($_SESSION['id'])) {
+    header('location: connection.php');
+    exit();
+}
 
-		$erreur = new_user($_POST);
-		
-		
-		
-		//Si le nombre d'erreur est 0, on va pouvoir insérer dans la base de donnée
-		if (count($erreur) == 0) {
+$id_user = $_SESSION['id'];
+$pseudo = $_SESSION['pseudo'];
+$moderateur_user=$_SESSION['isModerateur'];
 
-			$prenom=mysqli_real_escape_string($bd, $prenom);
-			$telephone=mysqli_real_escape_string($bd, $telephone);
-			$nom=mysqli_real_escape_string($bd, $nom);
-			$pseudo=mysqli_real_escape_string($bd, $pseudo);
-			$pass=mysqli_real_escape_string($bd, $pass);
-			$mail=mysqli_real_escape_string($bd, $mail);
-			$isModerateur = 2;
-			
-			
-			$pass_encrypt = encrypt_donnee($pass);
-			
-			//Requete d'insertion 
-			$S = "INSERT INTO USER 
-				(nom, prenom, pseudo, mail, password, telephone, isModerateur)
-					VALUES 
-				('$nom', '$prenom','$pseudo','$mail','$pass_encrypt','$telephone','$isModerateur')";
-			
-			$r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
-			$ID = mysqli_insert_id($bd);
-		
-			
+if ($moderateur_user <4) {
+    header('location: accueil.php');
+    exit();
+}
+/****************************************************************************************************************************
+ * 									AFFICHAGE																				*
+ ****************************************************************************************************************************/
+html_debut($title);
 
-			//Redirection vers compte.php
-			header ('location: admin.php');
-			exit();
-		}
-		
-		//Sinon il faudra afficher les erreurs
-		else {
-				$erreur = array();
-				$erreur = new_user($_POST);	
-				$taille = count($erreur);
+$page_principal_color="#3eb6d1";
+html_header();
+html_menu_espace($moderateur_user, 1);
+html_nav(-2, $moderateur_user, "menu_infoperso", 1);
 
-				echo '<h3>Les erreurs suivantes ont ete detectees :</h3>';
-					echo '<ul>';
-						for ($i = 0 ; $i < $taille ; $i++) 
-							echo '<li>', $erreur[$i], '</li>';
-					echo '</ul>';
-						
-			
-				
-					$_POST['txtPseudo'] = '';
-					$_POST['txtPasse'] = '';
-					$_POST['txtVerif'] = '';
-					$_POST['txtNom'] = '';
-					$_POST['txtMail'] = '';
-					$_POST['txtPrenom'] = '';
-					$_POST['txtTelephone'] = '';
-					$_POST['txtAdresse'] = '';
+echo '<div id="content" ><div class="sub_content">';
+menu_ad();
+echo '<div id="admin_div_user_list"> ';
+   $new_users= list_des_users($bd);
+echo '</div><div id="admin_div_new_user">';
+    if($new_users==""){
+        echo '<h3>Il n\'y a pas de nouvelles utilisateurs!</h3>';
+    }else{
+        echo $new_users;
+    }
+echo '</div><div id="admin_div_moderatheur">';
+if(!isset($_POST['btnValiderInscription'])) {
+    form_inscription("admin.php");
+}
 
-				
-				echo '</br>';
-				echo aff_form("admin");
+//Si le bouton de validation a été demandé
+if(isset($_POST['btnValiderInscription'])) {
+    $pseudo = trim($_POST['txtPseudoI']);
+    $prenom = trim($_POST['txtPrenom']);
+    $pass = trim($_POST['txtPasseI']);
+    $passVerif = trim($_POST['txtVerif']);
+    $nom = trim($_POST['txtNom']);
+    $mail = trim($_POST['txtMail']);
+    $telephone = trim($_POST['txtTelephone']);
+    $erreur = array();
+    $erreur = new_user($_POST);
+    validationDInscription($bd, $erreur, $pseudo, $prenom, $pass, $nom, $mail, $telephone, "admin.php");
+}
 
-		}
+echo '</div></div></div>';
+html_footer($page_principal_color);
 
-	}
-	
-	
-	echo '</br>';
-	
-	
-	echo '<h3>Supprimer un moderateur non therapeute  </h3>';
-	
+html_fin();
 
-	$sql="SELECT USER.id, nom, prenom, pseudo, isModerateur, mail
-			FROM USER
-			WHERE isModerateur = 2";
-	$r = mysqli_query($bd, $sql) or gk_bd_erreur($bd, $sql);
-	
-	
-	
 
-		echo '<table border=1 cellpadding=5>';
-		while($enr = mysqli_fetch_assoc($r)) {
-			$id=htmlentities($enr['id'],ENT_QUOTES,'ISO-8859-1');
-			$nom=htmlentities($enr['nom'],ENT_QUOTES,'ISO-8859-1');
-			$pseudo=htmlentities($enr['pseudo'],ENT_QUOTES,'ISO-8859-1');
-			$prenom=htmlentities($enr['prenom'],ENT_QUOTES,'ISO-8859-1');
-			$moderateur=htmlentities($enr['isModerateur'],ENT_QUOTES, 'ISO-8859-1');
-			
-			echo '<form method="POST" action="admin.php">';
+function menu_ad(){
+	echo '<ul id=admin_menu><!--
+	--><li id="ad_user_list">Liste des utilisateurs</li><!--
+	--><li id="ad_new_user">Les utilisateurs en attente</li><!--
+	--><li id="ad_moderator">Ajouter des modérateurs</li>
+</ul>';
+}
 
-				echo gk_cb_from_ligne("<label>"	.$nom. " " .$prenom. "</label>", "<input type=hidden name=btnValiderRemoveModNotTherapeute value='$id'> <input type=submit value='Supprimer moderateur'>", "right", "");
-			
-			
-					
-			echo '</form>';
-		}
-	echo '</table>';
 
-	
-	
-	
-	
-	
-	if(isset($_POST['btnValiderAccept'])) {
+if(isset($_POST['btn_certify'])) {
+    // print_r($_POST);die();
+    $id=$_POST['userID'];
+    $S = "UPDATE THERAPEUTE SET
+                    isCertified = 1
+                    WHERE THERAPEUTE.id = '$id'";
+    $r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
+
+    header('location: admin.php');
+    exit();
+
+}
+
+if(isset($_POST['btnBloquer'])) {
+   // print_r($_POST);die();
+    $id=$_POST['userID'];
+    $S = "UPDATE THERAPEUTE, USER SET
+                    isBlocked = (case when isBlocked = 0 then 1 else 0 end)
+                    WHERE THERAPEUTE.id = USER.id
+                    AND USER.id = '$id'";
+    $r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
+
+    header('location: admin.php');
+    exit();
+
+}
+if(isset($_POST['btnBloquerModNonThera'])) {
+
+    $id=$_POST['userID'];
+    $isModerateur=$_POST['isModerateur'];
+    $isModerateurNew=2;
+    if ($isModerateur==2){
+        $isModerateurNew=-2;
+    }
+   // print_r($isModerateurNew); print_r($_POST);die();
+    echo $isModerateurNew;
+    $S = "UPDATE USER SET
+                    isModerateur = '$isModerateurNew'
+                    WHERE USER.id = '$id'";
+    $r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
+
+    header('location: admin.php');
+    exit();
+
+}
+
+	if(isset($_POST['btnAddThera'])) {
 		$bd = gk_cb_bd_connection();
 		
-		$id = $_POST['btnValiderAccept'];
-		
-		
+		$id = $_POST['userID'];
+        $isModerateur= $_POST['isModerateur'];
+        $rand=rand(100000,100000000);
+        $S = "INSERT INTO THERAPEUTE
+				(id, isAccepted, cleLogiciel, titre, description, isCertified, couleur, skin, lienPhoto, isVerified, random, isBlocked)
+					VALUES
+				('$id', true, NULL, NULL, NULL, 0, 2, 1, NULL, 0, '$rand', false)";
+
+        $r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
+        $S = "UPDATE USER SET
+				isModerateur = '$isModerateur'+1
+				WHERE USER.id = '$id'";
+        $r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
+
+        $sql="SELECT pseudo
+        FROM USER
+        WHERE USER.id = '$id'";
+        $r = mysqli_query($bd, $sql) or gk_bd_erreur($bd, $sql);
+        $enr = mysqli_fetch_assoc($r);
+        $pseudo=htmlentities($enr['pseudo'],ENT_QUOTES, 'ISO-8859-1');
+
+        mkdir('../therapeute/'.$pseudo.'', 0777);
+        mkdir('../therapeute/'.$pseudo.'/images', 0777);
+
+        $monFichier = fopen('../therapeute/'.$pseudo.'/index.php', "w");
+        $txt = "<?php \$profil_id = $id; include '../../php/therapeute.php'; ?>";
+        fwrite($monFichier, $txt);
+        fclose($monFichier);
+
+        header('location: admin.php');
+		exit();
+
+	}
+
+	if(isset($_POST['btnAddMod'])) {
+		$bd = gk_cb_bd_connection();
+
+		$id = trim($_POST['userID']);
+
 		$S = "UPDATE USER SET
-				isModerateur = 1
-				WHERE USER.id = '$id'";	
+						isModerateur = isModerateur + 2
+						WHERE USER.id = '$id'";
 		$r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
-		
-		header('location: admin.php');
-		
-	
-	}
-	
-	if(isset($_POST['btnValiderAddMod'])) {
-		$bd = gk_cb_bd_connection();
-		
-		$id = $_POST['btnValiderAddMod'];
-		$S = "UPDATE THERAPEUTE, USER SET
-					isModerateur = isModerateur + 2
-					WHERE THERAPEUTE.id = USER.id
-					AND USER.id = '$id'";	
-		$r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
-		
-		
-		header('location: admin.php');
-	}
-	
-	if(isset($_POST['btnValiderRemoveMod'])) {
-		$bd = gk_cb_bd_connection();
-		
-		$id = trim($_POST['btnValiderRemoveMod']);
-		$S = "UPDATE THERAPEUTE, USER SET
-					isModerateur = isModerateur - 2
-					WHERE THERAPEUTE.id = USER.id
-					AND USER.id = '$id'";	
-		$r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
-		
-		
-		header('location: admin.php');
-	}
-	
-	
-	if(isset($_POST['btnValiderRemoveModNotTherapeute'])) {
-		$bd = gk_cb_bd_connection();
-		
-		$id = $_GET['btnValiderRemoveModNotTherapeute'];
-		$S = "DELETE FROM USER
-			WHERE USER.pseudo = '$pseudo'";	
-		$r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
-		
-		
-		header('location: admin.php');
-	}
-	
-	
-	
-	
-	
-	function cbl_utilisateur_en_demande($sql) {
-		//--------------------------------	UTILISATEUR EN DEMANDE
-		$bd = gk_cb_bd_connection();
-		$r = mysqli_query($bd, $sql) or gk_cb_bd_erreur($bd, $sql);
-			
-			echo '</br>';
-			echo '<h4>Accepter un utilisateur</h4>';
-					echo '<table border=1 cellpadding=5>';
-					while($enr = mysqli_fetch_assoc($r)) {
-						$id=htmlentities($enr['id'],ENT_QUOTES,'ISO-8859-1');
-						$nom=htmlentities($enr['nom'],ENT_QUOTES,'ISO-8859-1');
-						$pseudo=htmlentities($enr['pseudo'],ENT_QUOTES,'ISO-8859-1');
-						$prenom=htmlentities($enr['prenom'],ENT_QUOTES,'ISO-8859-1');
-						$bloque=htmlentities($enr['isBlocked'],ENT_QUOTES, 'ISO-8859-1');
-						$moderateur=htmlentities($enr['isModerateur'],ENT_QUOTES, 'ISO-8859-1');
-						$mail=htmlentities($enr['mail'],ENT_QUOTES, 'ISO-8859-1');
-						echo '<form method="POST" action="admin.php">';
 
-							if ($moderateur == 0) 
-								echo gk_cb_from_ligne("<label>"	.$nom. " " .$prenom. "-" .$mail ."</label>", "<input type=hidden name=btnValiderAccept value='$id'> <input type=submit value='Accepter'>", "right", "");
-						
-						
-								
-						echo '</form>';
-					}
-				echo '</table>';	
-			
-	
-		echo '</br>';
+		header('location: admin.php');
+		exit();
 	}
-	
-	
-	function cbl_ajouter_moderateur($sql) {
-		//--------------------------------	AJOUTER UN MODERATEUR
-			$bd = gk_cb_bd_connection();
-			$r = mysqli_query($bd, $sql) or gk_bd_erreur($bd, $sql);
-			
-			
-			echo '<h4>Ajouter un moderateur</h4>';
-					echo '<table border=1 cellpadding=5>';
-					while($enr = mysqli_fetch_assoc($r)) {
-						$id=htmlentities($enr['id'],ENT_QUOTES,'ISO-8859-1');
-						$nom=htmlentities($enr['nom'],ENT_QUOTES,'ISO-8859-1');
-						$pseudo=htmlentities($enr['pseudo'],ENT_QUOTES,'ISO-8859-1');
-						$prenom=htmlentities($enr['prenom'],ENT_QUOTES,'ISO-8859-1');
-						$bloque=htmlentities($enr['isBlocked'],ENT_QUOTES, 'ISO-8859-1');
-						$moderateur=htmlentities($enr['isModerateur'],ENT_QUOTES, 'ISO-8859-1');
-						echo '<form method="POST" action="admin.php">';
 
-							if ($moderateur == 1) 
-								echo gk_cb_from_ligne("<label>"	.$nom. " " .$prenom. "</label>", "<input type=hidden name=btnValiderAddMod value='$id'> <input type=submit value='Ajouter moderateur'>", "right", "");
-						
-						
-								
-						echo '</form>';
-					}
-				echo '</table>';
-	
-		echo '</br>';
+	if(isset($_POST['btnRemoveMod'])) {
+        $bd = gk_cb_bd_connection();
+
+        $id = trim($_POST['userID']);
+
+        $S = "UPDATE USER SET
+						isModerateur = isModerateur - 2
+						WHERE USER.id = '$id'";
+        $r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
+
+        header('location: admin.php');
+        exit();
 	}
-	
-	
-	function cbl_supprimer_moderateur($sql) {
-		//--------------------------------	SUPPRIMER UN MODERATEUR
-			$bd = gk_cb_bd_connection();
-			$r = mysqli_query($bd, $sql) or gk_bd_erreur($bd, $sql);
+
+if(isset($_POST['btn_supprimer'])) {
+    $bd = gk_cb_bd_connection();
+
+    $id = trim($_POST['userID']);
+
+    $S = "DELETE FROM USER
+			WHERE USER.id = '$id'";
+    $r = mysqli_query($bd, $S) or gk_cb_bd_erreur($bd, $S);
+
+    header('location: admin.php');
+    exit();
+}
+
+function list_des_users($bd){
+    $new_ones="";
+    $sql="SELECT USER.id, nom, prenom, pseudo, isModerateur, therapeute.isBlocked, isCertified
+			FROM user LEFT JOIN therapeute ON user.id = therapeute.id
+			ORDER BY isModerateur ASC";
+    $r = mysqli_query($bd, $sql) or gk_bd_erreur($bd, $sql);
+
+    $i=1;$content="";
+    $new_ones='<ul class="moderator_list" id="admin_list">';
+    echo  $new_ones;
+    while($enr = mysqli_fetch_assoc($r)) {
+        $id_t = htmlentities($enr['id'], ENT_QUOTES, 'ISO-8859-1');
+        $nom = htmlentities($enr['nom'], ENT_QUOTES, 'ISO-8859-1');
+        $pseudo = htmlentities($enr['pseudo'], ENT_QUOTES, 'ISO-8859-1');
+        $prenom = htmlentities($enr['prenom'], ENT_QUOTES, 'ISO-8859-1');
+        $bloque = htmlentities($enr['isBlocked'], ENT_QUOTES, 'ISO-8859-1');
+        $moderateur = htmlentities($enr['isModerateur'], ENT_QUOTES, 'ISO-8859-1');
+        $isCertified = htmlentities($enr['isCertified'], ENT_QUOTES, 'ISO-8859-1');
+
+        $form=form_ligne($id_t, $nom, $prenom, $bloque, $moderateur, $isCertified);
+        if ($moderateur==0){
+            $content.='<li>'.$form.'</li>';
+        }
+
+        echo '<li>'.$form.'</li>';
+
+        $i++;
+    }
+    echo '</ul>';
+
+    if($content==""){
+        return "";
+    }
+        $new_ones.=$content.'</ul>';
+    return $new_ones;
+}
+
+/**********************************************************************************************************
+ *											Forms
+ *
+ */
+
+function btnCertify($isCertidfied, $moderateur){
+    if($moderateur%2==1) {
+        if ($isCertidfied == 0) {
+            return '<li class="admin_table_narrow">
+                        <div class="tooltip"><input type=submit name="btn_certify" class="btn_certify" value="certifeir" />
+                        <span class="tooltiptext">Appuyer pour certifier</span></div></li>';
+        } else {
+            return '<li class="admin_table_narrow">
+                    <label>certifié</label></li>';
+        }
+    }else{
+        return '<li  class="admin_table_narrow"></li>';
+    }
+
+}
+function btnBloquerOrRemove($bloque, $moderateur)
+{
+    switch ($moderateur) {
+        case 0:
+            return '<li class="admin_table_narrow">
+                <div class="tooltip"><input type=submit name="btn_supprimer" class="btnRemoveModNonThera btn_supprimer" value="supprimer">
+                <span class="tooltiptext">Appuyer pour supprimer</span></div></li>';
+            break;
+        case 1:
+        case 3:
+            if ($bloque == 0) {
+                return '<li class="admin_table_narrow">
+                         <div class="tooltip">
+                         <input type=submit name=btnBloquer value ="bloquer" class="btnBlocker" >
+                         <span class="tooltiptext">Status courant: Thérapeute debloqué<br>Appuyer pour bloquer</span></div></li>';
+            } else {
+                return '<li class="admin_table_narrow">
+                        <div class="tooltip">
+                        <input type=submit name=btnBloquer value ="débloquer" class="btnDeblocker">
+                        <span class="tooltiptext">Status courant: Thérapeute bloqué<br>Appuyer pour debloquer</span></div></li>';
+            }
+            break;
+        case 2:
+            return '<li class="admin_table_narrow">
+                         <div class="tooltip" class="admin_table_narrow">
+                         <input type=submit name=btnBloquerModNonThera value ="bloquer" class="btnBlocker">
+                         <span class="tooltiptext">Status courant: Moderateur debloqué<br>Appuyer pour bloquer</span></div></li>';
+        case -2:
+            return '<li class="admin_table_narrow">
+                        <div class="tooltip" class="admin_table_narrow">
+                        <input type=submit name=btnBloquerModNonThera  value ="débloquer" class="btnDeblocker">
+                        <span class="tooltiptext">Status courant: Moderateur bloqué<br>Appuyer pour debloquer</span></div></li>';
+        default:
+            return '<li  class="admin_table_narrow"></li>';
+    }
+
+}
+
+
+function btnModerator($moderateur){
+	if ($moderateur>3) {
+        return '<li class="admin_table_narrow"></li>';
+    }else{
+        if ($moderateur == 0 || $moderateur == 1) {
+            return '<li class="admin_table_narrow">
+                    <div class="tooltip">
+                    <input type=submit name="btnAddMod" value="rendre moderateur" class="btnMod">
+                    <span class="tooltiptext">Status courant: utilisateur simple<br>Appuyer pour le rendre moderateur</span></div></li>';
+        } else {
+           return'<li class="admin_table_narrow">
+                    <div class="tooltip">
+                    <input type=submit name="btnRemoveMod" value="rendre simple utilisateur" class="btnSimpleUser">
+                    <span class="tooltiptext">Status courant: moderateur<br>Appuyer pour le rendre utilisateur simple</span></div></li>';
+        }
+    }
+}
+
+function newUser($moderateur){
+    if ($moderateur==0){
+       return '<li class="admin_table_narrow">
+                <div class="tooltip">
+                <input type=submit name="btnAddThera" value="rendre thérapeute" class="btnAcceptUser">
+                 <span class="tooltiptext">Accepter le thérapeute</span></div></li>';
+    }else if ($moderateur==2 ){
+        return '<li class="admin_table_narrow">
+                <div class="tooltip">
+                <input type=submit name="btnAddThera" value="rendre thérapeute-moderateur" class="btnAcceptUser">
+                <span class="tooltiptext">Rendre moderateur thérapeute</span></div></li>';
+    }else{
+        return '<li  class="admin_table_narrow"></li>';
+    }
+}
+function UserStatus($moderateur){
+	switch ($moderateur){
+
+		case 0 : return'<li class="admin_table_narrow"><label>en attente</label></li>';
+        break;
+		case 1 : return '<li class="admin_table_narrow"><label>thérapeute</label></li>';
+		break;
+        case -2:
+        case 2 :  return '<li class="admin_table_narrow"><label>modérateur-non thérapeute</label></li>';
+        break;
+        case 3 :  return '<li class="admin_table_narrow"><label>modérateur-thérapeute</label></li>';
+        break;
+        case 4 :  return '<li class="admin_table_narrow"><label>adminstrateur</label></li>';
+        break;
+        case 5: return '<li class="admin_table_narrow"><label>adminstrateur-thérapeute</label></li>';
+        break;
+	}
+
+}
+function form_ligne($id,  $nom, $prenom, $bloque, $moderateur, $isCertified){
+
+    return '<form method=POST action="admin.php" class="form_moderator">
+				<input type="hidden"  name="userID" value="'.$id.'" class="modHidden"/>
+				<input type="hidden"  name="isModerateur" value="'.$moderateur.'" class="modHidden"/>
+				<ul class="table_admin">
 				
-			
-			echo '<h4>Enlever un moderateur</h4>';
-					echo '<table border=1 cellpadding=5>';
-					while($enr = mysqli_fetch_assoc($r)) {
-						$id=htmlentities($enr['id'],ENT_QUOTES,'ISO-8859-1');
-						$nom=htmlentities($enr['nom'],ENT_QUOTES,'ISO-8859-1');
-						$pseudo=htmlentities($enr['pseudo'],ENT_QUOTES,'ISO-8859-1');
-						$prenom=htmlentities($enr['prenom'],ENT_QUOTES,'ISO-8859-1');
-						$bloque=htmlentities($enr['isBlocked'],ENT_QUOTES, 'ISO-8859-1');
-						$moderateur=htmlentities($enr['isModerateur'],ENT_QUOTES, 'ISO-8859-1');
-						echo '<form method="POST" action="admin.php">';
+				
+						<li><label>'.$nom.'</label></li>
+						<li><label>'.$prenom.'</label></li>
+						<li class="table_admin_more"><a ></a></li>
+						<li ><ul class="table_admin_buttons">'.UserStatus($moderateur).btnCertify($isCertified, $moderateur).newUser($moderateur).btnBloquerOrRemove($bloque, $moderateur).
+        btnModerator($moderateur).'</ul></li>
+	</ul></form>';
+}
 
-							if ($moderateur > 1 && $moderateur < 4)
-								echo gk_cb_from_ligne("<label>"	.$nom. " " .$prenom. "</label>", "<input type=hidden name=btnValiderRemoveMod value='$id'> <input type=submit value='Enlever moderateur'>", "right", "");
-						
-						
-								
-						echo '</form>';
-					}
-				echo '</table>';
-	
-		echo '</br>';
-		echo '</br>';
-	}
-	
-	
-	
-	mysqli_close($bd);
+
+
+mysqli_close($bd);
 	gk_cb_html_fin();
 	ob_end_flush();
 ?>
