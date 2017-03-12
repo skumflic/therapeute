@@ -1,0 +1,309 @@
+
+
+/*********************************************************
+***
+**********************************************************/
+#content_wellcome_page{
+  height: 100vh;
+  width: 100vw;
+  position:absolute;  position:absolute;
+  background-image: url(../images/fond_massage.jpg);
+  background-attachment:fixed;
+  background-repeat:no-repeat;
+  background-position:center center;
+   -webkit-background-size: cover; 
+  background-size: cover; 
+  
+}
+#w_overlay{
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0, 0.5);
+}
+
+#w_div_logo{
+  position:relative;
+  background: rgba(0,0,0, 0.6);
+  width:100%;
+  height:35%;
+  top:0;
+ box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    
+}
+#bienvue_text{
+ display:block;
+ position:relative;
+ color:white;
+ font-size:3.5em;
+ text-align:center;
+	margin-top:20px;
+
+
+}
+#img_logo{
+  position:relative;
+  height:60%;
+  top:20px;
+  display:block;
+ margin-left:auto;
+  margin-right:auto;
+
+
+}
+
+#w_footer{
+
+  height:60px;
+    position: absolute;
+    bottom: 0;  
+    width: 100vw;
+    background: rgba(0,0,0, 0.7);
+}
+
+#copyright{
+  display:block;
+  margin-left:25px;
+  color: #6E7378;
+  font-size:18px;
+   margin-top:18px;
+
+}
+
+#w_menu{ 
+    position: absolute;  
+    bottom:90px;
+    right:30px;
+}
+
+.w_menu_li{
+    color: white;
+    weight:bold; 
+    display:inline;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    text-align: center;
+  
+ margin-left:20px;
+ font-size:20px;
+ padding-bottom:8px;
+}
+.w_menu_li:nth-of-type(1){
+	 border-bottom:3px solid #F47D83;
+
+}
+.w_menu_li:nth-of-type(2){
+	 border-bottom:3px solid #3EB6D1;
+}
+.w_menu_li:nth-of-type(3){
+	 border-bottom:3px solid #F38C25;
+}
+.w_menu_li:nth-of-type(4){
+	 border-bottom:3px solid #43B863;
+}
+
+.w_menu_li:nth-of-type(1):hover{
+	 border-bottom:7px solid #F47D83;
+}
+.w_menu_li:nth-of-type(2):hover{
+	 border-bottom:7px solid #3EB6D1;
+}
+.w_menu_li:nth-of-type(3):hover{
+	 border-bottom:7px solid #F38C25;
+}
+.w_menu_li:nth-of-type(4):hover{
+	 border-bottom:7px solid #43B863;
+}
+.w_menu_li:hover{
+    cursor: pointer;
+
+}
+.wm_title{
+    font-size: 1.1em;
+
+}
+
+
+/*******************************************************
+*               Cube                                    *
+********************************************************/
+.wrap {
+	perspective: 800px;
+	perspective-origin: 50% 100px;
+	display:none;
+
+}
+.cube {
+  margin-top:50px;
+  margin-left:auto;
+  margin-right:auto;
+	position: relative;
+	width: 200px;
+	transform-style: preserve-3d;
+
+}
+
+.cube div {
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	font-size:0;
+	background: url("../images/logo.png") center no-repeat;
+	background-size:100%;
+  background-color:#548687;
+}
+
+.back {
+	transform: translateZ(-100px) rotateY(180deg);
+}
+.right {
+	transform: rotateY(-270deg) translateX(100px);
+	transform-origin: top right;
+}
+.left {
+	transform: rotateY(270deg) translateX(-100px);
+	transform-origin: center left;
+}
+.top {
+	transform: rotateX(-90deg) translateY(-100px);
+	transform-origin: top center;
+}
+.bottom {
+	transform: rotateX(90deg) translateY(100px);
+	transform-origin: bottom center;
+}
+.front {
+	transform: translateZ(100px);
+}
+
+@keyframes spin {
+	from { transform: rotateY(0); }
+	to { transform: rotateY(360deg); }
+}
+
+.cube {
+	animation: spin 5s infinite linear;
+}
+
+/**********************************************************************
+*                                  NEW                                 *
+ *********************************************************************/
+.w_btn_annuler{
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    left:15px;
+    top: 20px;
+    background: url("../images/back.png") center no-repeat;
+    background-size:30px;
+    font-size:0;
+}
+
+.wo_content{
+	 top: 0;
+    left: 0;
+     z-index:15;
+    height: 0;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+   background-color: rgba(0, 0,0, 0.8);
+    overflow-y: hidden;
+    transition: 0.5s;
+	overflow: scroll; 
+	overflow-x:hidden;
+
+}
+ 
+#wo_thera #con_ins_field{
+	position:relative;
+	
+	background-color: #fbfbfb;
+}
+
+#map_canvas{
+	position:relative;
+	top: 140px;
+	width:80%;
+	height: 60%;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	border:15px solid #3EB6D1;
+
+}
+
+#map_text{
+	padding:40px;
+	background:#3EB6D1;
+	position:relative;
+	display:block;
+	top: 140px;
+	width: 700px;
+	margin-left:auto;
+	margin-right:auto;
+	font-size: 26px;
+	color:white;
+	text-align:center;
+	border-bottom:2px solid;
+	border-top:5px solid white;
+
+}
+
+#methode_desc{
+	position:relative;
+	background:rgba(0, 0,0,0.9);
+	width:80%;
+	margin-left:auto;
+	margin-right:auto;
+	top:120px;
+	padding:3%;
+	color:white;
+	border:3px solid #3EB6D1;
+}
+
+#methode_img{
+	width:20%;
+	float:left;
+	margin:20px;
+}
+#methode_desc h1{
+	font-size:26px;
+	padding-left:30px;
+	width:100%;
+	margin-bottom:30px;
+}
+#methode_desc h2{
+	font-size:22px;
+	padding-left:30px;
+	width:100%;
+	margin-bottom:30px;
+	margin-top:20px;	
+}
+
+#methode_desc p{
+	margin-bottom:30px;
+}
+
+#methode_jm{
+
+	display:block;
+	margin-top:25px;
+	font-size:20px;
+
+}
+
+#methode_jm a{
+	display:block;
+	background: #3EB6D1;
+	text-align:center;
+	text-decoration:none;
+	padding: 15px 0;
+	opacity: 0.8;
+	color:white;
+	margin-top:20px;
+}
+
+#methode_jm a:hover{
+	opacity: 1;
+}

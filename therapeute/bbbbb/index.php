@@ -1,0 +1,1 @@
+<?php $profil_id = 26; include '../../php/therapeute.php'; ?>

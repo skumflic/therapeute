@@ -50,9 +50,6 @@ window.addEventListener("DOMContentLoaded", function () {
       form_validate_experience();
       form_validate_tarif();
      form_validate_cabinet();
-      form_validate_connection();
-      form_validate_inscription();
-      form_validate_mail();
       //  form_validate_photo();
       adjustStyle($(window).width());
       $(window).resize(function() {
@@ -439,37 +436,31 @@ function show_cab_insert_photo() {
 
 function welcome_page() {
     $('#w_demelt').click(function () {
-        $('#wo_demelt').css("height", "100%");
+        $('#wo_demelt').css("height", "auto");
     })
     $('#w_close_demelt').click(function () {
         $('#wo_demelt').css("height", "0");
     });
 
     $('#w_about').click(function () {
-        $('#wo_about').css("height", "100%");
-
+        $('#wo_about').css("height", "auto");
     })
     $('#w_close_about').click(function () {
         $('#wo_about').css("height", "0");
-
     });
 
     $('#w_thera').click(function () {
         $('#wo_thera').css("height", "100%");
-
     })
     $('#w_close_thera').click(function () {
         $('#wo_thera').css("height", "0");
-
     });
 
     $('#w_visitor').click(function () {
         $('#wo_visitor').css("height", "100%");
-
     })
     $('#w_close_visitor').click(function () {
         $('#wo_visitor').css("height", "0");
-
     });
 }
 
@@ -517,22 +508,10 @@ function closeNav() {
 function adjustStyle(width) {
     width = parseInt(width);
     if (width < 900) {
-        if($("#isIndex").val()) {
-            $("#size-stylesheet").attr("href", "style/narrow.css");
-        }else{
-            $("#size-stylesheet").attr("href", "../style/narrow.css");
-        }
-
-
-
+        $("#size-stylesheet").attr("href", "../style/narrow.css");
         $(".closebtn").show();
     }else{
-        if($("#isIndex").val()) {
-            $("#size-stylesheet").attr("href", "style/wide.css");
-        }else{
-            $("#size-stylesheet").attr("href", "../style/wide.css");
-        }
-
+        $("#size-stylesheet").attr("href", "../style/wide.css");
         $(".closebtn").hide();
     }
 };
@@ -686,8 +665,6 @@ function form_validate_existing_info_formation() {
         });
     });
 */
-
-
     $(".form_exist_formation").validate({
         rules: {
             txtNom: {
@@ -719,94 +696,7 @@ function form_validate_existing_info_formation() {
             $(".form_exist_formation").submit();
         }
     });
-
-
 }
 
 
-function form_validate_connection() {
-    $("#form_connection").validate({
-        rules: {
-            txtPseudo: "required",
-            txtPasse: {
-                required: true,
-                minlength:3,
-            },
 
-        },
-        messages: {
-            txtPseudo: "Le login est requis",
-            txtPasse: "Le mot de passe est requis et minimum de 4 caractères",
-
-        },
-        submitHandler: function(form) {
-            $("#btnValiderConnection").submit();
-        }
-    });
-
-}
-function form_validate_inscription() {
-    $("#form_inscription").validate({
-        rules: {
-            txtPseudoI:  {
-                required: true,
-                minlength:4,
-                maxlength: 30,
-            },
-            txtPasseI: {
-                required: true,
-                minlength:5,
-            },
-            txtNom: "required",
-            txtPrenom: "required",
-            txtMail: {
-                required: true,
-                email: true,
-            },
-            txtVerif: {
-                required: true,
-                equalTo: "#txtPasseI"
-            },
-            txtTelephone:{
-                required: true,
-                minlength:10,
-                maxlength: 10,
-            },
-
-        },
-        messages: {
-            txtPseudoI: "Le login est requis et de 4 à 30 charactères",
-            txtPasseI: "Le mot de passe est requis et minimum de 5 charactères",
-            txtNom: "Le nom est requis",
-            txtPrenom: "Le prenom est requis",
-            txtMail: "Inserez un mail valide",
-            txtVerif: "Mot de passe ne correspond pas",
-            txtTelephone: "Le numero de telephone est compose de 10 chiffres",
-
-        },
-        submitHandler: function(form) {
-            $("#btnValiderInscription").submit();
-        }
-    });
-
-}
-function form_validate_mail() {
-    $("#form_mail").validate({
-        rules: {
-            txtMail2: {
-                required: true,
-                email: true,
-            },
-
-        },
-        messages: {
-            txtMail2: "Entrez un mail valid",
-
-
-        },
-        submitHandler: function(form) {
-            $("#btnValiderPass").submit();
-        }
-    });
-
-}

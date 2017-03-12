@@ -1,0 +1,145 @@
+body, input, select, textarea {
+    color: #6B5AA9; /* PPR */
+}
+
+a:hover {
+    color: #38267D !important; /* PPR */
+}
+
+strong, b {
+    color: #4E3C91; /* PPR */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #4E3C91; /* PPR */
+}
+
+#header {
+    background: #38267D; /* PPR */
+    color: #9688C8; /* PPR */
+}
+
+header.major h2 {
+    color: #38267D; /* PPR */
+}
+
+header.major h2 + p {
+    color: #4E3C91; /* PPR */
+}
+
+label {
+    color: #4E3C91; /* PPR */
+}
+
+textarea:focus {
+    border-color: #38267D; /* PPR */
+}
+
+ul.feature-icons li:before {
+    background: #4E3C91;
+    color: #ffffff;
+}
+
+
+#header > nav ul li {
+    border-top: solid 2px #9688C8;
+
+}
+#header > footer .icons li a {
+    color: #9688C8;
+}
+
+#header > nav ul li a.active {
+    background: #fff;
+    color: #241363 !important;
+}
+
+#header > header p {
+    color: #d1f1e9;
+}
+
+input[type="submit"].special,
+input[type="reset"].special,
+input[type="button"].special,
+.button.special {
+    background-color: #4E3C91 !important;
+    color: #ffffff !important;
+}
+
+#one:before {
+    background-image: url("../../images/bleu/bleu_flowers.png");
+}
+
+/* ALPHA */
+#banner {
+    background-color: #38267D;
+    background-image:linear-gradient(60deg, #6B5AA9, #241363);
+    //background-image: none;
+    //background-image: url("images/overlay.png"), url("../../images/bleu/fotolia_80317639.png");
+}
+.icon.major.accent {
+    background: #4E3C91;
+}
+#cta {
+    background: #241363;
+    color: #fff;
+}
+#cta input[type="submit"],
+#cta input[type="reset"],
+#cta input[type="button"],
+#cta .button {
+    box-shadow: none;
+    background: #9688c8;
+    color: #241363;
+}
+
+.dropotron li.active > a, .dropotron li.active > span, .dropotron li:hover > a, .dropotron li:hover > span {
+    background: #9688C8;
+    color: #ffffff;
+}
+
+body {
+    background: #9688C8;
+}
+
+/* mediascreen */
+
+@media screen and (max-width: 1024px) {
+    #titleBar {
+        color: #fff;
+    }
+
+    #titleBar .title {
+        color: #fff;
+
+    }
+
+    #titleBar .toggle:before {
+        background: #38267D;
+        color: #ffffff;
+    }
+
+}
+
+@media screen and (max-height: 600px) {
+    .infoT {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    #navPanel {
+        background: #38267D;
+        color: #ffffff;
+    }
+
+}
+
+@media screen and (max-width: 400px) {
+    .image img {
+        width: 100%;
+    }
+
+
+
+}

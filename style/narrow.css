@@ -1,0 +1,337 @@
+/*******************************************************************
+************WELCOME**************************************************
+********************************************************************/
+.w_btn_annuler{
+    height:25px;
+    width: 25px;    
+    background: url("../images/back.png") center no-repeat;
+    background-size:20px;
+   
+}
+#w_menu_div{
+	position: absolute;
+	width: 100%;
+	bottom: 12%;
+}
+#w_menu{ 
+  position: relative;
+	width: 50%;
+	min-width: 140px;
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+}
+#copyright{
+  display:block;
+  margin-left:25px;
+  color: #6E7378;
+  font-size:14px !important;;
+  margin-top:5px;
+  margin-bottom: 5px;
+
+}
+
+.w_menu_li{
+   margin-bottom: 5px;
+	padding: 3px;
+    border-radius: 10px;
+    color: white;
+    weight:bold; 
+    display:block !important;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    text-align: center;
+   position: relative;
+    font-size:14px !important;
+  border: 1px solid;
+	border-bottom:3px solid;
+}
+
+.w_menu_li:nth-of-type(1){
+	 border-color:  #F47D83;
+}
+.w_menu_li:nth-of-type(2){
+	 border-color:  #3EB6D1;
+}
+.w_menu_li:nth-of-type(3){
+	 border-color:  #F38C25;
+}
+.w_menu_li:nth-of-type(4){
+	 border-color:  #43B863;
+}
+
+.w_menu_li:nth-of-type(1):hover{
+	 background: rgba(242,93,100, 0.8) ;
+}
+.w_menu_li:nth-of-type(2):hover{
+	 background: rgba(62,182,209, 0.8) ;
+}
+.w_menu_li:nth-of-type(3):hover{
+	 background: rgba(243,140,37, 0.8) ;
+}
+.w_menu_li:nth-of-type(4):hover{
+	 background: rgba(67,184,99, 0.8);
+}
+
+#bienvue_text{
+
+ font-size:20px !important;;
+	
+	margin-top:20px;
+
+
+}
+#img_logo{
+  position:relative;
+  top:20px;
+
+}
+/**********************************************************************************/
+.form_search{
+      right: 0px;
+}
+.table_moderator tr td:nth-of-type(1){
+   width:25%;
+}
+.table_moderator tr td:nth-of-type(2){
+    width:25%;
+}
+.table_moderator tr td:nth-of-type(3){
+    width:25%;
+}
+.table_moderator tr td:nth-of-type(4){
+    width:12%;
+    justify-content:left;
+}
+h1{
+    margin-bottom: 15px;
+}
+.menu_formation{
+    background-color: #f38c25 !important;
+}
+
+.menu_cabinet{
+    background-color: #43b863 !important;
+}
+.menu_tarif{
+    background-color: #705ea9 !important;
+}
+#cabinet_sub_menu{
+    max-width: 520px;
+     margin-left: auto;
+    margin-right: auto;
+}
+#table_aff_photos_of_cabinet tr td{
+  display: block;
+  width: 100%;
+}
+#table_aff_photos_of_cabinet tr{
+  display: block;
+ 
+}
+#navbar_open_menu{
+    top: 2px;
+    position: absolute;
+    left: 7px;
+    background:url(../images/list.png) center no-repeat;
+    height:35px;
+    width:35px;
+    background-size:20px;
+    cursor:pointer;
+    float: right;
+    
+}
+
+#navbar_open_menu:hover{
+    background: url(../images/list_hover.png) center no-repeat;
+    background-size:20px;
+}
+#h_logo{
+    position: absolute;
+    height: 40px;
+    left: 50px;
+    border-left:1px solid white;
+    padding-left: 7px;
+}
+#site_name{
+    color: white;
+    position: absolute;
+    left:100px;
+    font-size: 18px;
+    top:5px;
+}
+
+.overlay {
+    border-right: 5px solid white;
+     height: 0%;
+     width: 0%;
+     position: fixed;
+     z-index: 15000;
+     top: 0;
+     left: 0;
+     background-color: rgba(0,0,0, 0.9);
+     overflow-y: hidden;
+     transition: 0.5s;
+    background: #3eb6d1;
+ -moz-box-shadow: -3px 0px 12px 0px #000000;
+-webkit-box-shadow: -3px 0px 12px 0px #000000;
+-o-box-shadow: -3px 0px 12px 0px #000000;
+box-shadow: -3px 0px 12px 0px #000000;
+filter:progid:DXImageTransform.Microsoft.Shadow(color=#000000, Direction=180, Strength=12);
+ }
+
+.overlay_content{
+    width: 100%;
+    height: 100%;
+}
+.nav-container {
+    text-align: left;
+    position: relative;
+    top: 60px;
+    width: 100%;
+    margin-top: 30px;
+
+}
+.nav-container li:nth-of-type(1){
+    border-top: 1px dotted white;
+}
+.nav-container li{    
+    border-bottom: 1px dotted white;
+    padding: 3px 0 3px 9px;
+}
+
+.overlay a {
+    padding: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    color:  white;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlay li:hover {
+    border-left: 7px solid white;
+}
+.m_active {
+     border-left: 7px solid white;
+}
+.closebtn {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 0px !important;
+    background: url("../images/back.png") center no-repeat;
+    background-size: 25px 25px;
+   
+ 
+}
+
+.closebtn:focus, .closebtn:hover{
+    cursor: pointer;
+}
+header{
+    z-index: 5000;
+    position: fixed;
+    height: 40px;
+    width:100%; 
+    background: #565658;
+    box-shadow: 0 2px 3px rgba(0,0,0, .4);
+}
+
+
+
+
+
+
+form{
+    max-width: 500px;
+}
+
+
+
+@media screen and (max-height: 450px) {
+    .overlay {overflow-y: auto;}
+    .overlay a {font-size: 20px}
+    .closebtn {
+        font-size: 40px !important;
+        top: 15px;
+        right: 35px;
+    }
+}
+/*
+*
+*/
+.sub_content{
+   margin-top:100px;
+   margin-bottom:40px;
+}
+h1{
+    font-size: 24px;
+    text-align: center;
+}
+
+#content{
+    width: 90%;
+}
+#info_perso_sub_content .right_side,
+#info_perso_sub_content .left_side{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.left_side, .right_side{
+    width: 100%;
+}
+#info_perso_sub_content, #info_perso_sub_content div, #info_perso_sub_content .left_side{
+    width: 100%;
+}
+
+#infoperso_sub_menu{
+    width: 100%;
+    max-width: 1000px;
+    margin-right: auto;
+    margin-left:auto;
+    display:block;
+  
+}
+
+#infoperso_sub_menu li{
+    padding: 7px 5px;
+    text-align: center;
+}
+
+
+#div_photo div{
+    margin-top:15px;
+    border:1px solid #ADADAD;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.input_file_container .input_file_name{
+    width: 100%;
+}
+
+.input_file_container .input_file_button{
+    width:110px;
+}
+#div_photo{
+    padding-bottom: 60px;
+}
+.menu_espace_left{
+    display: none;
+}
+/**********************************************************
+            Infoperso photo
+*************************************************************/
+
+
+

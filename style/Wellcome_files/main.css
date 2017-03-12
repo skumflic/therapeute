@@ -1,0 +1,1597 @@
+/* ---------------------------------------------------------------
+			RE-INITIALISATION DES TAGS HTML
+	Pour Ã©viter les valeurs par dÃ©faut diffÃ©rentes suivant les
+	navigateurs. Seuls les tags le plus	souvent utilisÃ©s et non
+	dÃ©prÃ©ciÃ©s sont pris en compte.
+	Reset complet : http://meyerweb.com/eric/tools/css/reset/
+--------------------------------------------------------------- */
+html, body, div, span, applet, iframe,
+h1, h2, h3, h4, h5, h6, p, pre, strong, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    font-weight: normal;
+    vertical-align: baseline;
+    background: transparent;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+table {
+    border-spacing: 4px;
+}
+
+label {
+    display: inline-block;
+    text-align: right;
+}
+
+
+
+
+/************************************************************************************************************************************************
+**************************************************************************************************************************************************
+************************************************************************************************************************************************/
+body{
+    min-height: 100vh;
+    height:100%;
+    width: 100%;
+    line-height: 1.5;
+    font-size: 16px;
+    font-family: 'Georgia',  sans-serif;
+    background: #6e7378;
+}
+
+
+#bg_page{
+
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1800px;
+
+    background-color: #fbfbfb;
+    -moz-box-shadow: 0px 0px 30px 0px #656565;
+-webkit-box-shadow: 0px 0px 30px 0px #656565;
+-o-box-shadow: 0px 0px 30px 0px #656565;
+box-shadow: 0px 0px 30px 0px #656565;
+filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=NaN, Strength=30);
+}
+/****************************************************************************************
+*                                CONTENT                                                 *
+****************************************************************************************/
+/*
+*               Infoperso
+*/
+
+#infoperso_sub_menu li:hover{
+    background: #ADADAD;
+
+}
+#infoperso_sub_menu li:nth-of-type(1){    
+    background:url("../images/left-triangle.png")#6E7378 right no-repeat;
+    background-size:auto 50%;
+
+}
+#infoperso_sub_menu li{
+    padding: 15px 10px;
+        color: white;
+    background: #6E7378;
+    cursor: pointer;
+    border-bottom: 1px dotted;
+
+}
+#info_perso_sub_content .right_side div{
+ 
+    background: #C4E9FC;
+}
+#info_perso_sub_content #div_photo, 
+#info_perso_sub_content #div_reseau,
+#info_perso_sub_content #div_site_vitrine,
+#info_perso_sub_content #div_password{
+    display: none;
+}
+
+
+#content h1, #content h3{
+     color: #6E7378;
+}
+#info_perso_sub_content input[type=submit]{
+    background: #6E7378;
+
+}
+#info_perso_sub_content h1{
+    padding-top:25px;
+    border-bottom: 3px solid #F7FFF7;
+    text-align: center;
+    padding-left: 0;
+    margin-bottom: 10px;
+    color: #6E7378;
+
+}
+
+#info_perso_sub_content div{
+    max-width:600px;
+}
+.content_cabinet h2{
+    font-size: 22px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+#form_cabinet_principal #text_principal{
+    color: #43b863;
+    font-size: 22px;
+    padding-left: 22px;
+}
+/************************************************************************
+*                          Photo part inforperso                        *
+************************************************************************/
+#div_photo div label{
+ 
+    width: 290px;
+    font-size: 18px;
+    padding-left: 10px;
+    background: #ADADAD;
+    color:white;
+    text-align:center;
+}
+#div_photo div{
+    margin-top:15px;
+    border:1px solid #ADADAD;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+#profile_photo{
+    position: relative;
+    width: 300px;
+    height: auto;
+}
+
+#profile_photo_anonym{
+    display:block;
+    padding:30px;
+    position: relative;
+    width: 120px;
+    height: auto;
+    margin-left:auto;
+    margin-right:auto;
+
+}
+
+#div_photo input[type=submit]{
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 17px;
+}
+
+#div_photo .form_with_lbl{
+    
+    padding-bottom:100px;
+}
+.input_file{
+    display:none;
+}
+
+.input_file_container{
+    width: 100%;
+    display: block;
+}
+
+.input_file_container .input_file_name{
+    width: 65%;
+}
+
+.input_file_container .input_file_button{padding: 7px;text-align: center;border-radius: 5px;float: right;margin-top: 5px;/* background: #fcaa67; */background: #3EB6D1;color: white;}
+.input_file_container .input_file_button:hover{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.photo_upload_msg{
+    width:100%;
+    text-align:center;
+    color: red;
+}
+
+
+
+/*****************************************************************/
+
+/*          Reseau part                     */
+.form_social_network{
+    padding:0;
+    margin:0 auto;
+    width:100%;
+}
+
+#div_reseau .form_social_network table tr{
+    margin:0;
+    padding:0;
+}
+.form_social_network table{
+    width : 100%;
+}
+.sn_url label, .sn_url input[type=text]{
+    float:left;
+    width:75%;
+   
+}
+.form_social_network .sn_url input[type=submit]{
+    width:20%;
+    float:right;
+    margin:0;
+}
+
+/************************************************/
+
+#content{ 
+
+    position: relative;
+    margin-left:auto;
+    margin-right:auto;
+    overflow:hidden;
+    min-height:90vh;
+    
+}
+.sub_content{
+    overflow: hidden;
+    width: 100%;
+    padding-bottom: 30px;
+    margin-top: 50px;
+}
+
+
+/****************************************************************************************
+*                                FOOTER                                                  *
+****************************************************************************************/
+footer{
+    position: relative;
+    height: 45px;
+    background-color: #383838;
+    border-top: 7px solid #3eb6d1;
+    width:100%;
+}
+
+#copyright{
+    color: white;
+    display: block;
+    margin-top: 10px;
+    margin-left:15px;
+}
+
+/*****************************************************************************************
+*                                 PARTICULARITY                                           *
+ ****************************************************************************************/
+.cabinet_aff_input, .cabinet_download_photo, #form_cabinet_radio{
+    display: none;
+}
+
+.aff_input, .form_hidden{
+    display: none;
+}
+
+
+/****************************************************************************************************************************************************
+*                                                   FORM GENERAL SETTINGS                                                                           *
+****************************************************************************************************************************************************/
+
+form{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+    color: #333333;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+label{
+    text-align: left;
+    width:100%;
+    padding: 7px 0px 3px 0px;
+}
+
+input, textarea{
+    width:100%;
+    padding: 7px 0px 7px 7px;
+    margin: 4px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.date_input_right, .date_input_left{
+    width: 45%;
+    position: relative;
+    margin-top: 7px;
+}
+
+.date_input_right{
+    float: right;
+}
+.form_with_lbl input[type=submit]{
+    margin: 20px;
+}
+
+#info_perso_sub_content  .form_with_lbl{
+    margin-top:0px;
+    max-width: 500px;
+
+}
+
+form input:focus, textarea:focus{
+    border-color: #6EA2DE;
+    box-shadow: 0px 0px 3px #B2EBF2;
+
+
+}
+
+
+.form_with_lbl label{
+    color: #548687;
+}
+form input[type=submit]:hover{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    opacity: 1;
+}
+
+
+
+/**
+*   NEW INSERT
+**/
+.form_new_insert{
+    background: white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.form_new_insert table{
+    width:100%;
+    margin-right:auto;
+    margin-left:auto;
+    padding: 5px;
+ 
+}
+
+
+.form_new_insert h3{
+    font-size: 24px;
+    display: block;
+  
+    padding: 16px 10px;
+    text-align: center;
+    text-shadow: #171919 1px 1px;
+    color: white;
+}
+
+.form_new_insert input[type=checkbox]{
+    width: 15px;
+    height: 15px;
+    padding-top:  5px;
+}
+
+.form_new_insert input[type=submit]{
+    width: 40%;
+    padding: 13px 5px;
+    color: white;
+    font-size: 16px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-shadow: #171919 1px 1px;
+    float: right;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    opacity:0.9;
+ 
+}
+
+
+#content .form_new_insert h3{
+    color:white;
+}
+
+.form_new_insert select{
+    margin-top: 10px;
+}
+/*
+*            Form  with pages
+*/
+.content_formation .form_new_insert h3, 
+.content_formation .form_new_insert input[type=submit], 
+.content_formation .btn_sauvegarder{
+    background-color: #f38c25; 
+}
+.content_tarif .form_new_insert h3, 
+.content_tarif .form_new_insert input[type=submit], 
+.content_tarif .btn_sauvegarder{
+    background-color: #705ea9; 
+}
+
+.content_cabinet .form_new_insert h3, 
+.content_cabinet .form_new_insert input[type=submit], 
+.content_cabinet .btn_sauvegarder{
+    background-color: #43b863; 
+    
+}
+
+.content_cabinet .form_existing_info .btn_cab_photo{
+    background-color: #43b863; 
+    color: white;
+    border: 0;
+    padding: 10px;
+}
+.content_cabinet .form_existing_info .btn_annuler_changement{
+    box-shadow: 0 0 0;
+    border: 0;
+    border-radius: 0;
+    
+}
+/*
+*           EXISTINF INBFO
+ */
+#form_cabinet_principal{
+    background: white;
+}
+#form_cabinet_principal .btn_changer_cabinet{
+    width:50%;
+    font-size:14px;
+    text-align: center;
+    position: relative;
+    height: 45px;
+    margin-top: 20px;
+    height: auto;
+    background: #43b863;
+    padding: 10px;
+    color: white;
+    
+}
+#form_cabinet_radio table{
+
+    width:100%;
+    padding-left:10px;
+}
+#form_cabinet_radio{
+     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    
+}
+#form_cabinet_radio input[type=submit]{
+    padding: 10px;
+    font-size: 14px;
+    color: white;
+    background: #43b863;
+    margin-top: 25px; 
+}
+#form_cabinet_radio input[type=radio]{
+  position: absolute;
+  right:-10px;
+}
+
+#form_cabinet_principal table td .btn_modifier{
+    margin-top:20px;
+    padding: 0;
+    height: 35px;
+    width:35px;
+    position: relative;
+    border-radius: 5px;
+    background: #43b863 url("../images/edit.png") center no-repeat;
+    background-size:23px;
+    border: 0;
+
+}
+
+#form_cabinet_principal:hover{
+    opacity: 1;
+}
+.form_existing_info:nth-of-type(2n){
+    background:#C4E9FC;
+}
+.form_existing_info:nth-of-type(2n+1){
+    background:#f4f7f6;
+}
+
+
+.form_existing_info {
+    position: relative;
+    margin-bottom: 25px;
+    background: white;
+    border: 1px #BDBDBD solid;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.form_existing_info:hover{
+   //box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    opacity:0.8;
+}
+
+.lbl_buttons{
+    visibility: hidden;
+}
+
+.form_existing_info:hover .lbl_buttons:hover{
+    background-color:#333;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.form_existing_info:hover .lbl_buttons{
+    visibility: visible;
+    background-color: rgba(0,0,0,.7);
+    color: white;
+    border:0;
+
+}
+
+.btn_modifier, .btn_supprimer, .btn_modifier_text{
+    padding: 0.5px;
+    border-radius:50%;
+    font-size:0;
+    position: absolute;
+    top: 4px;
+    width: 28px;
+    height:28px;
+    z-index: 500;
+}
+
+.form_existing_info .btn_modifier, .form_existing_info .btn_modifier_text{
+    left:8px;
+    background: url("../images/edit.png") no-repeat center;
+    background-size : 20px 20px;
+}
+
+.form_existing_info .btn_supprimer{
+    right: 8px;
+
+    background: url("../images/remove_white.png") no-repeat center;
+    background-size : 20px 20px;
+}
+.form_existing_info .btn_consulter{
+    position: absolute;
+    bottom:-4px;
+    height:40px;
+    border-radius: 0;
+    font-size:12px;
+    color: white;
+    left: 0;
+}
+
+.aff_input, .aff_lbl{
+    width:100%;
+    margin-left: auto;
+    margin-right:auto;
+}
+.form_existing_info .btn_sauvegarder:hover{
+    opacity: 1;
+}
+.btn_annuler, .btn_sauvegarder{
+    font-size: 0;
+    height:40px;
+    float: right;
+    cursor: pointer;
+    margin: 3px 5px 3px 5px;
+    border: none;
+}
+
+.form_existing_info .btn_sauvegarder{
+    padding: 10px 5px;
+    background-size: 25px 25px;
+    width:auto;
+    text-align: right;
+    color: white;
+    font-size: 14px;
+
+}
+.form_existing_info .btn_annuler, .form_existing_info .btn_annuler_changement{
+    font-size:0;
+    background: url("../images/back2.png") center no-repeat;
+    background-size: 20px 20px;
+    float:left;
+    width:30px; 
+}
+ .form_existing_info .btn_annuler:hover, .content_cabinet .form_existing_info .btn_annuler_changement:hover{
+     background-size: 25px 25px;
+    box-shadow: 0 0 0 0;   
+     border:0;
+     border-radius:0;
+}
+#div_cabinet_photos .form_existing_info:hover{
+    opacity: 1;
+}
+
+.btn_change_photo, .btn_sauvegarder_cab{
+    width:40%;
+    margin-left:5px;
+    float: right;
+}
+/*
+          Form with label
+*/
+
+#div_site_vitrine .form_with_lbl{
+    max-width: 800px;
+
+}
+
+.form_with_lbl{
+    width: 90%;
+    max-width:400px;
+}
+.form_with_lbl input[type=submit]{
+    width:150px;
+    float: right;
+}
+.form_with_lbl table{
+    width: 100%;
+    padding:10px;
+}
+.form_with_lbl  td input, .form_with_lbl  td textarea{
+    margin-top: -3px;
+
+}
+.form_with_lbl label{
+    padding-bottom:0px;
+    display: block;
+    padding-left:9px;
+}
+.form_with_lbl input{
+    width:100%;
+    padding: 10px;
+}
+
+
+
+
+/*
+		CHECKBOX
+*/
+
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+    position: relative;
+    padding-left: 0px;
+    cursor: pointer;
+}
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+
+    content: '';
+    position: absolute;
+    right:15px; top: 9px;
+    width: 17px; height: 17px;
+    border: 1px solid #aaa;
+    background: #f8f8f8;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+}
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+    content: '✔';
+    position: absolute;
+    top: 7px; right: 19px;
+    font-size: 14px;
+    color: #09ad7e;
+    line-height: 1.75;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    transition: all .2s;
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+}
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+    box-shadow: none;
+    border-color: #bbb;
+    background-color: #ddd;
+}
+[type="checkbox"]:disabled:checked + label:after {
+    color: #999;
+}
+[type="checkbox"]:disabled + label {
+    color: #aaa;
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+    border: 1px dotted blue;
+}
+
+/**************
+*       DatePicker
+**************/
+
+.ui-datepicker {
+    width: auto;
+    height: auto;
+    margin: 5px auto 0;
+    font: 9pt Arial, sans-serif;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+}
+.ui-datepicker a {
+    text-decoration: none;
+}
+
+.ui-datepicker table {
+    width: 100%;
+}
+.ui-datepicker-header {
+    color: #e0e0e0;
+    font-weight: bold;
+    -webkit-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, 2);
+    -moz-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+    box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+    text-shadow: 1px -1px 0px #000;
+    filter: dropshadow(color=#000, offx=1, offy=-1);
+    line-height: 30px;
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    border-color: #111;
+}
+.ui-datepicker-title {
+    text-align: center;
+}
+.ui-datepicker-prev, .ui-datepicker-next {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+    background-image: url('../images/arrow.png');
+    background-repeat: no-repeat;
+    line-height: 600%;
+    overflow: hidden;
+}
+.ui-datepicker-prev {
+    float: left;
+    background-position: center -30px;
+}
+.ui-datepicker-next {
+    float: right;
+    background-position: center 0px;
+}
+.ui-datepicker thead {
+    background-color: #f7f7f7;
+    background-image: -moz-linear-gradient(top,  #f7f7f7 0%, #f1f1f1 100%);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f7f7), color-stop(100%,#f1f1f1));
+    background-image: -webkit-linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
+    background-image: -o-linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
+    background-image: -ms-linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
+    background-image: linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#f1f1f1',GradientType=0 );
+    border-bottom: 1px solid #bbb;
+}
+.ui-datepicker th {
+    text-transform: uppercase;
+    font-size: 6pt;
+    padding: 5px 0;
+    color: #666666;
+    text-shadow: 1px 0px 0px #fff;
+    filter: dropshadow(color=#fff, offx=1, offy=0);
+}
+.ui-datepicker tbody td {
+    padding: 0;
+    border-right: 1px solid #bbb;
+}
+.ui-datepicker tbody td:last-child {
+    border-right: 0px;
+}
+.ui-datepicker tbody tr {
+    border-bottom: 1px solid #bbb;
+}
+.ui-datepicker tbody tr:last-child {
+    border-bottom: 0px;
+}
+.ui-datepicker td span, .ui-datepicker td a {
+    display: inline-block;
+    font-weight: bold;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    color: #666666;
+    text-shadow: 1px 1px 0px #fff;
+    filter: dropshadow(color=#fff, offx=1, offy=1);
+}
+.ui-datepicker-calendar .ui-state-default {
+    background: #ededed;
+    background: -moz-linear-gradient(top,  #ededed 0%, #dedede 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ededed), color-stop(100%,#dedede));
+    background: -webkit-linear-gradient(top,  #ededed 0%,#dedede 100%);
+    background: -o-linear-gradient(top,  #ededed 0%,#dedede 100%);
+    background: -ms-linear-gradient(top,  #ededed 0%,#dedede 100%);
+    background: linear-gradient(top,  #ededed 0%,#dedede 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#dedede',GradientType=0 );
+    -webkit-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+    -moz-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+    box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+}
+.ui-datepicker-calendar .ui-state-hover {
+    background: #f7f7f7;
+}
+.ui-datepicker-calendar .ui-state-active {
+    background: #6eafbf;
+    -webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+    -moz-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+    box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+    color: #e0e0e0;
+    text-shadow: 0px 1px 0px #4d7a85;
+    filter: dropshadow(color=#4d7a85, offx=0, offy=1);
+    border: 1px solid #55838f;
+    position: relative;
+    margin: -1px;
+}
+.ui-datepicker-unselectable .ui-state-default {
+    background: #f4f4f4;
+    color: #b4b3b3;
+}
+.ui-datepicker-calendar td:first-child .ui-state-active {
+    width: 29px;
+    margin-left: 0;
+}
+.ui-datepicker-calendar td:last-child .ui-state-active {
+    width: 29px;
+    margin-right: 0;
+}
+.ui-datepicker-calendar tr:last-child .ui-state-active {
+    height: 29px;
+    margin-bottom: 0;
+}
+/*drop-down*/
+.form_insert_existing_cabinet{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+.form_insert_existing_cabinet{
+    position: relative;
+}
+.form_insert_existing_cabinet input[type=submit]{
+    margin-top: -1px;
+    padding: 10px 15px;
+    position:absolute;
+    right:15px;
+    width: 35%;
+    background:  #43b863;
+    color: white;
+    font-size: 15px;
+}
+.form_insert_existing_cabinet span{
+    color: #43b863;
+    padding: 15px;
+    font-size: 18px;
+}
+.form_insert_existing_cabinet table {
+    width: 100%;
+   
+}
+.form_insert_existing_cabinet select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 55%;
+    color: #fff;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
+    background: #6e7378 url(../images/sort-down.png) no-repeat right center;
+    background-size: 20px 20px;
+    border:1px solid #6e7378;
+    border-right: 10px solid #6e7378;
+  
+    box-shadow: 0 0 0 0;
+}
+/*************************
+*******************************
+ **************************/
+
+/*************************
+                                                    INSCRIPTION/CONNECTION
+ **************************/
+#content_not_user{
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 5vh;
+    min-height: 100vh;
+    height: auto;
+}
+
+#con_ins_field{
+    background: white;
+    border: 4px solid #3EB6D1;
+    width:100%;
+    max-width:500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+    height: auto;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+
+
+#con_ins_field div{
+    padding-top: 35px;
+    padding-bottom: 15px;
+}
+#con_ins_field input[type=submit]{
+    margin-top: 10px;
+    padding:15px 0;
+    background:#3EB6D1;
+}
+#con_ins_field div .form_with_lbl table {
+    padding: 0px;
+}
+
+#con_ins_field input{
+    padding: 5px;
+
+}
+
+#con_ins_field label{
+
+    font-size:14px;
+    padding: 0;
+}
+#tabs{
+    width: 100%;
+    height: 40px;
+
+}
+
+#tabs li{
+    cursor: pointer;
+    color: white;
+    vertical-align: center;
+    padding-top: 9px;
+    height: 35px;
+    border-top:8px solid #3EB6D1;
+    display: inline-block;
+    width:50%;
+    background: #3EB6D1;
+    float: left;
+    text-align: center;
+    font-size: 18px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+#forgot_pass{
+    color: red;
+}
+#forgot_pass:hover{
+    cursor: pointer;
+    color:#548687;
+}
+#con_ins_field #tabs #tab_connection {
+    background: white ;
+    color: #6E7378;
+}
+#div_inscription, #div_password{
+    display: none;
+}
+
+
+
+
+/*************************************************************************************************************************************/
+
+.moderator_list{
+    margin-top:50px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1300px;
+
+}
+
+.moderator_list #mod_li_header{
+    font-size:30px;
+}
+.moderator_list li{
+    display:block;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  
+}
+.moderator_list li:nth-of-type(2n) .form_moderator{
+    background:#C4E9FC;
+
+}
+.moderator_list li:nth-of-type(2n+1) .form_moderator{
+    background:white;
+
+}
+.moderator_list li .form_moderator{
+    background:coral;
+    width:100%;
+    max-width: 1300px;
+    padding: 0 15px;
+    margin:0 auto 0 auto;
+     border-bottom: 1px dashed #6E7378;
+}
+.form_moderator .table_moderator{
+    width: 100%;
+   
+}
+.form_moderator .table_moderator input[type=submit]:hover{
+   border-radius: 0;  
+}
+
+
+.moderator_list .table_moderator tr td:nth-of-type(4) label{
+    display: none;
+}
+
+.table_moderator tr td:nth-of-type(5){
+    width:12%;
+
+}
+
+.isMod{
+    text-align:center;
+}
+
+.moderator_list [type="checkbox"]:not(:checked) + label:before,
+.moderator_list [type="checkbox"]:checked + label:before {
+    left:10px; top: -4px;
+    width: 17px; height: 17px;
+}
+
+.moderator_list [type="checkbox"]:not(:checked) + label:after,
+.moderator_list [type="checkbox"]:checked + label:after {
+    top: -6px; left: 14px;
+}
+
+.moderator_list input[type=submit]{
+    display:block;
+    font-size:0;
+    width:35px;
+    height:35px;
+    margin-right:auto;
+    margin-left:auto;
+    border:0;
+    opacity:1;
+   
+ 
+}
+.form_moderator .table_moderator tr td label{
+    position:relative; 
+    text-align:left;
+   padding:0;
+      display:flex;
+    flex-direction:row;
+    justify-content:left;
+    align-items:center;
+    
+}
+
+.moderator_list input[type=submit]:hover{
+    box-shadow:0 0 0;   
+      background-size: 30px 30px;
+}
+.moderator_list .btnBlocker{
+    background: url("../images/padlock-unlock.png") center no-repeat;
+    background-size: 20px 20px;
+
+}
+
+.moderator_list .btnDeblocker{
+    background: url("../images/padlock.png") center no-repeat;
+    background-size: 20px 20px;
+}
+
+.moderator_list .btnMod{
+    background: url("../images/user.png") center no-repeat;
+    background-size: 20px 20px;
+}
+
+.moderator_list .btnRemoveModNonThera{
+    position:relative;
+    top:inherit;
+    border-radius:5px;
+     width:35px;
+    height:35px;
+ 
+  
+    background: url("../images/remove.png") center no-repeat;
+    background-size: 17px 17px;
+}
+.moderator_list .btnSimpleUser{
+    background: url("../images/mod.png") center no-repeat;
+    background-size: 25px 25px;
+}
+.moderator_list .btnAcceptUser{
+    background: url("../images/accept.png") center no-repeat;
+    background-size: 20px 20px;
+}
+.moderator_list .btn_certify{
+    background: url("../images/certify.png") center no-repeat;
+    background-size: 25px 25px;
+}
+
+
+#mod_li_header{
+    padding: 0 0 15px 20px;
+    font-size:24px;
+}
+
+/*****************************************
+*     Search button                                    *
+******************************************/
+
+
+.form_search{
+
+  border-radius: 0 !important;
+  display: inline-block;
+  height: 45px;
+  top: 145px;
+
+  padding: 0;
+  position: absolute;
+
+}
+
+#search{
+    border-bottom: 2px solid #3eb6d1;
+  height: 45px;
+  font-size: 24px;
+  display: inline-block;
+  font-family: "Lato";
+  font-weight: 100;
+  border: none;
+  outline: none;
+  color: #000;
+  padding: 3px;
+  padding-right: 60px;
+  width: 0px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+   
+  z-index: 1000000;
+  transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
+  cursor: pointer;
+}
+
+
+
+#search:focus:hover {
+  border-bottom: 2px solid #3eb6d1;
+}
+
+#search:focus {
+  background: #fbfbfb;
+    width: 100%;
+  max-width: 500px;
+  z-index: 1;
+  border-bottom: 1px solid #BBB;
+  cursor: text;
+ 
+}
+#search_submit {
+    border-radius: 0;
+  height: 37px;
+  width: 37px;
+  display: inline-block;
+  color:red;
+  float: right;
+  background: url(../images/search.png) center center no-repeat;
+  background-size:30px;
+  text-indent: -10000px;
+  border: none;
+  position: absolute;
+  top: 0px;
+  right: 2px;
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity .4s ease;
+   border:0;
+     box-shadow: 0 0 0;
+}
+#search_submit:hover {
+ border:0;
+  opacity: 1;
+  box-shadow: 0 0 0;
+}
+/***************************************************
+*                  Admin                            *
+****************************************************/
+
+#admin_menu{
+     border: 0;
+    margin: 0;
+    padding: 0;
+    margin-top:50px;
+    position:relative;
+    width:100%;   
+    border-top: #3EB6D1 7px solid;
+    background: #CCCCCC;
+    max-width: 1350px;
+    margin-left:auto;
+    margin-right:auto;
+    
+}
+
+#admin_menu li{
+    font-size:16px;
+    display:inline-block;
+    width:33%;
+    text-align:center;
+    padding: 20px 0;
+    vertical-align:center !important;
+    cursor:pointer;
+}
+
+
+#admin_menu li:nth-of-type(1){
+      border-bottom:0;
+      background:white;
+       margin-left: 0.5%;
+}
+#admin_div_new_user, #admin_div_moderatheur{
+    display:none;
+}
+
+
+.table_admin_more{
+    display: none;
+}
+#admin_div_moderatheur{
+  background: #C4E9FC;
+}
+#admin_div_moderatheur input[type=submit]{
+    background: #3eb6d1;
+}
+
+@media screen and (max-width: 600px) {
+    .table_moderator tr td:nth-of-type(3){
+    display: none !important;
+
+}
+    #admin_menu{
+        border-bottom:  #3EB6D1 7px solid;  
+        height:auto;
+        
+    }
+    #admin_menu li{
+        display: block;
+        width: 100%;
+        padding: 5px;
+        margin: 0;
+        height: auto;
+        
+    }
+    .table_admin_buttons li{
+        display: block !important;
+    }
+    .table_admin_buttons{
+        display: none;  
+        position: absolute;
+        width: 200px !important;
+        right:20px;
+       border: 2px solid #3eb6d1;
+        z-index: 500;
+        margin-top: 5px;       
+    }
+    .admin_table_narrow label{
+       display:none !important;;        
+    }
+    .table_admin_buttons .admin_table_narrow .btn_certify{
+        display: block;
+        margin-left: -100px;
+     
+    }
+     .admin_table_narrow input[type=submit]{
+         position: relative;
+        font-size: 13px;
+        width: 200px;
+        margin: 0;
+        background: rgba(0, 0, 0, 0.9);
+        border: 0;
+        border-radius:0;
+        color:white;
+    }
+    .admin_table_narrow{
+        border-bottom: 1px dotted #3eb6d1;
+    }
+    .admin_table_narrow input[type=submit]:hover{
+         background: #3eb6d1;
+    }
+    .table_admin{
+        display: table;
+        width: 100%;
+    }
+
+    .table_admin li:nth-of-type(1){
+       width:40% !important;;
+       min-width:100px;
+      
+        display: table-cell;
+    }
+    .table_admin li:nth-of-type(2){
+        width:40% !important;
+        min-width:100px;
+        
+        display: table-cell;
+    }
+    .table_admin_more{
+      display: table-cell;
+      position: relative;
+      width: 20%;   
+ 
+    }
+    .table_admin_more a{
+        width: 30px;
+        height: 30px;
+        display: block;
+        background: url("../images/more.png") center no-repeat;
+        background-size: 20px;
+        
+
+    }
+ 
+
+  
+ 
+    
+   
+}
+/**************************************
+*               list-style              *
+***************************************/
+#admin_list{
+    margin-top:0;
+}
+.form_moderator .table_admin input[type=submit]:hover{
+   border-radius: 0;  
+}
+.table_admin{  
+    width:100%;
+    display: table;
+    
+}
+
+
+.table_admin  li label{
+     display:flex;
+    flex-direction:row;
+    justify-content:left;
+    align-items:center;
+}
+.table_admin li:nth-of-type(1){
+   min-width:100px;
+    width:20%;
+    display: table-cell;
+}
+.table_admin li:nth-of-type(2){
+    min-width:100px;
+    width:18%;
+    display: table-cell;
+}
+
+.table_admin_buttons{
+    width: 100%;
+
+}
+.table_admin_buttons li{
+    display: table-cell;
+}
+.table_admin_buttons li:nth-of-type(1){
+    min-width:100px;
+    width:25%;   
+}
+
+.table_admin_buttons li:nth-of-type(2){
+    min-width:40px;
+    width:10%;
+}
+.table_admin_buttons li:nth-of-type(2) label{
+   justify-content:center;
+}
+.table_admin_buttons li:nth-of-type(3){
+    min-width:40px;
+    width:3%;
+}
+
+.table_admin_buttons li:nth-of-type(4){
+    min-width:40px;
+    width:3%;
+}
+.table_admin_buttons li:nth-of-type(5){
+    min-width:40px;
+    width:7%;
+   
+}
+
+/***************
+Tooltip style
+**********/
+.tooltip {
+    position: relative;
+    display: block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    text-align: center;
+    border-radius: 15px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 110%;
+   
+    border:4px solid #3eb6d1;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    margin-top: -15px;
+    border-width: 15px;
+    border-style: solid;
+    border-color: transparent transparent transparent  #3eb6d1;
+}
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+/*form info*/
+form .error {
+  color: #ff0000;
+}
+
+/*
+*         Cabinet
+*/
+#div_cabinet_cab_part, #div_cabinet_photo_part{
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background: white;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+.sub_content #cabinet_sub_menu{  
+
+   width: 100%;
+   max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    border-top: 5px solid #43b863;
+    border-left: 1px solid #43b863;
+    border-right: 1px solid #43b863;
+   background: #6E7378; 
+}
+
+#cabinet_sub_menu li{    
+    padding: 13px 0;
+    text-align: center;
+    display: inline-block;
+    color: white;
+    cursor:pointer;
+    width: 49%;
+   background: #6E7378;
+
+}
+#cabinet_sub_menu #cab_new{
+    background-color: white;
+    color: #43b863;
+}
+
+
+#cab_photo{
+ float: right;
+}
+#div_cabinet_photo_part{
+    display: none;   
+}
+#div_cabinet_cab_part, #div_cabinet_photo_part{
+    border-bottom: 5px solid #43b863;
+    border-left: 1px solid #43b863;
+    border-right: 1px solid #43b863;
+     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+#div_cabinet_cab_part form, #div_cabinet_photo_part form{
+    box-shadow: 0 0 0 0;
+}
+
+#div_cabinet_cab_part form h3, #div_cabinet_photo_part form h3, .form_insert_existing_cabinet h3{
+    background: white;
+    color: #43b863 !important;
+    text-shadow: 0 0 0;
+    border-bottom: 3px solid;
+}
+.form_insert_existing_cabinet h3{
+    padding-bottom: 15px;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.photo_extension, .photo_size, .photo_wh, .photo_required{
+    display: none;
+   
+    
+}
+/*
+**             CABINET
+*/
+.content_cabinet .sub_content:nth-of-type(2), .content_cabinet .sub_content:nth-of-type(3){
+    margin: 0;
+}
+#table_aff_photos_of_cabinet{
+    position: relative;
+    width: 100%;
+}
+
+
+#table_aff_photos_of_cabinet tr{ 
+
+  width: 100%;
+
+}
+#table_aff_photos_of_cabinet tr td { 
+vertical-align: top;
+    width: 50%;
+  
+}
+.imgCabinet{
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right:auto;  
+}
+.imgCabinet{
+    max-width: 500px;
+    width: 80%;
+}
+.photo_extension td, .photo_size td,  .photo_wh td, .photo_required td{
+    color: red;
