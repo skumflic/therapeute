@@ -6,7 +6,7 @@ work correctly.
 ******************************************************/
 
 //We log to the DataBase
-$mydb = mysqli_connect('localhost', 'root', 'c0o-simpson', 'Therapeute');
+$mydb = mysqli_connect('localhost', 'root', '', 'Therapeute');
 
 
 
